@@ -8,6 +8,9 @@ namespace Workspace {
 	using namespace System::Windows::Forms;
 	using namespace System::Data;
 	using namespace System::Drawing;
+	using namespace System;
+	using namespace System::IO;
+	using namespace System::Diagnostics;
 
 	/// <summary>
 	/// Summary for home
@@ -43,7 +46,8 @@ namespace Workspace {
 	private: System::Windows::Forms::PictureBox^ pictureBox1;
 	private: System::Windows::Forms::Panel^ main;
 	private: System::Windows::Forms::Label^ label2;
-	private: System::Windows::Forms::TextBox^ textBox1;
+	private: System::Windows::Forms::TextBox^ itemName;
+
 	private: System::Windows::Forms::Button^ button2;
 	private: System::Windows::Forms::Button^ button1;
 
@@ -57,8 +61,17 @@ namespace Workspace {
 	private: System::Windows::Forms::TextBox^ tbWorkSpaceName;
 
 
-
 	private: System::Windows::Forms::Label^ label4;
+	private: System::Windows::Forms::OpenFileDialog^ selectApplicationDialog;
+
+
+	private: System::Windows::Forms::Button^ chooseApplication;
+	private: System::Windows::Forms::GroupBox^ applicationGroup;
+
+	private: System::Windows::Forms::TextBox^ applicationPath;
+	private: System::Windows::Forms::Label^ label5;
+	private: System::Windows::Forms::Button^ testApplication;
+
 	protected:
 
 	protected:
@@ -98,16 +111,23 @@ namespace Workspace {
 			this->cancelBox = (gcnew System::Windows::Forms::Button());
 			this->tbWorkSpaceName = (gcnew System::Windows::Forms::TextBox());
 			this->label4 = (gcnew System::Windows::Forms::Label());
+			this->applicationGroup = (gcnew System::Windows::Forms::GroupBox());
+			this->testApplication = (gcnew System::Windows::Forms::Button());
+			this->applicationPath = (gcnew System::Windows::Forms::TextBox());
+			this->label5 = (gcnew System::Windows::Forms::Label());
+			this->chooseApplication = (gcnew System::Windows::Forms::Button());
 			this->treeView1 = (gcnew System::Windows::Forms::TreeView());
 			this->label3 = (gcnew System::Windows::Forms::Label());
 			this->button3 = (gcnew System::Windows::Forms::Button());
 			this->label2 = (gcnew System::Windows::Forms::Label());
-			this->textBox1 = (gcnew System::Windows::Forms::TextBox());
+			this->itemName = (gcnew System::Windows::Forms::TextBox());
 			this->button2 = (gcnew System::Windows::Forms::Button());
 			this->button1 = (gcnew System::Windows::Forms::Button());
+			this->selectApplicationDialog = (gcnew System::Windows::Forms::OpenFileDialog());
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox1))->BeginInit();
 			this->main->SuspendLayout();
 			this->newWSDialog->SuspendLayout();
+			this->applicationGroup->SuspendLayout();
 			this->SuspendLayout();
 			// 
 			// close
@@ -177,11 +197,12 @@ namespace Workspace {
 			this->main->BackColor = System::Drawing::Color::Transparent;
 			this->main->BackgroundImage = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"main.BackgroundImage")));
 			this->main->Controls->Add(this->newWSDialog);
+			this->main->Controls->Add(this->applicationGroup);
 			this->main->Controls->Add(this->treeView1);
 			this->main->Controls->Add(this->label3);
 			this->main->Controls->Add(this->button3);
 			this->main->Controls->Add(this->label2);
-			this->main->Controls->Add(this->textBox1);
+			this->main->Controls->Add(this->itemName);
 			this->main->Controls->Add(this->button2);
 			this->main->Controls->Add(this->button1);
 			this->main->Dock = System::Windows::Forms::DockStyle::Fill;
@@ -189,6 +210,7 @@ namespace Workspace {
 			this->main->Name = L"main";
 			this->main->Size = System::Drawing::Size(900, 600);
 			this->main->TabIndex = 4;
+			this->main->Paint += gcnew System::Windows::Forms::PaintEventHandler(this, &home::main_Paint);
 			// 
 			// newWSDialog
 			// 
@@ -197,14 +219,15 @@ namespace Workspace {
 			this->newWSDialog->Controls->Add(this->cancelBox);
 			this->newWSDialog->Controls->Add(this->tbWorkSpaceName);
 			this->newWSDialog->Controls->Add(this->label4);
-			this->newWSDialog->Location = System::Drawing::Point(261, 200);
+			this->newWSDialog->Location = System::Drawing::Point(19, 326);
 			this->newWSDialog->Name = L"newWSDialog";
-			this->newWSDialog->Size = System::Drawing::Size(400, 193);
+			this->newWSDialog->Size = System::Drawing::Size(407, 186);
 			this->newWSDialog->TabIndex = 8;
 			// 
 			// saveButton
 			// 
 			this->saveButton->BackColor = System::Drawing::Color::Blue;
+			this->saveButton->Enabled = false;
 			this->saveButton->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
 			this->saveButton->ForeColor = System::Drawing::Color::White;
 			this->saveButton->Location = System::Drawing::Point(167, 134);
@@ -250,6 +273,69 @@ namespace Workspace {
 			this->label4->TabIndex = 0;
 			this->label4->Text = L"New Workspace";
 			// 
+			// applicationGroup
+			// 
+			this->applicationGroup->Controls->Add(this->testApplication);
+			this->applicationGroup->Controls->Add(this->applicationPath);
+			this->applicationGroup->Controls->Add(this->label5);
+			this->applicationGroup->Controls->Add(this->chooseApplication);
+			this->applicationGroup->ForeColor = System::Drawing::Color::White;
+			this->applicationGroup->Location = System::Drawing::Point(325, 205);
+			this->applicationGroup->Name = L"applicationGroup";
+			this->applicationGroup->Size = System::Drawing::Size(545, 296);
+			this->applicationGroup->TabIndex = 10;
+			this->applicationGroup->TabStop = false;
+			this->applicationGroup->Text = L"Application Settings";
+			// 
+			// testApplication
+			// 
+			this->testApplication->FlatAppearance->BorderColor = System::Drawing::Color::White;
+			this->testApplication->FlatAppearance->MouseDownBackColor = System::Drawing::Color::Transparent;
+			this->testApplication->FlatAppearance->MouseOverBackColor = System::Drawing::Color::Transparent;
+			this->testApplication->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
+			this->testApplication->Font = (gcnew System::Drawing::Font(L"Segoe UI Semibold", 7, System::Drawing::FontStyle::Bold));
+			this->testApplication->ForeColor = System::Drawing::Color::White;
+			this->testApplication->Location = System::Drawing::Point(411, 255);
+			this->testApplication->Name = L"testApplication";
+			this->testApplication->Size = System::Drawing::Size(119, 25);
+			this->testApplication->TabIndex = 12;
+			this->testApplication->Text = L"Test";
+			this->testApplication->UseVisualStyleBackColor = true;
+			this->testApplication->Click += gcnew System::EventHandler(this, &home::testApplication_Click);
+			// 
+			// applicationPath
+			// 
+			this->applicationPath->Location = System::Drawing::Point(30, 64);
+			this->applicationPath->Name = L"applicationPath";
+			this->applicationPath->ReadOnly = true;
+			this->applicationPath->Size = System::Drawing::Size(375, 25);
+			this->applicationPath->TabIndex = 11;
+			// 
+			// label5
+			// 
+			this->label5->AutoSize = true;
+			this->label5->Location = System::Drawing::Point(26, 37);
+			this->label5->Name = L"label5";
+			this->label5->Size = System::Drawing::Size(144, 19);
+			this->label5->TabIndex = 10;
+			this->label5->Text = L"Application to launch";
+			// 
+			// chooseApplication
+			// 
+			this->chooseApplication->FlatAppearance->BorderColor = System::Drawing::Color::White;
+			this->chooseApplication->FlatAppearance->MouseDownBackColor = System::Drawing::Color::Transparent;
+			this->chooseApplication->FlatAppearance->MouseOverBackColor = System::Drawing::Color::Transparent;
+			this->chooseApplication->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
+			this->chooseApplication->Font = (gcnew System::Drawing::Font(L"Segoe UI Semibold", 7, System::Drawing::FontStyle::Bold));
+			this->chooseApplication->ForeColor = System::Drawing::Color::White;
+			this->chooseApplication->Location = System::Drawing::Point(411, 64);
+			this->chooseApplication->Name = L"chooseApplication";
+			this->chooseApplication->Size = System::Drawing::Size(119, 25);
+			this->chooseApplication->TabIndex = 9;
+			this->chooseApplication->Text = L"Select Application";
+			this->chooseApplication->UseVisualStyleBackColor = true;
+			this->chooseApplication->Click += gcnew System::EventHandler(this, &home::chooseApplication_Click);
+			// 
 			// treeView1
 			// 
 			this->treeView1->BorderStyle = System::Windows::Forms::BorderStyle::FixedSingle;
@@ -266,7 +352,7 @@ namespace Workspace {
 			this->label3->BackColor = System::Drawing::Color::Transparent;
 			this->label3->Font = (gcnew System::Drawing::Font(L"Segoe UI Semibold", 15, System::Drawing::FontStyle::Bold));
 			this->label3->ForeColor = System::Drawing::Color::White;
-			this->label3->Location = System::Drawing::Point(25, 22);
+			this->label3->Location = System::Drawing::Point(25, 36);
 			this->label3->Name = L"label3";
 			this->label3->Size = System::Drawing::Size(150, 35);
 			this->label3->TabIndex = 6;
@@ -298,19 +384,20 @@ namespace Workspace {
 			this->label2->BackColor = System::Drawing::Color::Transparent;
 			this->label2->Font = (gcnew System::Drawing::Font(L"Segoe UI Semibold", 15, System::Drawing::FontStyle::Bold));
 			this->label2->ForeColor = System::Drawing::Color::White;
-			this->label2->Location = System::Drawing::Point(374, 22);
+			this->label2->Location = System::Drawing::Point(332, 36);
 			this->label2->Name = L"label2";
 			this->label2->Size = System::Drawing::Size(173, 35);
 			this->label2->TabIndex = 4;
 			this->label2->Text = L"Display Name";
+			this->label2->Click += gcnew System::EventHandler(this, &home::label2_Click);
 			// 
-			// textBox1
+			// itemName
 			// 
-			this->textBox1->Font = (gcnew System::Drawing::Font(L"Segoe UI Semibold", 15, System::Drawing::FontStyle::Bold));
-			this->textBox1->Location = System::Drawing::Point(338, 92);
-			this->textBox1->Name = L"textBox1";
-			this->textBox1->Size = System::Drawing::Size(500, 41);
-			this->textBox1->TabIndex = 3;
+			this->itemName->Font = (gcnew System::Drawing::Font(L"Segoe UI Semibold", 15, System::Drawing::FontStyle::Bold));
+			this->itemName->Location = System::Drawing::Point(325, 92);
+			this->itemName->Name = L"itemName";
+			this->itemName->Size = System::Drawing::Size(545, 41);
+			this->itemName->TabIndex = 3;
 			// 
 			// button2
 			// 
@@ -330,6 +417,10 @@ namespace Workspace {
 			this->button1->Text = L"New Workspace";
 			this->button1->UseVisualStyleBackColor = true;
 			this->button1->Click += gcnew System::EventHandler(this, &home::button1_Click_1);
+			// 
+			// selectApplicationDialog
+			// 
+			this->selectApplicationDialog->Filter = L"\"EXE|*.exe|All files|*.*\"";
 			// 
 			// home
 			// 
@@ -353,6 +444,8 @@ namespace Workspace {
 			this->main->PerformLayout();
 			this->newWSDialog->ResumeLayout(false);
 			this->newWSDialog->PerformLayout();
+			this->applicationGroup->ResumeLayout(false);
+			this->applicationGroup->PerformLayout();
 			this->ResumeLayout(false);
 			this->PerformLayout();
 
@@ -368,7 +461,7 @@ namespace Workspace {
 		Application::Exit();
 	}
 private: System::Void pictureBox1_Click(System::Object^ sender, System::EventArgs^ e) {
-	System::Diagnostics::Process::Start("https://alphaone.me");
+	Process::Start("https://alphaone.me");
 }
 private: System::Void startButton_Click(System::Object^ sender, System::EventArgs^ e) {
 	main->Show();
@@ -385,17 +478,70 @@ private: System::Void button4_Click(System::Object^ sender, System::EventArgs^ e
 	newWSDialog->Hide();
 }
 private: System::Void button5_Click(System::Object^ sender, System::EventArgs^ e) {
-	if (tbWorkSpaceName->Text == "")
-	{
-		MessageBox::Show("Please enter valid name", "Error", MessageBoxButtons::OK,MessageBoxIcon::Error);
-	}
-	else {
-		tbWorkSpaceName->Text = "";
+		
 		newWSDialog->Hide();
+		String^ fileName = "workspaces.txt";
+		StreamWriter^ sw = gcnew StreamWriter(fileName,true);
+		sw->WriteLine(tbWorkSpaceName->Text);
+		sw->Close();
+		tbWorkSpaceName->Text = "";
+		setTree();
+}
+
+	   private: System::Void setTree() {
+		   String^ fileName = "workspaces.txt";
+		   try
+		   {
+			   Console::WriteLine("trying to open file {0}...", fileName);
+			   StreamReader^ din = File::OpenText(fileName);
+
+			   String^ str;
+			   int count = 0;
+			   while ((str = din->ReadLine()) != nullptr)
+			   {
+				   count++;
+				   Console::WriteLine("line {0}: {1}", count, str);
+				   itemName->Text = str;
+			   }
+		   }
+		   catch (Exception^ e)
+		   {
+			   if (dynamic_cast<FileNotFoundException^>(e))
+				   Console::WriteLine("file '{0}' not found", fileName);
+			   else
+				   Console::WriteLine("problem reading file '{0}'", fileName);
+		   }
+	   }
+
+private: System::Void textBox2_TextChanged(System::Object^ sender, System::EventArgs^ e) {
+		saveButton->Enabled = tbWorkSpaceName->Text != "";
+}
+private: System::Void label2_Click(System::Object^ sender, System::EventArgs^ e) {
+}
+private: System::Void openFileDialog1_FileOk(System::Object^ sender, System::ComponentModel::CancelEventArgs^ e) {
+}
+private: System::Void main_Paint(System::Object^ sender, System::Windows::Forms::PaintEventArgs^ e) {
+}
+private: System::Void chooseApplication_Click(System::Object^ sender, System::EventArgs^ e) {
+	if (selectApplicationDialog->ShowDialog() == System::Windows::Forms::DialogResult::OK) {
+		applicationPath->Text = selectApplicationDialog->FileName;
 	}
 }
-private: System::Void textBox2_TextChanged(System::Object^ sender, System::EventArgs^ e) {
-
+private: System::Void testApplication_Click(System::Object^ sender, System::EventArgs^ e) {
+	if (applicationPath->Text == "")
+	{
+		MessageBox::Show("Please select application", "Error", MessageBoxButtons::OK, MessageBoxIcon::Error);
+	
+	}
+	else {
+		Process^ myProcess = gcnew Process();
+		myProcess->StartInfo->UseShellExecute = false;
+		// You can start any process, HelloWorld is a do-nothing example.
+		myProcess->StartInfo->FileName = applicationPath->Text;
+		//myProcess->StartInfo->Arguments = "E:\Website";
+		myProcess->StartInfo->CreateNoWindow = true;
+		myProcess->Start();
+	}
 }
 };
 }

@@ -124,15 +124,29 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="home.cpp" />
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="workspaces.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="home.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
+    <ClInclude Include="main.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
+    <ClInclude Include="workspaces.h">
       <FileType>CppForm</FileType>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="home.resx">
       <DependentUpon>home.h</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="main.resx">
+      <DependentUpon>main.h</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="workspaces.resx">
+      <DependentUpon>workspaces.h</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

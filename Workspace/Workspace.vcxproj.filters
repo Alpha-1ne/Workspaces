@@ -35,5 +35,8 @@
     <ClInclude Include="workspaces.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Workspace.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

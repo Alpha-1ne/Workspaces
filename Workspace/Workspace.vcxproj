@@ -134,6 +134,7 @@
     <ClInclude Include="main.h">
       <FileType>CppForm</FileType>
     </ClInclude>
+    <ClInclude Include="Workspace.h" />
     <ClInclude Include="workspaces.h">
       <FileType>CppForm</FileType>
     </ClInclude>

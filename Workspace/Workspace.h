@@ -1,18 +1,20 @@
 #pragma once
 
-namespace Workspace {
+using namespace System;
 
+ref class Workspace
+{
+public:
+	Workspace()
+	{
 
-	using namespace System;
-	using namespace System::Collections;
+	}
+	void setData(int id, String^ wname) {
+		_id = id;
+		name = wname;
+	}
+private:
+	int _id;
+	String^ name;
+};
 
-	public ref class Workspace {
-	public:	
-		Workspace(void) {
-			name = "";
-		}
-	private:
-		String^ name;
-		String^ name;
-	};
-}

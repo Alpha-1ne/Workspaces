@@ -125,6 +125,7 @@
   <ItemGroup>
     <ClCompile Include="home.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Workspace.cpp" />
     <ClCompile Include="workspaces.cpp" />
   </ItemGroup>
   <ItemGroup>

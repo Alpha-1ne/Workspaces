@@ -45,6 +45,7 @@ namespace Workspace {
 	private: System::Windows::Forms::Panel^ pNoWorkspace;
 	private: System::Windows::Forms::Label^ label2;
 	private: System::Windows::Forms::Label^ label1;
+	private: System::Windows::Forms::LinkLabel^ linkLabel1;
 
 	private:
 		/// <summary>
@@ -65,8 +66,9 @@ namespace Workspace {
 			this->btAddWorkspace = (gcnew System::Windows::Forms::Button());
 			this->labelWorkspaces = (gcnew System::Windows::Forms::Label());
 			this->pNoWorkspace = (gcnew System::Windows::Forms::Panel());
-			this->label1 = (gcnew System::Windows::Forms::Label());
 			this->label2 = (gcnew System::Windows::Forms::Label());
+			this->label1 = (gcnew System::Windows::Forms::Label());
+			this->linkLabel1 = (gcnew System::Windows::Forms::LinkLabel());
 			this->panel1->SuspendLayout();
 			this->pNoWorkspace->SuspendLayout();
 			this->SuspendLayout();
@@ -124,6 +126,7 @@ namespace Workspace {
 			// 
 			// pNoWorkspace
 			// 
+			this->pNoWorkspace->Controls->Add(this->linkLabel1);
 			this->pNoWorkspace->Controls->Add(this->label2);
 			this->pNoWorkspace->Controls->Add(this->label1);
 			this->pNoWorkspace->Location = System::Drawing::Point(257, 29);
@@ -131,26 +134,38 @@ namespace Workspace {
 			this->pNoWorkspace->Size = System::Drawing::Size(631, 525);
 			this->pNoWorkspace->TabIndex = 1;
 			// 
-			// label1
-			// 
-			this->label1->AutoSize = true;
-			this->label1->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 25));
-			this->label1->Location = System::Drawing::Point(198, 145);
-			this->label1->Name = L"label1";
-			this->label1->Size = System::Drawing::Size(250, 48);
-			this->label1->TabIndex = 0;
-			this->label1->Text = L"Workspaces";
-			// 
 			// label2
 			// 
 			this->label2->AutoSize = true;
-			this->label2->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 10));
+			this->label2->Font = (gcnew System::Drawing::Font(L"Segoe UI", 16));
 			this->label2->ForeColor = System::Drawing::SystemColors::ActiveCaption;
-			this->label2->Location = System::Drawing::Point(225, 224);
+			this->label2->Location = System::Drawing::Point(171, 200);
 			this->label2->Name = L"label2";
-			this->label2->Size = System::Drawing::Size(183, 20);
+			this->label2->Size = System::Drawing::Size(289, 37);
 			this->label2->TabIndex = 1;
 			this->label2->Text = L"No workspace selected";
+			// 
+			// label1
+			// 
+			this->label1->AutoSize = true;
+			this->label1->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 25, System::Drawing::FontStyle::Bold));
+			this->label1->Location = System::Drawing::Point(185, 132);
+			this->label1->Name = L"label1";
+			this->label1->Size = System::Drawing::Size(260, 48);
+			this->label1->TabIndex = 0;
+			this->label1->Text = L"Workspaces";
+			// 
+			// linkLabel1
+			// 
+			this->linkLabel1->AutoSize = true;
+			this->linkLabel1->Font = (gcnew System::Drawing::Font(L"Segoe UI", 10));
+			this->linkLabel1->Location = System::Drawing::Point(230, 302);
+			this->linkLabel1->Name = L"linkLabel1";
+			this->linkLabel1->Size = System::Drawing::Size(128, 23);
+			this->linkLabel1->TabIndex = 2;
+			this->linkLabel1->TabStop = true;
+			this->linkLabel1->Text = L"Add Workspace";
+			this->linkLabel1->LinkClicked += gcnew System::Windows::Forms::LinkLabelLinkClickedEventHandler(this, &workspaces::linkLabel1_LinkClicked);
 			// 
 			// workspaces
 			// 
@@ -177,6 +192,10 @@ namespace Workspace {
 	private: System::Void button2_Click(System::Object^ sender, System::EventArgs^ e) {
 	}
 private: System::Void workspaces_Load(System::Object^ sender, System::EventArgs^ e) {
+}
+private: System::Void linkLabel1_LinkClicked(System::Object^ sender, System::Windows::Forms::LinkLabelLinkClickedEventArgs^ e) {
+
+
 }
 };
 }

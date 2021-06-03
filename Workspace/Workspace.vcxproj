@@ -116,6 +116,9 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>C:\Users\ravik\Downloads\Json130r1\Bin\netstandard1.0\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
@@ -125,7 +128,7 @@
   <ItemGroup>
     <ClCompile Include="home.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="Workspace.cpp" />
+    <ClCompile Include="WorkspaceContainer.cpp" />
     <ClCompile Include="workspaces.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -135,7 +138,7 @@
     <ClInclude Include="main.h">
       <FileType>CppForm</FileType>
     </ClInclude>
-    <ClInclude Include="Workspace.h" />
+    <ClInclude Include="WorkspaceContainer.h" />
     <ClInclude Include="workspaces.h">
       <FileType>CppForm</FileType>
     </ClInclude>

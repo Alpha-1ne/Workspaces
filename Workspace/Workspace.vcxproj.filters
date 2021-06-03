@@ -24,7 +24,7 @@
     <ClCompile Include="workspaces.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Workspace.cpp">
+    <ClCompile Include="WorkspaceContainer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -38,7 +38,7 @@
     <ClInclude Include="workspaces.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Workspace.h">
+    <ClInclude Include="WorkspaceContainer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

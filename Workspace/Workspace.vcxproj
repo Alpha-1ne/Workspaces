@@ -127,6 +127,8 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="home.cpp" />
+    <ClCompile Include="Item.cpp" />
+    <ClCompile Include="JsonRoot.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="WorkspaceContainer.cpp" />
     <ClCompile Include="workspaces.cpp" />
@@ -135,6 +137,8 @@
     <ClInclude Include="home.h">
       <FileType>CppForm</FileType>
     </ClInclude>
+    <ClInclude Include="Item.h" />
+    <ClInclude Include="JsonRoot.h" />
     <ClInclude Include="main.h">
       <FileType>CppForm</FileType>
     </ClInclude>

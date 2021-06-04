@@ -41,11 +41,11 @@ namespace Workspace {
 	private: System::Windows::Forms::GroupBox^ applicationGroup;
 	private: System::Windows::Forms::TextBox^ tbDirectory;
 	private: System::Windows::Forms::Button^ selectDirectoryButton;
-	private: System::Windows::Forms::Panel^ newWSDialog;
-	private: System::Windows::Forms::Button^ saveButton;
-	private: System::Windows::Forms::Button^ cancelBox;
-	private: System::Windows::Forms::TextBox^ tbWorkSpaceName;
-	private: System::Windows::Forms::Label^ label4;
+
+
+
+
+
 	private: System::Windows::Forms::Button^ testApplication;
 	private: System::Windows::Forms::TextBox^ applicationPath;
 	private: System::Windows::Forms::Label^ label5;
@@ -87,11 +87,6 @@ namespace Workspace {
 			this->applicationGroup = (gcnew System::Windows::Forms::GroupBox());
 			this->tbDirectory = (gcnew System::Windows::Forms::TextBox());
 			this->selectDirectoryButton = (gcnew System::Windows::Forms::Button());
-			this->newWSDialog = (gcnew System::Windows::Forms::Panel());
-			this->saveButton = (gcnew System::Windows::Forms::Button());
-			this->cancelBox = (gcnew System::Windows::Forms::Button());
-			this->tbWorkSpaceName = (gcnew System::Windows::Forms::TextBox());
-			this->label4 = (gcnew System::Windows::Forms::Label());
 			this->testApplication = (gcnew System::Windows::Forms::Button());
 			this->applicationPath = (gcnew System::Windows::Forms::TextBox());
 			this->label5 = (gcnew System::Windows::Forms::Label());
@@ -107,7 +102,6 @@ namespace Workspace {
 			this->directorySelectDialog = (gcnew System::Windows::Forms::FolderBrowserDialog());
 			this->panel1->SuspendLayout();
 			this->applicationGroup->SuspendLayout();
-			this->newWSDialog->SuspendLayout();
 			this->SuspendLayout();
 			// 
 			// panel1
@@ -165,7 +159,6 @@ namespace Workspace {
 			// 
 			this->applicationGroup->Controls->Add(this->tbDirectory);
 			this->applicationGroup->Controls->Add(this->selectDirectoryButton);
-			this->applicationGroup->Controls->Add(this->newWSDialog);
 			this->applicationGroup->Controls->Add(this->testApplication);
 			this->applicationGroup->Controls->Add(this->applicationPath);
 			this->applicationGroup->Controls->Add(this->label5);
@@ -200,66 +193,6 @@ namespace Workspace {
 			this->selectDirectoryButton->TabIndex = 13;
 			this->selectDirectoryButton->Text = L"Choose Directory";
 			this->selectDirectoryButton->UseVisualStyleBackColor = true;
-			// 
-			// newWSDialog
-			// 
-			this->newWSDialog->BackColor = System::Drawing::SystemColors::InfoText;
-			this->newWSDialog->Controls->Add(this->saveButton);
-			this->newWSDialog->Controls->Add(this->cancelBox);
-			this->newWSDialog->Controls->Add(this->tbWorkSpaceName);
-			this->newWSDialog->Controls->Add(this->label4);
-			this->newWSDialog->ForeColor = System::Drawing::Color::White;
-			this->newWSDialog->Location = System::Drawing::Point(65, 179);
-			this->newWSDialog->Name = L"newWSDialog";
-			this->newWSDialog->Size = System::Drawing::Size(407, 186);
-			this->newWSDialog->TabIndex = 8;
-			// 
-			// saveButton
-			// 
-			this->saveButton->BackColor = System::Drawing::Color::Blue;
-			this->saveButton->Enabled = false;
-			this->saveButton->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
-			this->saveButton->ForeColor = System::Drawing::Color::White;
-			this->saveButton->Location = System::Drawing::Point(167, 134);
-			this->saveButton->Name = L"saveButton";
-			this->saveButton->Size = System::Drawing::Size(93, 34);
-			this->saveButton->TabIndex = 3;
-			this->saveButton->Text = L"Save";
-			this->saveButton->UseVisualStyleBackColor = false;
-			// 
-			// cancelBox
-			// 
-			this->cancelBox->FlatAppearance->BorderColor = System::Drawing::Color::White;
-			this->cancelBox->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
-			this->cancelBox->ForeColor = System::Drawing::Color::White;
-			this->cancelBox->Location = System::Drawing::Point(277, 134);
-			this->cancelBox->Name = L"cancelBox";
-			this->cancelBox->Size = System::Drawing::Size(85, 34);
-			this->cancelBox->TabIndex = 2;
-			this->cancelBox->Text = L"Cancel";
-			this->cancelBox->UseVisualStyleBackColor = true;
-			// 
-			// tbWorkSpaceName
-			// 
-			this->tbWorkSpaceName->BackColor = System::Drawing::Color::Black;
-			this->tbWorkSpaceName->BorderStyle = System::Windows::Forms::BorderStyle::FixedSingle;
-			this->tbWorkSpaceName->Font = (gcnew System::Drawing::Font(L"Segoe UI Semibold", 12, System::Drawing::FontStyle::Bold));
-			this->tbWorkSpaceName->ForeColor = System::Drawing::Color::White;
-			this->tbWorkSpaceName->Location = System::Drawing::Point(31, 73);
-			this->tbWorkSpaceName->Name = L"tbWorkSpaceName";
-			this->tbWorkSpaceName->Size = System::Drawing::Size(331, 34);
-			this->tbWorkSpaceName->TabIndex = 1;
-			// 
-			// label4
-			// 
-			this->label4->AutoSize = true;
-			this->label4->Font = (gcnew System::Drawing::Font(L"Segoe UI Semibold", 12, System::Drawing::FontStyle::Bold));
-			this->label4->ForeColor = System::Drawing::Color::White;
-			this->label4->Location = System::Drawing::Point(12, 14);
-			this->label4->Name = L"label4";
-			this->label4->Size = System::Drawing::Size(158, 28);
-			this->label4->TabIndex = 0;
-			this->label4->Text = L"New Workspace";
 			// 
 			// testApplication
 			// 
@@ -411,8 +344,6 @@ namespace Workspace {
 			this->panel1->PerformLayout();
 			this->applicationGroup->ResumeLayout(false);
 			this->applicationGroup->PerformLayout();
-			this->newWSDialog->ResumeLayout(false);
-			this->newWSDialog->PerformLayout();
 			this->ResumeLayout(false);
 
 		}

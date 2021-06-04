@@ -1,4 +1,7 @@
 #pragma once
+#include <cliext/vector>
+#include "Item.h"
+
 using namespace System;
 
 ref class WorkspaceContainer
@@ -9,13 +12,15 @@ ref class WorkspaceContainer
 
 		}
 		void setData(int id, String^ wname) {
-			_id = id;
-			_name = wname;
+			id = id;
+			name = wname;
 		}
 		String^ getName(){
-			return _name;
+			return name;
 		}
-		int _id;
-		String^ _name;
+		int id;
+		String^ name;
+		cliext::vector<Item^> items;
+		
 };
 

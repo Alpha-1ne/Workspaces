@@ -15,7 +15,6 @@ ref class WorkspaceContainer
 		String^ getName(){
 			return _name;
 		}
-	private:
 		int _id;
 		String^ _name;
 };

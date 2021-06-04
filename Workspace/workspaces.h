@@ -25,6 +25,7 @@ namespace Workspace {
 			//TODO: Add the constructor code here
 			//
 			newWSDialog->Hide();
+			progressBarDialog->Hide();
 		}
 
 	protected:
@@ -63,6 +64,9 @@ namespace Workspace {
 	private: System::Windows::Forms::TextBox^ tbWorkSpaceName;
 	private: System::Windows::Forms::Label^ label4;
 	private: System::Windows::Forms::Button^ button3;
+	private: System::Windows::Forms::Panel^ progressBarDialog;
+	private: System::Windows::Forms::ProgressBar^ progressBar;
+	private: System::Windows::Forms::Label^ label3;
 		   cliext::vector<WorkspaceContainer^> myWorkpaces;
 
 #pragma region Windows Form Designer generated code
@@ -88,9 +92,13 @@ namespace Workspace {
 			this->label2 = (gcnew System::Windows::Forms::Label());
 			this->label1 = (gcnew System::Windows::Forms::Label());
 			this->button3 = (gcnew System::Windows::Forms::Button());
+			this->progressBarDialog = (gcnew System::Windows::Forms::Panel());
+			this->progressBar = (gcnew System::Windows::Forms::ProgressBar());
+			this->label3 = (gcnew System::Windows::Forms::Label());
 			this->panel1->SuspendLayout();
 			this->pNoWorkspace->SuspendLayout();
 			this->newWSDialog->SuspendLayout();
+			this->progressBarDialog->SuspendLayout();
 			this->SuspendLayout();
 			// 
 			// panel1
@@ -152,11 +160,10 @@ namespace Workspace {
 			// 
 			// pNoWorkspace
 			// 
-			this->pNoWorkspace->Controls->Add(this->newWSDialog);
 			this->pNoWorkspace->Controls->Add(this->linkLabel1);
 			this->pNoWorkspace->Controls->Add(this->label2);
 			this->pNoWorkspace->Controls->Add(this->label1);
-			this->pNoWorkspace->Location = System::Drawing::Point(257, 29);
+			this->pNoWorkspace->Location = System::Drawing::Point(381, 343);
 			this->pNoWorkspace->Name = L"pNoWorkspace";
 			this->pNoWorkspace->Size = System::Drawing::Size(631, 525);
 			this->pNoWorkspace->TabIndex = 1;
@@ -169,7 +176,7 @@ namespace Workspace {
 			this->newWSDialog->Controls->Add(this->tbWorkSpaceName);
 			this->newWSDialog->Controls->Add(this->label4);
 			this->newWSDialog->ForeColor = System::Drawing::Color::White;
-			this->newWSDialog->Location = System::Drawing::Point(53, 139);
+			this->newWSDialog->Location = System::Drawing::Point(657, 97);
 			this->newWSDialog->Name = L"newWSDialog";
 			this->newWSDialog->Size = System::Drawing::Size(407, 186);
 			this->newWSDialog->TabIndex = 9;
@@ -277,11 +284,39 @@ namespace Workspace {
 			this->button3->UseVisualStyleBackColor = false;
 			this->button3->Click += gcnew System::EventHandler(this, &workspaces::button3_Click);
 			// 
+			// progressBarDialog
+			// 
+			this->progressBarDialog->Controls->Add(this->label3);
+			this->progressBarDialog->Controls->Add(this->progressBar);
+			this->progressBarDialog->Location = System::Drawing::Point(275, 170);
+			this->progressBarDialog->Name = L"progressBarDialog";
+			this->progressBarDialog->Size = System::Drawing::Size(407, 123);
+			this->progressBarDialog->TabIndex = 10;
+			// 
+			// progressBar
+			// 
+			this->progressBar->Location = System::Drawing::Point(31, 62);
+			this->progressBar->Name = L"progressBar";
+			this->progressBar->Size = System::Drawing::Size(348, 34);
+			this->progressBar->Style = System::Windows::Forms::ProgressBarStyle::Continuous;
+			this->progressBar->TabIndex = 0;
+			// 
+			// label3
+			// 
+			this->label3->AutoSize = true;
+			this->label3->Location = System::Drawing::Point(27, 15);
+			this->label3->Name = L"label3";
+			this->label3->Size = System::Drawing::Size(85, 19);
+			this->label3->TabIndex = 1;
+			this->label3->Text = L"Please wait...";
+			// 
 			// workspaces
 			// 
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::None;
 			this->BackColor = System::Drawing::SystemColors::Control;
 			this->ClientSize = System::Drawing::Size(900, 600);
+			this->Controls->Add(this->progressBarDialog);
+			this->Controls->Add(this->newWSDialog);
 			this->Controls->Add(this->button3);
 			this->Controls->Add(this->panel1);
 			this->Controls->Add(this->pNoWorkspace);
@@ -298,6 +333,8 @@ namespace Workspace {
 			this->pNoWorkspace->PerformLayout();
 			this->newWSDialog->ResumeLayout(false);
 			this->newWSDialog->PerformLayout();
+			this->progressBarDialog->ResumeLayout(false);
+			this->progressBarDialog->PerformLayout();
 			this->ResumeLayout(false);
 
 		}
@@ -316,8 +353,9 @@ private: System::Void cancelBox_Click(System::Object^ sender, System::EventArgs^
 	newWSDialog->Hide();
 }
 private: System::Void button3_Click(System::Object^ sender, System::EventArgs^ e) {
-
-	System::IO::StreamWriter^ sw = gcnew System::IO::StreamWriter("text.json", true);
+	progressBarDialog->Show();
+	progressBar->PerformStep();
+	System::IO::StreamWriter^ sw = gcnew System::IO::StreamWriter("text.json", false);
 	Newtonsoft::Json::JsonSerializer^ serializer = gcnew Newtonsoft::Json::JsonSerializer();
 	serializer->Serialize(sw, myWorkpaces);
 	sw->Close();

@@ -97,7 +97,15 @@ namespace Workspace {
 	private: System::Windows::Forms::TextBox^ itemName;
 	private: System::Windows::Forms::FolderBrowserDialog^ directorySelectDialog;
 	private: System::Windows::Forms::OpenFileDialog^ selectApplicationDialog;
-		   cliext::vector<WorkspaceContainer^> myWorkpaces;
+	private: System::Windows::Forms::Panel^ urlPanel;
+
+	private: System::Windows::Forms::TextBox^ textBox1;
+	private: System::Windows::Forms::Label^ labelTitle;
+	private: System::Windows::Forms::Panel^ applicationPanel;
+	private: System::Windows::Forms::Button^ btCancel;
+	private: System::Windows::Forms::Button^ button1;
+	private: cliext::vector<WorkspaceContainer^> myWorkpaces;
+	private: int selectedIndex;
 
 #pragma region Windows Form Designer generated code
 		/// <summary>
@@ -126,12 +134,18 @@ namespace Workspace {
 			this->label6 = (gcnew System::Windows::Forms::Label());
 			this->itemType = (gcnew System::Windows::Forms::ComboBox());
 			this->applicationGroup = (gcnew System::Windows::Forms::GroupBox());
+			this->urlPanel = (gcnew System::Windows::Forms::Panel());
+			this->textBox1 = (gcnew System::Windows::Forms::TextBox());
+			this->labelTitle = (gcnew System::Windows::Forms::Label());
+			this->applicationPanel = (gcnew System::Windows::Forms::Panel());
 			this->tbDirectory = (gcnew System::Windows::Forms::TextBox());
 			this->selectDirectoryButton = (gcnew System::Windows::Forms::Button());
-			this->testApplication = (gcnew System::Windows::Forms::Button());
 			this->applicationPath = (gcnew System::Windows::Forms::TextBox());
 			this->label5 = (gcnew System::Windows::Forms::Label());
 			this->chooseApplication = (gcnew System::Windows::Forms::Button());
+			this->btCancel = (gcnew System::Windows::Forms::Button());
+			this->button1 = (gcnew System::Windows::Forms::Button());
+			this->testApplication = (gcnew System::Windows::Forms::Button());
 			this->label7 = (gcnew System::Windows::Forms::Label());
 			this->itemName = (gcnew System::Windows::Forms::TextBox());
 			this->directorySelectDialog = (gcnew System::Windows::Forms::FolderBrowserDialog());
@@ -141,6 +155,8 @@ namespace Workspace {
 			this->newWSDialog->SuspendLayout();
 			this->addItem->SuspendLayout();
 			this->applicationGroup->SuspendLayout();
+			this->urlPanel->SuspendLayout();
+			this->applicationPanel->SuspendLayout();
 			this->SuspendLayout();
 			// 
 			// panel1
@@ -251,9 +267,9 @@ namespace Workspace {
 			this->newWSDialog->Controls->Add(this->tbWorkSpaceName);
 			this->newWSDialog->Controls->Add(this->label4);
 			this->newWSDialog->ForeColor = System::Drawing::Color::White;
-			this->newWSDialog->Location = System::Drawing::Point(8, 363);
+			this->newWSDialog->Location = System::Drawing::Point(294, 5);
 			this->newWSDialog->Name = L"newWSDialog";
-			this->newWSDialog->Size = System::Drawing::Size(395, 187);
+			this->newWSDialog->Size = System::Drawing::Size(374, 189);
 			this->newWSDialog->TabIndex = 9;
 			// 
 			// saveButton
@@ -335,7 +351,7 @@ namespace Workspace {
 			this->addItem->Controls->Add(this->itemName);
 			this->addItem->Location = System::Drawing::Point(260, 29);
 			this->addItem->Name = L"addItem";
-			this->addItem->Size = System::Drawing::Size(614, 524);
+			this->addItem->Size = System::Drawing::Size(614, 535);
 			this->addItem->TabIndex = 11;
 			// 
 			// label6
@@ -359,34 +375,69 @@ namespace Workspace {
 			this->itemType->Font = (gcnew System::Drawing::Font(L"Segoe UI Semibold", 7.5F, System::Drawing::FontStyle::Bold));
 			this->itemType->FormattingEnabled = true;
 			this->itemType->ImeMode = System::Windows::Forms::ImeMode::NoControl;
-			this->itemType->Items->AddRange(gcnew cli::array< System::Object^  >(4) {
-				L"Application", L"Application + Directory", L"URL",
-					L"Command"
-			});
+			this->itemType->Items->AddRange(gcnew cli::array< System::Object^  >(3) { L"Application", L"Application + Directory", L"URL" });
 			this->itemType->Location = System::Drawing::Point(28, 113);
 			this->itemType->Name = L"itemType";
 			this->itemType->Size = System::Drawing::Size(545, 23);
 			this->itemType->TabIndex = 16;
+			this->itemType->SelectedIndexChanged += gcnew System::EventHandler(this, &workspaces::itemType_SelectedIndexChanged);
 			// 
 			// applicationGroup
 			// 
-			this->applicationGroup->Controls->Add(this->tbDirectory);
-			this->applicationGroup->Controls->Add(this->selectDirectoryButton);
+			this->applicationGroup->Controls->Add(this->urlPanel);
+			this->applicationGroup->Controls->Add(this->applicationPanel);
+			this->applicationGroup->Controls->Add(this->btCancel);
+			this->applicationGroup->Controls->Add(this->button1);
 			this->applicationGroup->Controls->Add(this->testApplication);
-			this->applicationGroup->Controls->Add(this->applicationPath);
-			this->applicationGroup->Controls->Add(this->label5);
-			this->applicationGroup->Controls->Add(this->chooseApplication);
 			this->applicationGroup->ForeColor = System::Drawing::Color::Black;
 			this->applicationGroup->Location = System::Drawing::Point(28, 156);
 			this->applicationGroup->Name = L"applicationGroup";
-			this->applicationGroup->Size = System::Drawing::Size(545, 371);
+			this->applicationGroup->Size = System::Drawing::Size(545, 362);
 			this->applicationGroup->TabIndex = 15;
 			this->applicationGroup->TabStop = false;
-			this->applicationGroup->Text = L"Application Settings";
+			this->applicationGroup->Text = L"Task Settings";
+			// 
+			// urlPanel
+			// 
+			this->urlPanel->Controls->Add(this->textBox1);
+			this->urlPanel->Controls->Add(this->labelTitle);
+			this->urlPanel->Location = System::Drawing::Point(8, 40);
+			this->urlPanel->Name = L"urlPanel";
+			this->urlPanel->Size = System::Drawing::Size(520, 103);
+			this->urlPanel->TabIndex = 18;
+			// 
+			// textBox1
+			// 
+			this->textBox1->Location = System::Drawing::Point(7, 55);
+			this->textBox1->Name = L"textBox1";
+			this->textBox1->Size = System::Drawing::Size(375, 25);
+			this->textBox1->TabIndex = 12;
+			// 
+			// labelTitle
+			// 
+			this->labelTitle->AutoSize = true;
+			this->labelTitle->Location = System::Drawing::Point(3, 23);
+			this->labelTitle->Name = L"labelTitle";
+			this->labelTitle->Size = System::Drawing::Size(34, 19);
+			this->labelTitle->TabIndex = 0;
+			this->labelTitle->Text = L"URL";
+			this->labelTitle->Click += gcnew System::EventHandler(this, &workspaces::labelTitle_Click);
+			// 
+			// applicationPanel
+			// 
+			this->applicationPanel->Controls->Add(this->tbDirectory);
+			this->applicationPanel->Controls->Add(this->selectDirectoryButton);
+			this->applicationPanel->Controls->Add(this->applicationPath);
+			this->applicationPanel->Controls->Add(this->label5);
+			this->applicationPanel->Controls->Add(this->chooseApplication);
+			this->applicationPanel->Location = System::Drawing::Point(8, 44);
+			this->applicationPanel->Name = L"applicationPanel";
+			this->applicationPanel->Size = System::Drawing::Size(522, 114);
+			this->applicationPanel->TabIndex = 17;
 			// 
 			// tbDirectory
 			// 
-			this->tbDirectory->Location = System::Drawing::Point(30, 105);
+			this->tbDirectory->Location = System::Drawing::Point(8, 73);
 			this->tbDirectory->Name = L"tbDirectory";
 			this->tbDirectory->ReadOnly = true;
 			this->tbDirectory->Size = System::Drawing::Size(375, 25);
@@ -400,32 +451,17 @@ namespace Workspace {
 			this->selectDirectoryButton->FlatAppearance->MouseOverBackColor = System::Drawing::Color::Transparent;
 			this->selectDirectoryButton->Font = (gcnew System::Drawing::Font(L"Segoe UI Semibold", 7, System::Drawing::FontStyle::Bold));
 			this->selectDirectoryButton->ForeColor = System::Drawing::Color::Black;
-			this->selectDirectoryButton->Location = System::Drawing::Point(411, 105);
+			this->selectDirectoryButton->Location = System::Drawing::Point(389, 73);
 			this->selectDirectoryButton->Name = L"selectDirectoryButton";
 			this->selectDirectoryButton->Size = System::Drawing::Size(119, 25);
 			this->selectDirectoryButton->TabIndex = 13;
 			this->selectDirectoryButton->Text = L"Choose Directory";
 			this->selectDirectoryButton->UseVisualStyleBackColor = false;
-			// 
-			// testApplication
-			// 
-			this->testApplication->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((System::Windows::Forms::AnchorStyles::Bottom | System::Windows::Forms::AnchorStyles::Right));
-			this->testApplication->FlatAppearance->BorderColor = System::Drawing::Color::White;
-			this->testApplication->FlatAppearance->MouseDownBackColor = System::Drawing::Color::Transparent;
-			this->testApplication->FlatAppearance->MouseOverBackColor = System::Drawing::Color::Transparent;
-			this->testApplication->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
-			this->testApplication->Font = (gcnew System::Drawing::Font(L"Segoe UI Semibold", 7, System::Drawing::FontStyle::Bold));
-			this->testApplication->ForeColor = System::Drawing::Color::White;
-			this->testApplication->Location = System::Drawing::Point(411, 333);
-			this->testApplication->Name = L"testApplication";
-			this->testApplication->Size = System::Drawing::Size(119, 25);
-			this->testApplication->TabIndex = 12;
-			this->testApplication->Text = L"Test";
-			this->testApplication->UseVisualStyleBackColor = true;
+			this->selectDirectoryButton->Click += gcnew System::EventHandler(this, &workspaces::selectDirectoryButton_Click);
 			// 
 			// applicationPath
 			// 
-			this->applicationPath->Location = System::Drawing::Point(30, 64);
+			this->applicationPath->Location = System::Drawing::Point(8, 32);
 			this->applicationPath->Name = L"applicationPath";
 			this->applicationPath->ReadOnly = true;
 			this->applicationPath->Size = System::Drawing::Size(375, 25);
@@ -434,7 +470,7 @@ namespace Workspace {
 			// label5
 			// 
 			this->label5->AutoSize = true;
-			this->label5->Location = System::Drawing::Point(26, 37);
+			this->label5->Location = System::Drawing::Point(4, 5);
 			this->label5->Name = L"label5";
 			this->label5->Size = System::Drawing::Size(138, 19);
 			this->label5->TabIndex = 10;
@@ -448,12 +484,61 @@ namespace Workspace {
 			this->chooseApplication->FlatStyle = System::Windows::Forms::FlatStyle::System;
 			this->chooseApplication->Font = (gcnew System::Drawing::Font(L"Segoe UI Semibold", 7, System::Drawing::FontStyle::Bold));
 			this->chooseApplication->ForeColor = System::Drawing::Color::Black;
-			this->chooseApplication->Location = System::Drawing::Point(411, 64);
+			this->chooseApplication->Location = System::Drawing::Point(389, 32);
 			this->chooseApplication->Name = L"chooseApplication";
 			this->chooseApplication->Size = System::Drawing::Size(119, 25);
 			this->chooseApplication->TabIndex = 9;
 			this->chooseApplication->Text = L"Select Application";
 			this->chooseApplication->UseVisualStyleBackColor = true;
+			this->chooseApplication->Click += gcnew System::EventHandler(this, &workspaces::chooseApplication_Click);
+			// 
+			// btCancel
+			// 
+			this->btCancel->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((System::Windows::Forms::AnchorStyles::Bottom | System::Windows::Forms::AnchorStyles::Right));
+			this->btCancel->FlatAppearance->BorderColor = System::Drawing::Color::White;
+			this->btCancel->FlatAppearance->MouseDownBackColor = System::Drawing::Color::Transparent;
+			this->btCancel->FlatAppearance->MouseOverBackColor = System::Drawing::Color::Transparent;
+			this->btCancel->FlatStyle = System::Windows::Forms::FlatStyle::System;
+			this->btCancel->Font = (gcnew System::Drawing::Font(L"Segoe UI Semibold", 7, System::Drawing::FontStyle::Bold));
+			this->btCancel->ForeColor = System::Drawing::Color::White;
+			this->btCancel->Location = System::Drawing::Point(6, 324);
+			this->btCancel->Name = L"btCancel";
+			this->btCancel->Size = System::Drawing::Size(119, 25);
+			this->btCancel->TabIndex = 16;
+			this->btCancel->Text = L"Cancel";
+			this->btCancel->UseVisualStyleBackColor = true;
+			// 
+			// button1
+			// 
+			this->button1->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((System::Windows::Forms::AnchorStyles::Bottom | System::Windows::Forms::AnchorStyles::Right));
+			this->button1->FlatAppearance->BorderColor = System::Drawing::Color::White;
+			this->button1->FlatAppearance->MouseDownBackColor = System::Drawing::Color::Transparent;
+			this->button1->FlatAppearance->MouseOverBackColor = System::Drawing::Color::Transparent;
+			this->button1->FlatStyle = System::Windows::Forms::FlatStyle::System;
+			this->button1->Font = (gcnew System::Drawing::Font(L"Segoe UI Semibold", 7, System::Drawing::FontStyle::Bold));
+			this->button1->ForeColor = System::Drawing::Color::White;
+			this->button1->Location = System::Drawing::Point(286, 324);
+			this->button1->Name = L"button1";
+			this->button1->Size = System::Drawing::Size(119, 25);
+			this->button1->TabIndex = 15;
+			this->button1->Text = L"Test";
+			this->button1->UseVisualStyleBackColor = true;
+			// 
+			// testApplication
+			// 
+			this->testApplication->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((System::Windows::Forms::AnchorStyles::Bottom | System::Windows::Forms::AnchorStyles::Right));
+			this->testApplication->FlatAppearance->BorderColor = System::Drawing::Color::White;
+			this->testApplication->FlatAppearance->MouseDownBackColor = System::Drawing::Color::Transparent;
+			this->testApplication->FlatAppearance->MouseOverBackColor = System::Drawing::Color::Transparent;
+			this->testApplication->FlatStyle = System::Windows::Forms::FlatStyle::System;
+			this->testApplication->Font = (gcnew System::Drawing::Font(L"Segoe UI Semibold", 7, System::Drawing::FontStyle::Bold));
+			this->testApplication->ForeColor = System::Drawing::Color::White;
+			this->testApplication->Location = System::Drawing::Point(411, 324);
+			this->testApplication->Name = L"testApplication";
+			this->testApplication->Size = System::Drawing::Size(119, 25);
+			this->testApplication->TabIndex = 12;
+			this->testApplication->Text = L"Save";
+			this->testApplication->UseVisualStyleBackColor = true;
 			// 
 			// label7
 			// 
@@ -478,6 +563,7 @@ namespace Workspace {
 			// selectApplicationDialog
 			// 
 			this->selectApplicationDialog->Filter = L"\"EXE|*.exe|All files|*.*\"";
+			this->selectApplicationDialog->InitialDirectory = L"C:\\ProgramData\\Microsoft\\Windows\\Start Menu\\Programs";
 			// 
 			// workspaces
 			// 
@@ -485,9 +571,9 @@ namespace Workspace {
 			this->BackColor = System::Drawing::SystemColors::Control;
 			this->ClientSize = System::Drawing::Size(900, 600);
 			this->Controls->Add(this->newWSDialog);
-			this->Controls->Add(this->addItem);
 			this->Controls->Add(this->button3);
 			this->Controls->Add(this->panel1);
+			this->Controls->Add(this->addItem);
 			this->Controls->Add(this->pNoWorkspace);
 			this->Font = (gcnew System::Drawing::Font(L"Segoe UI", 7.8F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
@@ -505,7 +591,10 @@ namespace Workspace {
 			this->addItem->ResumeLayout(false);
 			this->addItem->PerformLayout();
 			this->applicationGroup->ResumeLayout(false);
-			this->applicationGroup->PerformLayout();
+			this->urlPanel->ResumeLayout(false);
+			this->urlPanel->PerformLayout();
+			this->applicationPanel->ResumeLayout(false);
+			this->applicationPanel->PerformLayout();
 			this->ResumeLayout(false);
 
 		}
@@ -553,6 +642,39 @@ private: System::Void setTree() {
 }
 private: System::Void treeView_AfterSelect(System::Object^ sender, System::Windows::Forms::TreeViewEventArgs^ e) {
 	btAddItem->Enabled = true;
+}
+private: System::Void chooseApplication_Click(System::Object^ sender, System::EventArgs^ e) {
+	if (selectApplicationDialog->ShowDialog() == System::Windows::Forms::DialogResult::OK) {
+		applicationPath->Text = selectApplicationDialog->FileName;
+	}
+}
+private: System::Void selectDirectoryButton_Click(System::Object^ sender, System::EventArgs^ e) {
+	if (directorySelectDialog->ShowDialog() == System::Windows::Forms::DialogResult::OK) {
+		tbDirectory->Text = directorySelectDialog->SelectedPath;
+	}
+}
+private: System::Void labelTitle_Click(System::Object^ sender, System::EventArgs^ e) {
+}
+private: System::Void itemType_SelectedIndexChanged(System::Object^ sender, System::EventArgs^ e) {
+	selectedIndex = itemType->SelectedIndex;
+	switch (selectedIndex) {
+	case 0: 
+		urlPanel->Hide();
+		selectDirectoryButton->Hide();
+		tbDirectory->Hide();
+		applicationPanel->Show();
+		break;
+	case 1:
+		urlPanel->Hide();
+		selectDirectoryButton->Show();
+		tbDirectory->Show();
+		applicationPanel->Show();
+		break;
+	case 2:
+		applicationPanel->Hide();
+		urlPanel->Show();
+		break;
+	}
 }
 };
 }

@@ -18,9 +18,6 @@
     <ClCompile Include="home.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="main.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="workspaces.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>

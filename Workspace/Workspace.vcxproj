@@ -129,7 +129,6 @@
     <ClCompile Include="home.cpp" />
     <ClCompile Include="Item.cpp" />
     <ClCompile Include="JsonRoot.cpp" />
-    <ClCompile Include="main.cpp" />
     <ClCompile Include="NewItemWindow.cpp" />
     <ClCompile Include="WorkspaceContainer.cpp" />
     <ClCompile Include="workspaces.cpp" />

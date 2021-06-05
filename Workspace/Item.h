@@ -4,11 +4,12 @@ using namespace System;
 ref class Item
 {
 public:
-	Item(int _id, String^ _name) {
+	Item(int _id, int _parentId) {
 		id = _id;
-		name = _name;
+		parentId = _parentId;
 	}
 	int id;
+	int parentId;
 	String^ name;
 	int type;
 	String^ url;

@@ -28,18 +28,15 @@ namespace Workspace {
 			//
 			//TODO: Add the constructor code here
 			//
-			newWSDialog->Hide();
+			panelNewWorkspace->Hide();
 			StreamReader^ din = File::OpenText("text.json");
 			myWorkpaces.clear();
 			array<WorkspaceContainer^>^ root = Newtonsoft::Json::JsonConvert::DeserializeObject<array<WorkspaceContainer^>^>(din->ReadLine());
 			din->Close();
+			myWorkpaces.empty();
 			for (int i = 0; i < root->Length; i++) {
-				TreeNode^ node = gcnew TreeNode(root[i]->name);
-				for (int j = 0; j < root[i]->items.size(); j++)
-				{
-					node->Nodes->Add(gcnew TreeNode(root[i]->items[j]->name));
-				}
-				treeView->Nodes->Add(node);
+				myWorkpaces.push_back(root[i]);
+				listWorkspaces->Items->Add(root[i]->name);
 			}
 		}
 
@@ -55,13 +52,13 @@ namespace Workspace {
 			}
 		}
 	private: System::Windows::Forms::Panel^ panel1;
-	private: System::Windows::Forms::Button^ btAddItem;
+
 	private: System::Windows::Forms::Button^ btAddWorkspace;
 	protected:
 
 
 	private: System::Windows::Forms::Label^ labelWorkspaces;
-	private: System::Windows::Forms::TreeView^ treeView;
+
 
 
 
@@ -105,15 +102,20 @@ namespace Workspace {
 
 
 	private: cliext::vector<WorkspaceContainer^> myWorkpaces;
-	private: System::Windows::Forms::Panel^ newWSDialog;
-	private: System::Windows::Forms::Button^ saveButton;
-	private: System::Windows::Forms::Button^ cancelBox;
-	private: System::Windows::Forms::TextBox^ tbWorkSpaceName;
-	private: System::Windows::Forms::Label^ label4;
+
+
+
+
+
 	private: System::Windows::Forms::Label^ label1;
 	private: System::Windows::Forms::Label^ label2;
 	private: System::Windows::Forms::LinkLabel^ linkLabel1;
 	private: System::Windows::Forms::Panel^ pNoWorkspace;
+	private: System::Windows::Forms::ListView^ listWorkspaces;
+	private: System::Windows::Forms::Panel^ panelNewWorkspace;
+	private: System::Windows::Forms::ListBox^ listBox1;
+	private: System::Windows::Forms::TextBox^ textBox1;
+	private: System::Windows::Forms::Label^ label3;
 	private: int selectedIndex;
 
 #pragma region Windows Form Designer generated code
@@ -125,57 +127,54 @@ namespace Workspace {
 		{
 			System::ComponentModel::ComponentResourceManager^ resources = (gcnew System::ComponentModel::ComponentResourceManager(workspaces::typeid));
 			this->panel1 = (gcnew System::Windows::Forms::Panel());
-			this->btAddItem = (gcnew System::Windows::Forms::Button());
+			this->listWorkspaces = (gcnew System::Windows::Forms::ListView());
 			this->btAddWorkspace = (gcnew System::Windows::Forms::Button());
 			this->labelWorkspaces = (gcnew System::Windows::Forms::Label());
-			this->treeView = (gcnew System::Windows::Forms::TreeView());
 			this->button3 = (gcnew System::Windows::Forms::Button());
 			this->directorySelectDialog = (gcnew System::Windows::Forms::FolderBrowserDialog());
 			this->selectApplicationDialog = (gcnew System::Windows::Forms::OpenFileDialog());
-			this->newWSDialog = (gcnew System::Windows::Forms::Panel());
-			this->saveButton = (gcnew System::Windows::Forms::Button());
-			this->cancelBox = (gcnew System::Windows::Forms::Button());
-			this->tbWorkSpaceName = (gcnew System::Windows::Forms::TextBox());
-			this->label4 = (gcnew System::Windows::Forms::Label());
 			this->label1 = (gcnew System::Windows::Forms::Label());
 			this->label2 = (gcnew System::Windows::Forms::Label());
 			this->linkLabel1 = (gcnew System::Windows::Forms::LinkLabel());
 			this->pNoWorkspace = (gcnew System::Windows::Forms::Panel());
+			this->panelNewWorkspace = (gcnew System::Windows::Forms::Panel());
+			this->listBox1 = (gcnew System::Windows::Forms::ListBox());
+			this->textBox1 = (gcnew System::Windows::Forms::TextBox());
+			this->label3 = (gcnew System::Windows::Forms::Label());
 			this->panel1->SuspendLayout();
-			this->newWSDialog->SuspendLayout();
 			this->pNoWorkspace->SuspendLayout();
+			this->panelNewWorkspace->SuspendLayout();
 			this->SuspendLayout();
 			// 
 			// panel1
 			// 
 			this->panel1->BackColor = System::Drawing::SystemColors::ControlLight;
-			this->panel1->Controls->Add(this->btAddItem);
+			this->panel1->Controls->Add(this->listWorkspaces);
 			this->panel1->Controls->Add(this->btAddWorkspace);
 			this->panel1->Controls->Add(this->labelWorkspaces);
-			this->panel1->Controls->Add(this->treeView);
 			this->panel1->Location = System::Drawing::Point(1, 2);
 			this->panel1->Name = L"panel1";
 			this->panel1->Size = System::Drawing::Size(250, 600);
 			this->panel1->TabIndex = 0;
 			// 
-			// btAddItem
+			// listWorkspaces
 			// 
-			this->btAddItem->Anchor = System::Windows::Forms::AnchorStyles::Bottom;
-			this->btAddItem->Enabled = false;
-			this->btAddItem->Location = System::Drawing::Point(131, 558);
-			this->btAddItem->Name = L"btAddItem";
-			this->btAddItem->Size = System::Drawing::Size(116, 34);
-			this->btAddItem->TabIndex = 2;
-			this->btAddItem->Text = L"Add Item";
-			this->btAddItem->UseVisualStyleBackColor = true;
-			this->btAddItem->Click += gcnew System::EventHandler(this, &workspaces::button2_Click);
+			this->listWorkspaces->Font = (gcnew System::Drawing::Font(L"Segoe UI", 10));
+			this->listWorkspaces->HideSelection = false;
+			this->listWorkspaces->Location = System::Drawing::Point(8, 31);
+			this->listWorkspaces->Name = L"listWorkspaces";
+			this->listWorkspaces->Size = System::Drawing::Size(228, 509);
+			this->listWorkspaces->TabIndex = 3;
+			this->listWorkspaces->UseCompatibleStateImageBehavior = false;
+			this->listWorkspaces->View = System::Windows::Forms::View::List;
+			this->listWorkspaces->SelectedIndexChanged += gcnew System::EventHandler(this, &workspaces::listWorkspaces_SelectedIndexChanged);
 			// 
 			// btAddWorkspace
 			// 
 			this->btAddWorkspace->Anchor = System::Windows::Forms::AnchorStyles::Bottom;
-			this->btAddWorkspace->Location = System::Drawing::Point(3, 558);
+			this->btAddWorkspace->Location = System::Drawing::Point(8, 552);
 			this->btAddWorkspace->Name = L"btAddWorkspace";
-			this->btAddWorkspace->Size = System::Drawing::Size(123, 34);
+			this->btAddWorkspace->Size = System::Drawing::Size(228, 34);
 			this->btAddWorkspace->TabIndex = 1;
 			this->btAddWorkspace->Text = L"Add Workspace";
 			this->btAddWorkspace->UseVisualStyleBackColor = true;
@@ -191,17 +190,6 @@ namespace Workspace {
 			this->labelWorkspaces->Size = System::Drawing::Size(102, 20);
 			this->labelWorkspaces->TabIndex = 0;
 			this->labelWorkspaces->Text = L"Workspaces";
-			// 
-			// treeView
-			// 
-			this->treeView->Font = (gcnew System::Drawing::Font(L"Segoe UI", 10));
-			this->treeView->HideSelection = false;
-			this->treeView->Location = System::Drawing::Point(7, 26);
-			this->treeView->Name = L"treeView";
-			this->treeView->ShowLines = false;
-			this->treeView->Size = System::Drawing::Size(231, 525);
-			this->treeView->TabIndex = 3;
-			this->treeView->AfterSelect += gcnew System::Windows::Forms::TreeViewEventHandler(this, &workspaces::treeView_AfterSelect);
 			// 
 			// button3
 			// 
@@ -227,69 +215,6 @@ namespace Workspace {
 			// 
 			this->selectApplicationDialog->Filter = L"\"EXE|*.exe|All files|*.*\"";
 			this->selectApplicationDialog->InitialDirectory = L"C:\\ProgramData\\Microsoft\\Windows\\Start Menu\\Programs";
-			// 
-			// newWSDialog
-			// 
-			this->newWSDialog->BackColor = System::Drawing::SystemColors::ActiveCaption;
-			this->newWSDialog->Controls->Add(this->saveButton);
-			this->newWSDialog->Controls->Add(this->cancelBox);
-			this->newWSDialog->Controls->Add(this->tbWorkSpaceName);
-			this->newWSDialog->Controls->Add(this->label4);
-			this->newWSDialog->ForeColor = System::Drawing::Color::White;
-			this->newWSDialog->Location = System::Drawing::Point(86, 336);
-			this->newWSDialog->Name = L"newWSDialog";
-			this->newWSDialog->Size = System::Drawing::Size(374, 189);
-			this->newWSDialog->TabIndex = 9;
-			// 
-			// saveButton
-			// 
-			this->saveButton->BackColor = System::Drawing::Color::DodgerBlue;
-			this->saveButton->Enabled = false;
-			this->saveButton->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
-			this->saveButton->ForeColor = System::Drawing::Color::White;
-			this->saveButton->Location = System::Drawing::Point(167, 134);
-			this->saveButton->Name = L"saveButton";
-			this->saveButton->Size = System::Drawing::Size(93, 34);
-			this->saveButton->TabIndex = 3;
-			this->saveButton->Text = L"Save";
-			this->saveButton->UseVisualStyleBackColor = false;
-			this->saveButton->Click += gcnew System::EventHandler(this, &workspaces::saveButton_Click);
-			// 
-			// cancelBox
-			// 
-			this->cancelBox->FlatAppearance->BorderColor = System::Drawing::Color::White;
-			this->cancelBox->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
-			this->cancelBox->ForeColor = System::Drawing::Color::White;
-			this->cancelBox->Location = System::Drawing::Point(277, 134);
-			this->cancelBox->Name = L"cancelBox";
-			this->cancelBox->Size = System::Drawing::Size(85, 34);
-			this->cancelBox->TabIndex = 2;
-			this->cancelBox->Text = L"Cancel";
-			this->cancelBox->UseVisualStyleBackColor = true;
-			this->cancelBox->Click += gcnew System::EventHandler(this, &workspaces::cancelBox_Click);
-			// 
-			// tbWorkSpaceName
-			// 
-			this->tbWorkSpaceName->BackColor = System::Drawing::Color::LightGray;
-			this->tbWorkSpaceName->BorderStyle = System::Windows::Forms::BorderStyle::FixedSingle;
-			this->tbWorkSpaceName->Font = (gcnew System::Drawing::Font(L"Segoe UI Semibold", 12, System::Drawing::FontStyle::Bold));
-			this->tbWorkSpaceName->ForeColor = System::Drawing::Color::White;
-			this->tbWorkSpaceName->Location = System::Drawing::Point(31, 73);
-			this->tbWorkSpaceName->Name = L"tbWorkSpaceName";
-			this->tbWorkSpaceName->Size = System::Drawing::Size(331, 34);
-			this->tbWorkSpaceName->TabIndex = 1;
-			this->tbWorkSpaceName->TextChanged += gcnew System::EventHandler(this, &workspaces::tbWorkSpaceName_TextChanged);
-			// 
-			// label4
-			// 
-			this->label4->AutoSize = true;
-			this->label4->Font = (gcnew System::Drawing::Font(L"Segoe UI Semibold", 12, System::Drawing::FontStyle::Bold));
-			this->label4->ForeColor = System::Drawing::Color::White;
-			this->label4->Location = System::Drawing::Point(12, 14);
-			this->label4->Name = L"label4";
-			this->label4->Size = System::Drawing::Size(158, 28);
-			this->label4->TabIndex = 0;
-			this->label4->Text = L"New Workspace";
 			// 
 			// label1
 			// 
@@ -326,20 +251,55 @@ namespace Workspace {
 			// 
 			// pNoWorkspace
 			// 
-			this->pNoWorkspace->Controls->Add(this->newWSDialog);
 			this->pNoWorkspace->Controls->Add(this->linkLabel1);
 			this->pNoWorkspace->Controls->Add(this->label2);
 			this->pNoWorkspace->Controls->Add(this->label1);
-			this->pNoWorkspace->Location = System::Drawing::Point(268, 28);
+			this->pNoWorkspace->Location = System::Drawing::Point(260, 29);
 			this->pNoWorkspace->Name = L"pNoWorkspace";
 			this->pNoWorkspace->Size = System::Drawing::Size(620, 550);
 			this->pNoWorkspace->TabIndex = 1;
+			// 
+			// panelNewWorkspace
+			// 
+			this->panelNewWorkspace->Controls->Add(this->listBox1);
+			this->panelNewWorkspace->Controls->Add(this->textBox1);
+			this->panelNewWorkspace->Controls->Add(this->label3);
+			this->panelNewWorkspace->Location = System::Drawing::Point(263, 29);
+			this->panelNewWorkspace->Name = L"panelNewWorkspace";
+			this->panelNewWorkspace->Size = System::Drawing::Size(623, 489);
+			this->panelNewWorkspace->TabIndex = 10;
+			// 
+			// listBox1
+			// 
+			this->listBox1->FormattingEnabled = true;
+			this->listBox1->ItemHeight = 17;
+			this->listBox1->Location = System::Drawing::Point(16, 116);
+			this->listBox1->Name = L"listBox1";
+			this->listBox1->Size = System::Drawing::Size(452, 361);
+			this->listBox1->TabIndex = 2;
+			// 
+			// textBox1
+			// 
+			this->textBox1->Location = System::Drawing::Point(16, 61);
+			this->textBox1->Name = L"textBox1";
+			this->textBox1->Size = System::Drawing::Size(553, 25);
+			this->textBox1->TabIndex = 1;
+			// 
+			// label3
+			// 
+			this->label3->AutoSize = true;
+			this->label3->Location = System::Drawing::Point(12, 15);
+			this->label3->Name = L"label3";
+			this->label3->Size = System::Drawing::Size(115, 19);
+			this->label3->TabIndex = 0;
+			this->label3->Text = L"Workspace Name";
 			// 
 			// workspaces
 			// 
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::None;
 			this->BackColor = System::Drawing::SystemColors::Control;
 			this->ClientSize = System::Drawing::Size(900, 600);
+			this->Controls->Add(this->panelNewWorkspace);
 			this->Controls->Add(this->button3);
 			this->Controls->Add(this->panel1);
 			this->Controls->Add(this->pNoWorkspace);
@@ -352,29 +312,33 @@ namespace Workspace {
 			this->Load += gcnew System::EventHandler(this, &workspaces::workspaces_Load);
 			this->panel1->ResumeLayout(false);
 			this->panel1->PerformLayout();
-			this->newWSDialog->ResumeLayout(false);
-			this->newWSDialog->PerformLayout();
 			this->pNoWorkspace->ResumeLayout(false);
 			this->pNoWorkspace->PerformLayout();
+			this->panelNewWorkspace->ResumeLayout(false);
+			this->panelNewWorkspace->PerformLayout();
 			this->ResumeLayout(false);
 
 		}
 #pragma endregion
 	private: System::Void button2_Click(System::Object^ sender, System::EventArgs^ e) {
-		Workspace::NewItemWindow^ workspace = gcnew Workspace::NewItemWindow();
-		workspace->Show();
+		Workspace::NewItemWindow^ newItemWindow = gcnew Workspace::NewItemWindow();
+
+		//int itemIndex = container->items.size() + 1;
+		//container->items.push_back(gcnew Item(itemIndex, "Test1 Item"));
+		newItemWindow->Show();
 	}
 	private: System::Void workspaces_Load(System::Object^ sender, System::EventArgs^ e) {
 	}
 	private: System::Void linkLabel1_LinkClicked(System::Object^ sender, System::Windows::Forms::LinkLabelLinkClickedEventArgs^ e) {
-		newWSDialog->Show();
+		pNoWorkspace->Hide();
+		panelNewWorkspace->Show();
+
 	}
 	private: System::Void btAddWorkspace_Click(System::Object^ sender, System::EventArgs^ e) {
-		newWSDialog->Show();
+		panelNewWorkspace->Show();
+		pNoWorkspace->Hide();
 	}
-private: System::Void cancelBox_Click(System::Object^ sender, System::EventArgs^ e) {
-	newWSDialog->Hide();
-}
+
 private: System::Void button3_Click(System::Object^ sender, System::EventArgs^ e) {
 	System::IO::StreamWriter^ sw = gcnew System::IO::StreamWriter("text.json", false);
 	Newtonsoft::Json::JsonSerializer^ serializer = gcnew Newtonsoft::Json::JsonSerializer();
@@ -382,19 +346,15 @@ private: System::Void button3_Click(System::Object^ sender, System::EventArgs^ e
 	sw->Close();
 	Application::Exit();
 }
-private: System::Void tbWorkSpaceName_TextChanged(System::Object^ sender, System::EventArgs^ e) {
-	saveButton->Enabled = tbWorkSpaceName->Text != "";
-}
+
 private: System::Void saveButton_Click(System::Object^ sender, System::EventArgs^ e) {
-	newWSDialog->Hide();
+	panelNewWorkspace->Hide();
 	WorkspaceContainer^ container = gcnew WorkspaceContainer();
 	int index = myWorkpaces.size() + 1;
-	container->setData(index, tbWorkSpaceName->Text);
-	int itemIndex = container->items.size() + 1;
-	container->items.push_back(gcnew Item(itemIndex,"Test1 Item"));
-	treeView->Nodes->Add(gcnew TreeNode(tbWorkSpaceName->Text));
+	//container->setData(index, tbWorkSpaceName->Text);
+	//listWorkspaces->Items->Add(tbWorkSpaceName->Text);
 	myWorkpaces.push_back(container);
-	tbWorkSpaceName->Text = "";
+	//tbWorkSpaceName->Text = "";
 	// serialize JSON directly to a file
 }
 private: System::Void setTree() {
@@ -403,11 +363,15 @@ private: System::Void setTree() {
 	}
 }
 private: System::Void treeView_AfterSelect(System::Object^ sender, System::Windows::Forms::TreeViewEventArgs^ e) {
-	btAddItem->Enabled = true;
+	//btAddItem->Enabled = true;
 }
 
 private: System::Void labelTitle_Click(System::Object^ sender, System::EventArgs^ e) {
+
 }
 
+private: System::Void listWorkspaces_SelectedIndexChanged(System::Object^ sender, System::EventArgs^ e) {
+
+}
 };
 }

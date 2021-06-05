@@ -116,6 +116,9 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>C:\Users\ravik\Downloads\Json130r1\Bin\netstandard1.0\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
@@ -124,15 +127,35 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="home.cpp" />
+    <ClCompile Include="Item.cpp" />
+    <ClCompile Include="JsonRoot.cpp" />
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="WorkspaceContainer.cpp" />
+    <ClCompile Include="workspaces.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="home.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
+    <ClInclude Include="Item.h" />
+    <ClInclude Include="JsonRoot.h" />
+    <ClInclude Include="main.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
+    <ClInclude Include="WorkspaceContainer.h" />
+    <ClInclude Include="workspaces.h">
       <FileType>CppForm</FileType>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="home.resx">
       <DependentUpon>home.h</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="main.resx">
+      <DependentUpon>main.h</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="workspaces.resx">
+      <DependentUpon>workspaces.h</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

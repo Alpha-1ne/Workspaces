@@ -1,5 +1,5 @@
 #pragma once
-
+#include "Item.h"
 namespace Workspace {
 
 	using namespace System;
@@ -160,6 +160,7 @@ namespace Workspace {
 			this->testApplication->TabIndex = 12;
 			this->testApplication->Text = L"Save";
 			this->testApplication->UseVisualStyleBackColor = true;
+			this->testApplication->Click += gcnew System::EventHandler(this, &NewItemWindow::testApplication_Click);
 			// 
 			// button1
 			// 
@@ -223,6 +224,7 @@ namespace Workspace {
 			this->webURL->Name = L"webURL";
 			this->webURL->Size = System::Drawing::Size(375, 25);
 			this->webURL->TabIndex = 12;
+			this->webURL->Text = L"http://";
 			// 
 			// labelTitle
 			// 
@@ -412,6 +414,46 @@ private: System::Void button1_Click(System::Object^ sender, System::EventArgs^ e
 			myProcess->StartInfo->CreateNoWindow = true;
 			myProcess->Start();
 		}
+	}
+}
+	   public: Item^ getItemData(int id, int parentId) {
+		   Item^ currentItem = gcnew Item(id,parentId);
+		   currentItem->name = itemName->Text;
+		   currentItem->type = selectedIndex;
+		   switch (selectedIndex) {
+		   case 0:
+			   currentItem -> application = applicationPath->Text;
+			   break;
+		   case 1:
+			   currentItem->application = applicationPath->Text;
+			   currentItem->directory = tbDirectory->Text;
+			   break;
+		   case 2:
+			   currentItem->url = webURL->Text;
+		   }
+		   return currentItem;
+	   }
+private: System::Void testApplication_Click(System::Object^ sender, System::EventArgs^ e) {
+	if (itemName->Text == "")
+	{
+		MessageBox::Show("Please enter valid name", "Error", MessageBoxButtons::OK, MessageBoxIcon::Error);
+		itemName->Focus();
+	}
+	else if (selectedIndex == -1) {
+		MessageBox::Show("Please select task type", "Error", MessageBoxButtons::OK, MessageBoxIcon::Error);
+		itemType->Focus();
+	}
+	else if (selectedIndex == 0 && applicationPath->Text=="") {
+		MessageBox::Show("Please select application", "Error", MessageBoxButtons::OK, MessageBoxIcon::Error);
+		applicationPath->Focus();
+	}
+	else if (selectedIndex == 2 && webURL->Text == "http://")
+	{
+		MessageBox::Show("Please enter valid URL", "Error", MessageBoxButtons::OK, MessageBoxIcon::Error);
+		webURL->Focus();
+	}
+	else {
+		Close();
 	}
 }
 };

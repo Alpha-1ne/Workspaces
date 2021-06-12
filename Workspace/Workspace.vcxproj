@@ -129,7 +129,7 @@
     <ClCompile Include="home.cpp" />
     <ClCompile Include="Item.cpp" />
     <ClCompile Include="JsonRoot.cpp" />
-    <ClCompile Include="main.cpp" />
+    <ClCompile Include="NewItemWindow.cpp" />
     <ClCompile Include="WorkspaceContainer.cpp" />
     <ClCompile Include="workspaces.cpp" />
   </ItemGroup>
@@ -139,7 +139,7 @@
     </ClInclude>
     <ClInclude Include="Item.h" />
     <ClInclude Include="JsonRoot.h" />
-    <ClInclude Include="main.h">
+    <ClInclude Include="NewItemWindow.h">
       <FileType>CppForm</FileType>
     </ClInclude>
     <ClInclude Include="WorkspaceContainer.h" />
@@ -151,8 +151,8 @@
     <EmbeddedResource Include="home.resx">
       <DependentUpon>home.h</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="main.resx">
-      <DependentUpon>main.h</DependentUpon>
+    <EmbeddedResource Include="NewItemWindow.resx">
+      <DependentUpon>NewItemWindow.h</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="workspaces.resx">
       <DependentUpon>workspaces.h</DependentUpon>

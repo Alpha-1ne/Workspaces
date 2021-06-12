@@ -28,7 +28,8 @@ namespace Workspace {
 			
 			try {
 				StreamReader^ din = File::OpenText("text.json");
-				array<WorkspaceContainer^>^ root = Newtonsoft::Json::JsonConvert::DeserializeObject<array<WorkspaceContainer^>^>(din->ReadLine());
+				String^ data = din->ReadLine();
+				array<WorkspaceContainer^>^ root = Newtonsoft::Json::JsonConvert::DeserializeObject<array<WorkspaceContainer^>^>(data);
 				din->Close();
 				workspace = gcnew Workspace::workspaces(root);
 			}
@@ -53,7 +54,7 @@ namespace Workspace {
 	private: System::Windows::Forms::Button^ startButton;
 
 	private: System::Windows::Forms::PictureBox^ pictureBox1;
-	private: System::Windows::Forms::ProgressBar^ progressBar;
+
 
 
 
@@ -123,7 +124,6 @@ namespace Workspace {
 			this->label1 = (gcnew System::Windows::Forms::Label());
 			this->startButton = (gcnew System::Windows::Forms::Button());
 			this->pictureBox1 = (gcnew System::Windows::Forms::PictureBox());
-			this->progressBar = (gcnew System::Windows::Forms::ProgressBar());
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox1))->BeginInit();
 			this->SuspendLayout();
 			// 
@@ -190,22 +190,12 @@ namespace Workspace {
 			this->pictureBox1->TabStop = false;
 			this->pictureBox1->Click += gcnew System::EventHandler(this, &home::pictureBox1_Click);
 			// 
-			// progressBar
-			// 
-			this->progressBar->Location = System::Drawing::Point(36, 12);
-			this->progressBar->MarqueeAnimationSpeed = 50;
-			this->progressBar->Name = L"progressBar";
-			this->progressBar->Size = System::Drawing::Size(797, 20);
-			this->progressBar->Style = System::Windows::Forms::ProgressBarStyle::Marquee;
-			this->progressBar->TabIndex = 4;
-			// 
 			// home
 			// 
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::None;
 			this->BackColor = System::Drawing::Color::White;
 			this->BackgroundImage = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"$this.BackgroundImage")));
 			this->ClientSize = System::Drawing::Size(900, 600);
-			this->Controls->Add(this->progressBar);
 			this->Controls->Add(this->pictureBox1);
 			this->Controls->Add(this->startButton);
 			this->Controls->Add(this->label1);

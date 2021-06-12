@@ -132,8 +132,8 @@ namespace Workspace {
 	private: System::Windows::Forms::Button^ btDelete;
 	private: System::Windows::Forms::Button^ button1;
 	private: System::Windows::Forms::Button^ button5;
-private: System::Windows::Forms::Button^ btEditItem;
-private: System::Windows::Forms::Button^ btDeleteItem;
+	private: System::Windows::Forms::Button^ btEditItem;
+	private: System::Windows::Forms::Button^ btDeleteItem;
 
 
 	private: System::Windows::Forms::Button^ btSave;
@@ -190,9 +190,10 @@ private: System::Windows::Forms::Button^ btDeleteItem;
 			   // listWorkspaces
 			   // 
 			   this->listWorkspaces->Font = (gcnew System::Drawing::Font(L"Segoe UI", 10));
+			   this->listWorkspaces->ItemHeight = 23;
 			   this->listWorkspaces->Location = System::Drawing::Point(8, 31);
 			   this->listWorkspaces->Name = L"listWorkspaces";
-			   this->listWorkspaces->Size = System::Drawing::Size(228, 509);
+			   this->listWorkspaces->Size = System::Drawing::Size(228, 510);
 			   this->listWorkspaces->TabIndex = 3;
 			   this->listWorkspaces->SelectedIndexChanged += gcnew System::EventHandler(this, &workspaces::listWorkspaces_SelectedIndexChanged);
 			   // 
@@ -281,7 +282,7 @@ private: System::Windows::Forms::Button^ btDeleteItem;
 			   this->pNoWorkspace->Controls->Add(this->linkLabel1);
 			   this->pNoWorkspace->Controls->Add(this->label2);
 			   this->pNoWorkspace->Controls->Add(this->label1);
-			   this->pNoWorkspace->Location = System::Drawing::Point(260, 29);
+			   this->pNoWorkspace->Location = System::Drawing::Point(266, 29);
 			   this->pNoWorkspace->Name = L"pNoWorkspace";
 			   this->pNoWorkspace->Size = System::Drawing::Size(620, 550);
 			   this->pNoWorkspace->TabIndex = 1;
@@ -297,10 +298,11 @@ private: System::Windows::Forms::Button^ btDeleteItem;
 			   this->panelNewWorkspace->Controls->Add(this->listItems);
 			   this->panelNewWorkspace->Controls->Add(this->workspaceName);
 			   this->panelNewWorkspace->Controls->Add(this->label3);
-			   this->panelNewWorkspace->Location = System::Drawing::Point(263, 29);
+			   this->panelNewWorkspace->Location = System::Drawing::Point(257, 32);
 			   this->panelNewWorkspace->Name = L"panelNewWorkspace";
 			   this->panelNewWorkspace->Size = System::Drawing::Size(623, 559);
 			   this->panelNewWorkspace->TabIndex = 10;
+			   this->panelNewWorkspace->Paint += gcnew System::Windows::Forms::PaintEventHandler(this, &workspaces::panelNewWorkspace_Paint);
 			   // 
 			   // btSave
 			   // 
@@ -523,7 +525,19 @@ private: System::Windows::Forms::Button^ btDeleteItem;
 		   System::Void Workspace::workspaces::OnFormClosed(System::Object^ sender, System::Windows::Forms::FormClosedEventArgs^ e)
 		   {
 			   if (newItem != nullptr) {
-				   currentWorkpace->items.push_back(newItem->getItemData(currentWorkpace->items.size(), currentWorkpace->id));
+				   Item^ data = newItem->getItemData();
+				   if (selectedItemIndex != -1)
+				   {
+					   Item^ cItem = currentWorkpace->items[selectedIndex];
+					   cItem->name = data->name;
+					   cItem->application = data->application;
+					   cItem->directory = data->directory;
+					   cItem->url = data->url;
+					   cItem->type = data->type;
+				   }
+				   else {
+					   currentWorkpace->items.push_back(data);
+				   }
 				   setUpList();
 			   }
 		   }
@@ -535,7 +549,7 @@ private: System::Windows::Forms::Button^ btDeleteItem;
 		}
 	}
 	private: System::Void button5_Click(System::Object^ sender, System::EventArgs^ e) {
-		newItem = gcnew NewItemWindow();
+		newItem = gcnew NewItemWindow(currentWorkpace->items.size(), currentWorkpace->id);
 		newItem->FormClosed += gcnew System::Windows::Forms::FormClosedEventHandler(this, &Workspace::workspaces::OnFormClosed);
 		newItem->Show();
 	}
@@ -573,7 +587,9 @@ private: System::Windows::Forms::Button^ btDeleteItem;
 		}
 	}
 	private: System::Void button4_Click(System::Object^ sender, System::EventArgs^ e) {
-
+		newItem = gcnew NewItemWindow(currentWorkpace->items[selectedItemIndex]);
+		newItem->FormClosed += gcnew System::Windows::Forms::FormClosedEventHandler(this, &Workspace::workspaces::OnFormClosed);
+		newItem->Show();
 	}
 	private: System::Void button2_Click(System::Object^ sender, System::EventArgs^ e) {
 		if (selectedItemIndex != -1)
@@ -616,7 +632,9 @@ private: System::Windows::Forms::Button^ btDeleteItem;
 			btDeleteItem->Hide();
 		}
 	}
-};
+	private: System::Void panelNewWorkspace_Paint(System::Object^ sender, System::Windows::Forms::PaintEventArgs^ e) {
+	}
+	};
 }
 
 

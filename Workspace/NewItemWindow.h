@@ -99,6 +99,7 @@ namespace Workspace {
 		   /// </summary>
 		   void InitializeComponent(void)
 		   {
+			   System::ComponentModel::ComponentResourceManager^ resources = (gcnew System::ComponentModel::ComponentResourceManager(NewItemWindow::typeid));
 			   this->addItem = (gcnew System::Windows::Forms::Panel());
 			   this->label6 = (gcnew System::Windows::Forms::Label());
 			   this->itemType = (gcnew System::Windows::Forms::ComboBox());
@@ -159,13 +160,13 @@ namespace Workspace {
 			   this->itemType->Cursor = System::Windows::Forms::Cursors::Default;
 			   this->itemType->DropDownStyle = System::Windows::Forms::ComboBoxStyle::DropDownList;
 			   this->itemType->FlatStyle = System::Windows::Forms::FlatStyle::System;
-			   this->itemType->Font = (gcnew System::Drawing::Font(L"Segoe UI Semibold", 7.5F, System::Drawing::FontStyle::Bold));
+			   this->itemType->Font = (gcnew System::Drawing::Font(L"Segoe UI Semibold", 10, System::Drawing::FontStyle::Bold));
 			   this->itemType->FormattingEnabled = true;
 			   this->itemType->ImeMode = System::Windows::Forms::ImeMode::NoControl;
 			   this->itemType->Items->AddRange(gcnew cli::array< System::Object^  >(3) { L"Application", L"Application + Directory", L"URL" });
 			   this->itemType->Location = System::Drawing::Point(28, 113);
 			   this->itemType->Name = L"itemType";
-			   this->itemType->Size = System::Drawing::Size(545, 23);
+			   this->itemType->Size = System::Drawing::Size(545, 31);
 			   this->itemType->TabIndex = 16;
 			   this->itemType->SelectedIndexChanged += gcnew System::EventHandler(this, &NewItemWindow::itemType_SelectedIndexChanged);
 			   // 
@@ -176,7 +177,7 @@ namespace Workspace {
 			   this->btSave->FlatAppearance->MouseDownBackColor = System::Drawing::Color::Transparent;
 			   this->btSave->FlatAppearance->MouseOverBackColor = System::Drawing::Color::Transparent;
 			   this->btSave->FlatStyle = System::Windows::Forms::FlatStyle::System;
-			   this->btSave->Font = (gcnew System::Drawing::Font(L"Segoe UI Semibold", 7, System::Drawing::FontStyle::Bold));
+			   this->btSave->Font = (gcnew System::Drawing::Font(L"Segoe UI Semibold", 10, System::Drawing::FontStyle::Bold));
 			   this->btSave->ForeColor = System::Drawing::Color::White;
 			   this->btSave->Location = System::Drawing::Point(468, 330);
 			   this->btSave->Name = L"btSave";
@@ -193,7 +194,7 @@ namespace Workspace {
 			   this->btTest->FlatAppearance->MouseDownBackColor = System::Drawing::Color::Transparent;
 			   this->btTest->FlatAppearance->MouseOverBackColor = System::Drawing::Color::Transparent;
 			   this->btTest->FlatStyle = System::Windows::Forms::FlatStyle::System;
-			   this->btTest->Font = (gcnew System::Drawing::Font(L"Segoe UI Semibold", 7, System::Drawing::FontStyle::Bold));
+			   this->btTest->Font = (gcnew System::Drawing::Font(L"Segoe UI Semibold", 10, System::Drawing::FontStyle::Bold));
 			   this->btTest->ForeColor = System::Drawing::Color::White;
 			   this->btTest->Location = System::Drawing::Point(318, 330);
 			   this->btTest->Name = L"btTest";
@@ -210,7 +211,7 @@ namespace Workspace {
 			   this->btCancel->FlatAppearance->MouseDownBackColor = System::Drawing::Color::Transparent;
 			   this->btCancel->FlatAppearance->MouseOverBackColor = System::Drawing::Color::Transparent;
 			   this->btCancel->FlatStyle = System::Windows::Forms::FlatStyle::System;
-			   this->btCancel->Font = (gcnew System::Drawing::Font(L"Segoe UI Semibold", 7, System::Drawing::FontStyle::Bold));
+			   this->btCancel->Font = (gcnew System::Drawing::Font(L"Segoe UI Semibold", 10, System::Drawing::FontStyle::Bold));
 			   this->btCancel->ForeColor = System::Drawing::Color::White;
 			   this->btCancel->Location = System::Drawing::Point(12, 330);
 			   this->btCancel->Name = L"btCancel";
@@ -343,10 +344,10 @@ namespace Workspace {
 			   // 
 			   // itemName
 			   // 
-			   this->itemName->Font = (gcnew System::Drawing::Font(L"Segoe UI Semibold", 15, System::Drawing::FontStyle::Bold));
+			   this->itemName->Font = (gcnew System::Drawing::Font(L"Segoe UI Semibold", 10, System::Drawing::FontStyle::Bold));
 			   this->itemName->Location = System::Drawing::Point(28, 43);
 			   this->itemName->Name = L"itemName";
-			   this->itemName->Size = System::Drawing::Size(545, 41);
+			   this->itemName->Size = System::Drawing::Size(545, 30);
 			   this->itemName->TabIndex = 13;
 			   // 
 			   // selectApplicationDialog
@@ -361,8 +362,10 @@ namespace Workspace {
 			   this->ClientSize = System::Drawing::Size(599, 362);
 			   this->ControlBox = false;
 			   this->Controls->Add(this->addItem);
+			   this->Cursor = System::Windows::Forms::Cursors::Default;
 			   this->Font = (gcnew System::Drawing::Font(L"Segoe UI", 7.8F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				   static_cast<System::Byte>(0)));
+			   this->Icon = (cli::safe_cast<System::Drawing::Icon^>(resources->GetObject(L"$this.Icon")));
 			   this->Name = L"NewItemWindow";
 			   this->ShowIcon = false;
 			   this->ShowInTaskbar = false;

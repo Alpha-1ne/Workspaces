@@ -240,14 +240,15 @@ namespace Workspace {
 			   this->urlPanel->Controls->Add(this->labelTitle);
 			   this->urlPanel->Location = System::Drawing::Point(6, 16);
 			   this->urlPanel->Name = L"urlPanel";
-			   this->urlPanel->Size = System::Drawing::Size(520, 103);
+			   this->urlPanel->Size = System::Drawing::Size(520, 116);
 			   this->urlPanel->TabIndex = 18;
 			   // 
 			   // webURL
 			   // 
+			   this->webURL->Font = (gcnew System::Drawing::Font(L"Segoe UI", 10));
 			   this->webURL->Location = System::Drawing::Point(7, 55);
 			   this->webURL->Name = L"webURL";
-			   this->webURL->Size = System::Drawing::Size(375, 25);
+			   this->webURL->Size = System::Drawing::Size(375, 30);
 			   this->webURL->TabIndex = 12;
 			   this->webURL->Text = L"http://";
 			   // 
@@ -397,12 +398,14 @@ namespace Workspace {
 			selectDirectoryButton->Hide();
 			tbDirectory->Hide();
 			applicationPanel->Show();
+			applicationPath->Show();
 			applicationPath->Text = currentItem->application;
 			break;
 		case 1:
 			urlPanel->Hide();
 			selectDirectoryButton->Show();
 			tbDirectory->Show();
+			applicationPath->Show();
 			applicationPanel->Show();
 			applicationPath->Text = currentItem->application;
 			tbDirectory->Text = currentItem->directory;
@@ -410,6 +413,7 @@ namespace Workspace {
 		case 2:
 			applicationPanel->Hide();
 			urlPanel->Show();
+			webURL->Show();
 			webURL->Text = currentItem->url;
 			break;
 		}

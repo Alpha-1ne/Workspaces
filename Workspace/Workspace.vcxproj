@@ -104,6 +104,8 @@
     </ClCompile>
     <Link>
       <AdditionalDependencies />
+      <EntryPointSymbol>main</EntryPointSymbol>
+      <SubSystem>Windows</SubSystem>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -113,6 +115,8 @@
     </ClCompile>
     <Link>
       <AdditionalDependencies />
+      <EntryPointSymbol>main</EntryPointSymbol>
+      <SubSystem>Windows</SubSystem>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
@@ -142,6 +146,7 @@
     <ClInclude Include="NewItemWindow.h">
       <FileType>CppForm</FileType>
     </ClInclude>
+    <ClInclude Include="resource.h" />
     <ClInclude Include="WorkspaceContainer.h" />
     <ClInclude Include="workspaces.h">
       <FileType>CppForm</FileType>
@@ -157,6 +162,12 @@
     <EmbeddedResource Include="workspaces.resx">
       <DependentUpon>workspaces.h</DependentUpon>
     </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="Workspace.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="C:\Users\ravik\Downloads\preferencessystemwindows_93750.ico" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

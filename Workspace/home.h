@@ -12,6 +12,7 @@ namespace Workspace {
 	using namespace System;
 	using namespace System::IO;
 	using namespace System::Diagnostics;
+	using namespace  Microsoft::Win32;
 
 	/// <summary>
 	/// Summary for home
@@ -25,7 +26,17 @@ namespace Workspace {
 			//
 			//TODO: Add the constructor code here
 			//
+			RegistryKey^ rk = Registry::CurrentUser->OpenSubKey("SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run", true);
 			
+			if (rk != nullptr) {
+				try {
+					if(rk->GetValue("Workspaces") != nullptr)
+						checkBoxStartup->Checked = true;
+				}
+				catch (Exception^ e) {
+					checkBoxStartup->Checked = false;
+				}
+			}
 			try {
 				StreamReader^ din = File::OpenText("text.json");
 				String^ data = din->ReadLine();
@@ -109,7 +120,9 @@ namespace Workspace {
 		/// Required designer variable.
 		/// </summary>
 		System::ComponentModel::Container ^components;
-		Workspace::workspaces^ workspace;
+	private: System::Windows::Forms::CheckBox^ checkBoxStartup;
+
+		   Workspace::workspaces^ workspace;
 
 
 #pragma region Windows Form Designer generated code
@@ -124,6 +137,7 @@ namespace Workspace {
 			this->label1 = (gcnew System::Windows::Forms::Label());
 			this->startButton = (gcnew System::Windows::Forms::Button());
 			this->pictureBox1 = (gcnew System::Windows::Forms::PictureBox());
+			this->checkBoxStartup = (gcnew System::Windows::Forms::CheckBox());
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox1))->BeginInit();
 			this->SuspendLayout();
 			// 
@@ -154,7 +168,7 @@ namespace Workspace {
 			this->label1->BackColor = System::Drawing::Color::Transparent;
 			this->label1->Font = (gcnew System::Drawing::Font(L"Segoe UI", 40));
 			this->label1->ForeColor = System::Drawing::Color::White;
-			this->label1->Location = System::Drawing::Point(495, 218);
+			this->label1->Location = System::Drawing::Point(495, 195);
 			this->label1->Name = L"label1";
 			this->label1->Size = System::Drawing::Size(388, 89);
 			this->label1->TabIndex = 1;
@@ -190,12 +204,27 @@ namespace Workspace {
 			this->pictureBox1->TabStop = false;
 			this->pictureBox1->Click += gcnew System::EventHandler(this, &home::pictureBox1_Click);
 			// 
+			// checkBoxStartup
+			// 
+			this->checkBoxStartup->AutoSize = true;
+			this->checkBoxStartup->BackColor = System::Drawing::Color::Transparent;
+			this->checkBoxStartup->Font = (gcnew System::Drawing::Font(L"Segoe UI Semibold", 10, System::Drawing::FontStyle::Bold));
+			this->checkBoxStartup->ForeColor = System::Drawing::Color::White;
+			this->checkBoxStartup->Location = System::Drawing::Point(561, 297);
+			this->checkBoxStartup->Name = L"checkBoxStartup";
+			this->checkBoxStartup->Size = System::Drawing::Size(246, 27);
+			this->checkBoxStartup->TabIndex = 4;
+			this->checkBoxStartup->Text = L"Launch on Windows startup";
+			this->checkBoxStartup->UseVisualStyleBackColor = false;
+			this->checkBoxStartup->CheckedChanged += gcnew System::EventHandler(this, &home::checkBoxStartup_CheckedChanged);
+			// 
 			// home
 			// 
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::None;
 			this->BackColor = System::Drawing::Color::White;
 			this->BackgroundImage = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"$this.BackgroundImage")));
 			this->ClientSize = System::Drawing::Size(900, 600);
+			this->Controls->Add(this->checkBoxStartup);
 			this->Controls->Add(this->pictureBox1);
 			this->Controls->Add(this->startButton);
 			this->Controls->Add(this->label1);
@@ -203,7 +232,10 @@ namespace Workspace {
 			this->Font = (gcnew System::Drawing::Font(L"Segoe UI Semibold", 7.8F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
 			this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::None;
+			this->Icon = (cli::safe_cast<System::Drawing::Icon^>(resources->GetObject(L"$this.Icon")));
 			this->Name = L"home";
+			this->ShowIcon = false;
+			this->ShowInTaskbar = false;
 			this->StartPosition = System::Windows::Forms::FormStartPosition::CenterScreen;
 			this->Text = L"home";
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox1))->EndInit();
@@ -227,6 +259,15 @@ private: System::Void close_Click(System::Object^ sender, System::EventArgs^ e) 
 private: System::Void startButton_Click(System::Object^ sender, System::EventArgs^ e) {
 	workspace->Show();
 	Hide();
+}
+private: System::Void checkBoxStartup_CheckedChanged(System::Object^ sender, System::EventArgs^ e) {
+	RegistryKey^ rk = Registry::CurrentUser->OpenSubKey("SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run", true);
+	if (checkBoxStartup->Checked) {
+		rk->SetValue("Workspaces",Application::ExecutablePath);
+	}
+	else {
+		rk->DeleteValue("Workspaces", false);
+	}
 }
 };
 }

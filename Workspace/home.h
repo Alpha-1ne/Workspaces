@@ -37,6 +37,7 @@ namespace Workspace {
 					checkBoxStartup->Checked = false;
 				}
 			}
+			
 			try {
 				StreamReader^ din = File::OpenText("text.json");
 				String^ data = din->ReadLine();
@@ -234,8 +235,6 @@ namespace Workspace {
 			this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::None;
 			this->Icon = (cli::safe_cast<System::Drawing::Icon^>(resources->GetObject(L"$this.Icon")));
 			this->Name = L"home";
-			this->ShowIcon = false;
-			this->ShowInTaskbar = false;
 			this->StartPosition = System::Windows::Forms::FormStartPosition::CenterScreen;
 			this->Text = L"home";
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox1))->EndInit();

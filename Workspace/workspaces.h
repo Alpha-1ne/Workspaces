@@ -100,8 +100,8 @@ namespace Workspace {
 
 
 
-	private: System::Windows::Forms::FolderBrowserDialog^ directorySelectDialog;
-	private: System::Windows::Forms::OpenFileDialog^ selectApplicationDialog;
+
+
 
 
 
@@ -142,6 +142,8 @@ namespace Workspace {
 	private: int selectedIndex = -1;
 private: System::Windows::Forms::Button^ btCancel;
 private: System::Windows::Forms::Label^ label4;
+
+
 	private: int selectedItemIndex = -1;
 
 #pragma region Windows Form Designer generated code
@@ -157,8 +159,6 @@ private: System::Windows::Forms::Label^ label4;
 			   this->btAddWorkspace = (gcnew System::Windows::Forms::Button());
 			   this->labelWorkspaces = (gcnew System::Windows::Forms::Label());
 			   this->button3 = (gcnew System::Windows::Forms::Button());
-			   this->directorySelectDialog = (gcnew System::Windows::Forms::FolderBrowserDialog());
-			   this->selectApplicationDialog = (gcnew System::Windows::Forms::OpenFileDialog());
 			   this->label2 = (gcnew System::Windows::Forms::Label());
 			   this->pNoWorkspace = (gcnew System::Windows::Forms::Panel());
 			   this->panelNewWorkspace = (gcnew System::Windows::Forms::Panel());
@@ -180,18 +180,18 @@ private: System::Windows::Forms::Label^ label4;
 			   // 
 			   // panel1
 			   // 
-			   this->panel1->BackColor = System::Drawing::SystemColors::ControlLight;
+			   this->panel1->BackColor = System::Drawing::Color::LightGray;
 			   this->panel1->Controls->Add(this->listWorkspaces);
 			   this->panel1->Controls->Add(this->btAddWorkspace);
 			   this->panel1->Controls->Add(this->labelWorkspaces);
-			   this->panel1->Location = System::Drawing::Point(1, 2);
+			   this->panel1->Location = System::Drawing::Point(0, 0);
 			   this->panel1->Name = L"panel1";
 			   this->panel1->Size = System::Drawing::Size(250, 600);
 			   this->panel1->TabIndex = 0;
 			   // 
 			   // listWorkspaces
 			   // 
-			   this->listWorkspaces->BackColor = System::Drawing::SystemColors::ControlLight;
+			   this->listWorkspaces->BackColor = System::Drawing::Color::LightGray;
 			   this->listWorkspaces->BorderStyle = System::Windows::Forms::BorderStyle::None;
 			   this->listWorkspaces->Font = (gcnew System::Drawing::Font(L"Segoe UI", 10));
 			   this->listWorkspaces->ItemHeight = 23;
@@ -210,6 +210,7 @@ private: System::Windows::Forms::Label^ label4;
 			   this->btAddWorkspace->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
 			   this->btAddWorkspace->Font = (gcnew System::Drawing::Font(L"Segoe UI Semibold", 10.2F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				   static_cast<System::Byte>(0)));
+			   this->btAddWorkspace->ForeColor = System::Drawing::Color::DimGray;
 			   this->btAddWorkspace->Location = System::Drawing::Point(0, 550);
 			   this->btAddWorkspace->Name = L"btAddWorkspace";
 			   this->btAddWorkspace->Size = System::Drawing::Size(250, 45);
@@ -224,6 +225,7 @@ private: System::Windows::Forms::Label^ label4;
 			   this->labelWorkspaces->BackColor = System::Drawing::Color::Transparent;
 			   this->labelWorkspaces->Font = (gcnew System::Drawing::Font(L"Segoe UI", 15, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				   static_cast<System::Byte>(0)));
+			   this->labelWorkspaces->ForeColor = System::Drawing::Color::Black;
 			   this->labelWorkspaces->Location = System::Drawing::Point(11, 7);
 			   this->labelWorkspaces->Name = L"labelWorkspaces";
 			   this->labelWorkspaces->Size = System::Drawing::Size(155, 35);
@@ -249,11 +251,6 @@ private: System::Windows::Forms::Label^ label4;
 			   this->button3->UseMnemonic = false;
 			   this->button3->UseVisualStyleBackColor = false;
 			   this->button3->Click += gcnew System::EventHandler(this, &workspaces::button3_Click);
-			   // 
-			   // selectApplicationDialog
-			   // 
-			   this->selectApplicationDialog->Filter = L"\"EXE|*.exe|All files|*.*\"";
-			   this->selectApplicationDialog->InitialDirectory = L"C:\\ProgramData\\Microsoft\\Windows\\Start Menu\\Programs";
 			   // 
 			   // label2
 			   // 
@@ -290,26 +287,28 @@ private: System::Windows::Forms::Label^ label4;
 			   this->panelNewWorkspace->Controls->Add(this->listItems);
 			   this->panelNewWorkspace->Controls->Add(this->workspaceName);
 			   this->panelNewWorkspace->Controls->Add(this->label3);
-			   this->panelNewWorkspace->Location = System::Drawing::Point(254, 31);
+			   this->panelNewWorkspace->Location = System::Drawing::Point(256, 9);
 			   this->panelNewWorkspace->Name = L"panelNewWorkspace";
-			   this->panelNewWorkspace->Size = System::Drawing::Size(631, 566);
+			   this->panelNewWorkspace->Size = System::Drawing::Size(610, 579);
 			   this->panelNewWorkspace->TabIndex = 10;
 			   this->panelNewWorkspace->Paint += gcnew System::Windows::Forms::PaintEventHandler(this, &workspaces::panelNewWorkspace_Paint);
 			   // 
 			   // label4
 			   // 
 			   this->label4->AutoSize = true;
-			   this->label4->Font = (gcnew System::Drawing::Font(L"Segoe UI", 10));
+			   this->label4->Font = (gcnew System::Drawing::Font(L"Segoe UI Semibold", 10.2F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+				   static_cast<System::Byte>(0)));
 			   this->label4->ForeColor = System::Drawing::Color::White;
-			   this->label4->Location = System::Drawing::Point(12, 103);
+			   this->label4->Location = System::Drawing::Point(12, 93);
 			   this->label4->Name = L"label4";
-			   this->label4->Size = System::Drawing::Size(48, 23);
+			   this->label4->Size = System::Drawing::Size(49, 23);
 			   this->label4->TabIndex = 19;
 			   this->label4->Text = L"Tasks";
 			   // 
 			   // btCancel
 			   // 
-			   this->btCancel->Location = System::Drawing::Point(320, 533);
+			   this->btCancel->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((System::Windows::Forms::AnchorStyles::Bottom | System::Windows::Forms::AnchorStyles::Right));
+			   this->btCancel->Location = System::Drawing::Point(330, 546);
 			   this->btCancel->Name = L"btCancel";
 			   this->btCancel->Size = System::Drawing::Size(125, 30);
 			   this->btCancel->TabIndex = 18;
@@ -319,7 +318,8 @@ private: System::Windows::Forms::Label^ label4;
 			   // 
 			   // btSave
 			   // 
-			   this->btSave->Location = System::Drawing::Point(461, 533);
+			   this->btSave->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((System::Windows::Forms::AnchorStyles::Bottom | System::Windows::Forms::AnchorStyles::Right));
+			   this->btSave->Location = System::Drawing::Point(461, 546);
 			   this->btSave->Name = L"btSave";
 			   this->btSave->Size = System::Drawing::Size(125, 30);
 			   this->btSave->TabIndex = 17;
@@ -338,7 +338,7 @@ private: System::Windows::Forms::Label^ label4;
 			   this->button5->FlatAppearance->MouseOverBackColor = System::Drawing::Color::Transparent;
 			   this->button5->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
 			   this->button5->ForeColor = System::Drawing::Color::Transparent;
-			   this->button5->Location = System::Drawing::Point(599, 135);
+			   this->button5->Location = System::Drawing::Point(16, 143);
 			   this->button5->Margin = System::Windows::Forms::Padding(3, 10, 10, 3);
 			   this->button5->Name = L"button5";
 			   this->button5->Size = System::Drawing::Size(22, 22);
@@ -358,7 +358,7 @@ private: System::Windows::Forms::Label^ label4;
 			   this->btEditItem->FlatAppearance->MouseOverBackColor = System::Drawing::Color::Transparent;
 			   this->btEditItem->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
 			   this->btEditItem->ForeColor = System::Drawing::Color::Transparent;
-			   this->btEditItem->Location = System::Drawing::Point(599, 185);
+			   this->btEditItem->Location = System::Drawing::Point(17, 187);
 			   this->btEditItem->Margin = System::Windows::Forms::Padding(3, 10, 10, 3);
 			   this->btEditItem->Name = L"btEditItem";
 			   this->btEditItem->Size = System::Drawing::Size(21, 25);
@@ -378,7 +378,7 @@ private: System::Windows::Forms::Label^ label4;
 			   this->btDeleteItem->FlatAppearance->MouseOverBackColor = System::Drawing::Color::Transparent;
 			   this->btDeleteItem->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
 			   this->btDeleteItem->ForeColor = System::Drawing::Color::Transparent;
-			   this->btDeleteItem->Location = System::Drawing::Point(599, 235);
+			   this->btDeleteItem->Location = System::Drawing::Point(16, 238);
 			   this->btDeleteItem->Margin = System::Windows::Forms::Padding(3, 10, 10, 3);
 			   this->btDeleteItem->Name = L"btDeleteItem";
 			   this->btDeleteItem->Size = System::Drawing::Size(22, 29);
@@ -394,7 +394,7 @@ private: System::Windows::Forms::Label^ label4;
 			   this->button1->FlatAppearance->BorderColor = System::Drawing::Color::White;
 			   this->button1->FlatAppearance->MouseDownBackColor = System::Drawing::Color::Transparent;
 			   this->button1->FlatAppearance->MouseOverBackColor = System::Drawing::Color::Transparent;
-			   this->button1->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
+			   this->button1->FlatStyle = System::Windows::Forms::FlatStyle::System;
 			   this->button1->ForeColor = System::Drawing::Color::White;
 			   this->button1->ImageAlign = System::Drawing::ContentAlignment::MiddleLeft;
 			   this->button1->Location = System::Drawing::Point(506, 15);
@@ -414,7 +414,7 @@ private: System::Windows::Forms::Label^ label4;
 			   this->btDelete->FlatAppearance->BorderColor = System::Drawing::Color::White;
 			   this->btDelete->FlatAppearance->MouseDownBackColor = System::Drawing::Color::Transparent;
 			   this->btDelete->FlatAppearance->MouseOverBackColor = System::Drawing::Color::Transparent;
-			   this->btDelete->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
+			   this->btDelete->FlatStyle = System::Windows::Forms::FlatStyle::System;
 			   this->btDelete->ForeColor = System::Drawing::Color::White;
 			   this->btDelete->Location = System::Drawing::Point(413, 15);
 			   this->btDelete->Margin = System::Windows::Forms::Padding(3, 10, 10, 3);
@@ -428,32 +428,34 @@ private: System::Windows::Forms::Label^ label4;
 			   // 
 			   // listItems
 			   // 
-			   this->listItems->BackColor = System::Drawing::SystemColors::Control;
+			   this->listItems->BackColor = System::Drawing::SystemColors::Window;
 			   this->listItems->Font = (gcnew System::Drawing::Font(L"Segoe UI", 10));
 			   this->listItems->FormattingEnabled = true;
 			   this->listItems->ItemHeight = 23;
-			   this->listItems->Location = System::Drawing::Point(16, 129);
+			   this->listItems->Location = System::Drawing::Point(51, 129);
 			   this->listItems->Name = L"listItems";
-			   this->listItems->Size = System::Drawing::Size(570, 395);
+			   this->listItems->Size = System::Drawing::Size(534, 395);
 			   this->listItems->TabIndex = 2;
 			   this->listItems->SelectedIndexChanged += gcnew System::EventHandler(this, &workspaces::listItems_SelectedIndexChanged);
 			   // 
 			   // workspaceName
 			   // 
 			   this->workspaceName->Font = (gcnew System::Drawing::Font(L"Segoe UI", 10));
+			   this->workspaceName->ForeColor = System::Drawing::Color::Black;
 			   this->workspaceName->Location = System::Drawing::Point(16, 51);
 			   this->workspaceName->Name = L"workspaceName";
-			   this->workspaceName->Size = System::Drawing::Size(570, 30);
+			   this->workspaceName->Size = System::Drawing::Size(569, 30);
 			   this->workspaceName->TabIndex = 1;
 			   // 
 			   // label3
 			   // 
 			   this->label3->AutoSize = true;
-			   this->label3->Font = (gcnew System::Drawing::Font(L"Segoe UI", 10));
+			   this->label3->Font = (gcnew System::Drawing::Font(L"Segoe UI Semibold", 10.2F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+				   static_cast<System::Byte>(0)));
 			   this->label3->ForeColor = System::Drawing::Color::White;
 			   this->label3->Location = System::Drawing::Point(12, 15);
 			   this->label3->Name = L"label3";
-			   this->label3->Size = System::Drawing::Size(143, 23);
+			   this->label3->Size = System::Drawing::Size(145, 23);
 			   this->label3->TabIndex = 0;
 			   this->label3->Text = L"Workspace Name";
 			   // 
@@ -550,7 +552,7 @@ private: System::Windows::Forms::Label^ label4;
 				   Item^ data = newItem->getItemData();
 				   if (selectedItemIndex != -1)
 				   {
-					   Item^ cItem = currentWorkpace->items[selectedIndex];
+					   Item^ cItem = currentWorkpace->items[selectedItemIndex];
 					   cItem->name = data->name;
 					   cItem->application = data->application;
 					   cItem->directory = data->directory;
@@ -618,7 +620,7 @@ private: System::Windows::Forms::Label^ label4;
 		if (selectedItemIndex != -1)
 		{
 			int j = 0;
-			for (auto i = currentWorkpace->items.begin(); i != currentWorkpace->items.end(); i++) {
+			for (auto i = currentWorkpace->items.begin(); i != currentWorkpace->items.end(); ) {
 				if (j == selectedItemIndex)
 				{
 					currentWorkpace->items.erase(i);

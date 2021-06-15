@@ -40,10 +40,10 @@ namespace Workspace {
 			//TODO: Add the constructor code here
 			//
 			currentItem = item;
-			bindItemData();
 			urlPanel->Hide();
 			applicationPanel->Hide();
 			btSave->Text = "Update";
+			bindItemData();
 		}
 
 	protected:
@@ -184,7 +184,7 @@ namespace Workspace {
 			   this->btSave->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
 			   this->btSave->Font = (gcnew System::Drawing::Font(L"Segoe UI Semibold", 10, System::Drawing::FontStyle::Bold));
 			   this->btSave->ForeColor = System::Drawing::Color::White;
-			   this->btSave->Location = System::Drawing::Point(464, 357);
+			   this->btSave->Location = System::Drawing::Point(454, 357);
 			   this->btSave->Name = L"btSave";
 			   this->btSave->Size = System::Drawing::Size(119, 30);
 			   this->btSave->TabIndex = 12;
@@ -201,7 +201,7 @@ namespace Workspace {
 			   this->btTest->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
 			   this->btTest->Font = (gcnew System::Drawing::Font(L"Segoe UI Semibold", 10, System::Drawing::FontStyle::Bold));
 			   this->btTest->ForeColor = System::Drawing::Color::White;
-			   this->btTest->Location = System::Drawing::Point(314, 357);
+			   this->btTest->Location = System::Drawing::Point(315, 357);
 			   this->btTest->Name = L"btTest";
 			   this->btTest->Size = System::Drawing::Size(119, 30);
 			   this->btTest->TabIndex = 15;
@@ -218,7 +218,7 @@ namespace Workspace {
 			   this->btCancel->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
 			   this->btCancel->Font = (gcnew System::Drawing::Font(L"Segoe UI Semibold", 10, System::Drawing::FontStyle::Bold));
 			   this->btCancel->ForeColor = System::Drawing::Color::White;
-			   this->btCancel->Location = System::Drawing::Point(8, 357);
+			   this->btCancel->Location = System::Drawing::Point(28, 357);
 			   this->btCancel->Name = L"btCancel";
 			   this->btCancel->Size = System::Drawing::Size(119, 30);
 			   this->btCancel->TabIndex = 16;
@@ -244,7 +244,7 @@ namespace Workspace {
 			   this->urlPanel->BackColor = System::Drawing::Color::Transparent;
 			   this->urlPanel->Controls->Add(this->webURL);
 			   this->urlPanel->Controls->Add(this->labelTitle);
-			   this->urlPanel->Location = System::Drawing::Point(6, 27);
+			   this->urlPanel->Location = System::Drawing::Point(6, 29);
 			   this->urlPanel->Name = L"urlPanel";
 			   this->urlPanel->Size = System::Drawing::Size(537, 116);
 			   this->urlPanel->TabIndex = 18;
@@ -253,6 +253,7 @@ namespace Workspace {
 			   // 
 			   this->webURL->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(26)), static_cast<System::Int32>(static_cast<System::Byte>(26)),
 				   static_cast<System::Int32>(static_cast<System::Byte>(26)));
+			   this->webURL->BorderStyle = System::Windows::Forms::BorderStyle::FixedSingle;
 			   this->webURL->Font = (gcnew System::Drawing::Font(L"Segoe UI", 10));
 			   this->webURL->ForeColor = System::Drawing::Color::White;
 			   this->webURL->Location = System::Drawing::Point(7, 55);
@@ -287,12 +288,15 @@ namespace Workspace {
 			   // 
 			   this->tbDirectory->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(26)), static_cast<System::Int32>(static_cast<System::Byte>(26)),
 				   static_cast<System::Int32>(static_cast<System::Byte>(26)));
+			   this->tbDirectory->BorderStyle = System::Windows::Forms::BorderStyle::None;
+			   this->tbDirectory->Font = (gcnew System::Drawing::Font(L"Segoe UI", 9));
 			   this->tbDirectory->ForeColor = System::Drawing::Color::White;
 			   this->tbDirectory->Location = System::Drawing::Point(8, 73);
 			   this->tbDirectory->Name = L"tbDirectory";
 			   this->tbDirectory->ReadOnly = true;
-			   this->tbDirectory->Size = System::Drawing::Size(375, 30);
+			   this->tbDirectory->Size = System::Drawing::Size(375, 20);
 			   this->tbDirectory->TabIndex = 14;
+			   this->tbDirectory->Text = L"Not Selected";
 			   // 
 			   // selectDirectoryButton
 			   // 
@@ -315,12 +319,15 @@ namespace Workspace {
 			   // 
 			   this->applicationPath->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(26)), static_cast<System::Int32>(static_cast<System::Byte>(26)),
 				   static_cast<System::Int32>(static_cast<System::Byte>(26)));
+			   this->applicationPath->BorderStyle = System::Windows::Forms::BorderStyle::None;
+			   this->applicationPath->Font = (gcnew System::Drawing::Font(L"Segoe UI", 9));
 			   this->applicationPath->ForeColor = System::Drawing::Color::White;
 			   this->applicationPath->Location = System::Drawing::Point(8, 32);
 			   this->applicationPath->Name = L"applicationPath";
 			   this->applicationPath->ReadOnly = true;
-			   this->applicationPath->Size = System::Drawing::Size(375, 30);
+			   this->applicationPath->Size = System::Drawing::Size(375, 20);
 			   this->applicationPath->TabIndex = 11;
+			   this->applicationPath->Text = L"Not Selected";
 			   // 
 			   // label5
 			   // 

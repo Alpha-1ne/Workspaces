@@ -39,7 +39,8 @@ namespace Workspace {
 			}
 			
 			try {
-				StreamReader^ din = File::OpenText("text.json");
+				Application::LocalUserAppDataPath;
+				StreamReader^ din = File::OpenText(String::Concat(Application::UserAppDataPath, "\\appdata.json"));
 				String^ data = din->ReadLine();
 				array<WorkspaceContainer^>^ root = Newtonsoft::Json::JsonConvert::DeserializeObject<array<WorkspaceContainer^>^>(data);
 				din->Close();

@@ -134,6 +134,7 @@
     <ClCompile Include="Item.cpp" />
     <ClCompile Include="JsonRoot.cpp" />
     <ClCompile Include="NewItemWindow.cpp" />
+    <ClCompile Include="ProgressDialog.cpp" />
     <ClCompile Include="WorkspaceContainer.cpp" />
     <ClCompile Include="workspaces.cpp" />
   </ItemGroup>
@@ -144,6 +145,9 @@
     <ClInclude Include="Item.h" />
     <ClInclude Include="JsonRoot.h" />
     <ClInclude Include="NewItemWindow.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
+    <ClInclude Include="ProgressDialog.h">
       <FileType>CppForm</FileType>
     </ClInclude>
     <ClInclude Include="resource.h" />
@@ -158,6 +162,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="NewItemWindow.resx">
       <DependentUpon>NewItemWindow.h</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ProgressDialog.resx">
+      <DependentUpon>ProgressDialog.h</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="workspaces.resx">
       <DependentUpon>workspaces.h</DependentUpon>

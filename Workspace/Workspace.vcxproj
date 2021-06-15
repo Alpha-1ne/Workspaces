@@ -134,7 +134,6 @@
     <ClCompile Include="Item.cpp" />
     <ClCompile Include="JsonRoot.cpp" />
     <ClCompile Include="NewItemWindow.cpp" />
-    <ClCompile Include="ProgressDialog.cpp" />
     <ClCompile Include="WorkspaceContainer.cpp" />
     <ClCompile Include="workspaces.cpp" />
   </ItemGroup>

@@ -293,9 +293,9 @@ private: System::Windows::Forms::Label^ labelNoWorkspace;
 			   this->panelNewWorkspace->Controls->Add(this->listItems);
 			   this->panelNewWorkspace->Controls->Add(this->tbWorkspaceName);
 			   this->panelNewWorkspace->Controls->Add(this->labelWorkspaceName);
-			   this->panelNewWorkspace->Location = System::Drawing::Point(251, 1);
+			   this->panelNewWorkspace->Location = System::Drawing::Point(251, 0);
 			   this->panelNewWorkspace->Name = L"panelNewWorkspace";
-			   this->panelNewWorkspace->Size = System::Drawing::Size(648, 598);
+			   this->panelNewWorkspace->Size = System::Drawing::Size(650, 600);
 			   this->panelNewWorkspace->TabIndex = 10;
 			   this->panelNewWorkspace->Paint += gcnew System::Windows::Forms::PaintEventHandler(this, &workspaces::panelNewWorkspace_Paint);
 			   // 
@@ -336,7 +336,7 @@ private: System::Windows::Forms::Label^ labelNoWorkspace;
 			   this->btSaveWorkspace->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((System::Windows::Forms::AnchorStyles::Bottom | System::Windows::Forms::AnchorStyles::Right));
 			   this->btSaveWorkspace->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
 			   this->btSaveWorkspace->ForeColor = System::Drawing::SystemColors::ButtonFace;
-			   this->btSaveWorkspace->Location = System::Drawing::Point(480, 556);
+			   this->btSaveWorkspace->Location = System::Drawing::Point(480, 560);
 			   this->btSaveWorkspace->Name = L"btSaveWorkspace";
 			   this->btSaveWorkspace->Size = System::Drawing::Size(125, 30);
 			   this->btSaveWorkspace->TabIndex = 17;
@@ -406,6 +406,7 @@ private: System::Windows::Forms::Label^ labelNoWorkspace;
 			   // 
 			   // button1
 			   // 
+			   this->button1->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((System::Windows::Forms::AnchorStyles::Bottom | System::Windows::Forms::AnchorStyles::Right));
 			   this->button1->BackColor = System::Drawing::Color::DodgerBlue;
 			   this->button1->BackgroundImageLayout = System::Windows::Forms::ImageLayout::Stretch;
 			   this->button1->FlatAppearance->BorderColor = System::Drawing::Color::White;
@@ -414,7 +415,7 @@ private: System::Windows::Forms::Label^ labelNoWorkspace;
 			   this->button1->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
 			   this->button1->ForeColor = System::Drawing::Color::White;
 			   this->button1->ImageAlign = System::Drawing::ContentAlignment::MiddleLeft;
-			   this->button1->Location = System::Drawing::Point(378, 556);
+			   this->button1->Location = System::Drawing::Point(387, 560);
 			   this->button1->Margin = System::Windows::Forms::Padding(3, 10, 10, 3);
 			   this->button1->Name = L"button1";
 			   this->button1->Size = System::Drawing::Size(80, 30);
@@ -426,6 +427,7 @@ private: System::Windows::Forms::Label^ labelNoWorkspace;
 			   // 
 			   // btDelete
 			   // 
+			   this->btDelete->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((System::Windows::Forms::AnchorStyles::Bottom | System::Windows::Forms::AnchorStyles::Left));
 			   this->btDelete->BackColor = System::Drawing::Color::Red;
 			   this->btDelete->BackgroundImageLayout = System::Windows::Forms::ImageLayout::Stretch;
 			   this->btDelete->FlatAppearance->BorderColor = System::Drawing::Color::White;
@@ -435,7 +437,7 @@ private: System::Windows::Forms::Label^ labelNoWorkspace;
 			   this->btDelete->Font = (gcnew System::Drawing::Font(L"Segoe UI Semibold", 7.8F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				   static_cast<System::Byte>(0)));
 			   this->btDelete->ForeColor = System::Drawing::Color::White;
-			   this->btDelete->Location = System::Drawing::Point(16, 556);
+			   this->btDelete->Location = System::Drawing::Point(16, 560);
 			   this->btDelete->Margin = System::Windows::Forms::Padding(3, 10, 10, 3);
 			   this->btDelete->Name = L"btDelete";
 			   this->btDelete->Size = System::Drawing::Size(152, 30);
@@ -680,6 +682,7 @@ private: System::Windows::Forms::Label^ labelNoWorkspace;
 			}
 			listWorkspaces->Items->RemoveAt(selectedIndex);
 			selectedIndex = -1;
+			panelNewWorkspace->Hide();
 		}
 	}
 	private: System::Void listItems_SelectedIndexChanged(System::Object^ sender, System::EventArgs^ e) {

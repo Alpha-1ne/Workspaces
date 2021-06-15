@@ -128,6 +128,9 @@ namespace Workspace {
 			   // 
 			   // addItem
 			   // 
+			   this->addItem->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(26)), static_cast<System::Int32>(static_cast<System::Byte>(26)),
+				   static_cast<System::Int32>(static_cast<System::Byte>(26)));
+			   this->addItem->BorderStyle = System::Windows::Forms::BorderStyle::Fixed3D;
 			   this->addItem->Controls->Add(this->label6);
 			   this->addItem->Controls->Add(this->itemType);
 			   this->addItem->Controls->Add(this->btSave);
@@ -137,9 +140,10 @@ namespace Workspace {
 			   this->addItem->Controls->Add(this->label7);
 			   this->addItem->Controls->Add(this->itemName);
 			   this->addItem->Dock = System::Windows::Forms::DockStyle::Fill;
+			   this->addItem->ForeColor = System::Drawing::Color::White;
 			   this->addItem->Location = System::Drawing::Point(0, 0);
 			   this->addItem->Name = L"addItem";
-			   this->addItem->Size = System::Drawing::Size(599, 362);
+			   this->addItem->Size = System::Drawing::Size(599, 403);
 			   this->addItem->TabIndex = 12;
 			   // 
 			   // label6
@@ -147,7 +151,7 @@ namespace Workspace {
 			   this->label6->AutoSize = true;
 			   this->label6->BackColor = System::Drawing::Color::Transparent;
 			   this->label6->Font = (gcnew System::Drawing::Font(L"Segoe UI Semibold", 10, System::Drawing::FontStyle::Bold));
-			   this->label6->ForeColor = System::Drawing::Color::Black;
+			   this->label6->ForeColor = System::Drawing::Color::White;
 			   this->label6->Location = System::Drawing::Point(27, 87);
 			   this->label6->Name = L"label6";
 			   this->label6->Size = System::Drawing::Size(59, 23);
@@ -156,11 +160,12 @@ namespace Workspace {
 			   // 
 			   // itemType
 			   // 
-			   this->itemType->BackColor = System::Drawing::SystemColors::Window;
+			   this->itemType->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(26)), static_cast<System::Int32>(static_cast<System::Byte>(26)),
+				   static_cast<System::Int32>(static_cast<System::Byte>(26)));
 			   this->itemType->Cursor = System::Windows::Forms::Cursors::Default;
-			   this->itemType->DropDownStyle = System::Windows::Forms::ComboBoxStyle::DropDownList;
-			   this->itemType->FlatStyle = System::Windows::Forms::FlatStyle::System;
+			   this->itemType->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
 			   this->itemType->Font = (gcnew System::Drawing::Font(L"Segoe UI Semibold", 10, System::Drawing::FontStyle::Bold));
+			   this->itemType->ForeColor = System::Drawing::Color::White;
 			   this->itemType->FormattingEnabled = true;
 			   this->itemType->ImeMode = System::Windows::Forms::ImeMode::NoControl;
 			   this->itemType->Items->AddRange(gcnew cli::array< System::Object^  >(3) { L"Application", L"Application + Directory", L"URL" });
@@ -176,12 +181,12 @@ namespace Workspace {
 			   this->btSave->FlatAppearance->BorderColor = System::Drawing::Color::White;
 			   this->btSave->FlatAppearance->MouseDownBackColor = System::Drawing::Color::Transparent;
 			   this->btSave->FlatAppearance->MouseOverBackColor = System::Drawing::Color::Transparent;
-			   this->btSave->FlatStyle = System::Windows::Forms::FlatStyle::System;
+			   this->btSave->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
 			   this->btSave->Font = (gcnew System::Drawing::Font(L"Segoe UI Semibold", 10, System::Drawing::FontStyle::Bold));
 			   this->btSave->ForeColor = System::Drawing::Color::White;
-			   this->btSave->Location = System::Drawing::Point(468, 330);
+			   this->btSave->Location = System::Drawing::Point(464, 357);
 			   this->btSave->Name = L"btSave";
-			   this->btSave->Size = System::Drawing::Size(119, 25);
+			   this->btSave->Size = System::Drawing::Size(119, 30);
 			   this->btSave->TabIndex = 12;
 			   this->btSave->Text = L"Save";
 			   this->btSave->UseVisualStyleBackColor = true;
@@ -193,12 +198,12 @@ namespace Workspace {
 			   this->btTest->FlatAppearance->BorderColor = System::Drawing::Color::White;
 			   this->btTest->FlatAppearance->MouseDownBackColor = System::Drawing::Color::Transparent;
 			   this->btTest->FlatAppearance->MouseOverBackColor = System::Drawing::Color::Transparent;
-			   this->btTest->FlatStyle = System::Windows::Forms::FlatStyle::System;
+			   this->btTest->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
 			   this->btTest->Font = (gcnew System::Drawing::Font(L"Segoe UI Semibold", 10, System::Drawing::FontStyle::Bold));
 			   this->btTest->ForeColor = System::Drawing::Color::White;
-			   this->btTest->Location = System::Drawing::Point(318, 330);
+			   this->btTest->Location = System::Drawing::Point(314, 357);
 			   this->btTest->Name = L"btTest";
-			   this->btTest->Size = System::Drawing::Size(119, 25);
+			   this->btTest->Size = System::Drawing::Size(119, 30);
 			   this->btTest->TabIndex = 15;
 			   this->btTest->Text = L"Test";
 			   this->btTest->UseVisualStyleBackColor = true;
@@ -210,12 +215,12 @@ namespace Workspace {
 			   this->btCancel->FlatAppearance->BorderColor = System::Drawing::Color::White;
 			   this->btCancel->FlatAppearance->MouseDownBackColor = System::Drawing::Color::Transparent;
 			   this->btCancel->FlatAppearance->MouseOverBackColor = System::Drawing::Color::Transparent;
-			   this->btCancel->FlatStyle = System::Windows::Forms::FlatStyle::System;
+			   this->btCancel->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
 			   this->btCancel->Font = (gcnew System::Drawing::Font(L"Segoe UI Semibold", 10, System::Drawing::FontStyle::Bold));
 			   this->btCancel->ForeColor = System::Drawing::Color::White;
-			   this->btCancel->Location = System::Drawing::Point(12, 330);
+			   this->btCancel->Location = System::Drawing::Point(8, 357);
 			   this->btCancel->Name = L"btCancel";
-			   this->btCancel->Size = System::Drawing::Size(119, 25);
+			   this->btCancel->Size = System::Drawing::Size(119, 30);
 			   this->btCancel->TabIndex = 16;
 			   this->btCancel->Text = L"Cancel";
 			   this->btCancel->UseVisualStyleBackColor = true;
@@ -225,10 +230,11 @@ namespace Workspace {
 			   // 
 			   this->taskGroup->Controls->Add(this->urlPanel);
 			   this->taskGroup->Controls->Add(this->applicationPanel);
-			   this->taskGroup->ForeColor = System::Drawing::Color::Black;
+			   this->taskGroup->Font = (gcnew System::Drawing::Font(L"Segoe UI Semibold", 10, System::Drawing::FontStyle::Bold));
+			   this->taskGroup->ForeColor = System::Drawing::Color::White;
 			   this->taskGroup->Location = System::Drawing::Point(28, 156);
 			   this->taskGroup->Name = L"taskGroup";
-			   this->taskGroup->Size = System::Drawing::Size(545, 151);
+			   this->taskGroup->Size = System::Drawing::Size(545, 168);
 			   this->taskGroup->TabIndex = 15;
 			   this->taskGroup->TabStop = false;
 			   this->taskGroup->Text = L"Task Settings";
@@ -238,17 +244,20 @@ namespace Workspace {
 			   this->urlPanel->BackColor = System::Drawing::Color::Transparent;
 			   this->urlPanel->Controls->Add(this->webURL);
 			   this->urlPanel->Controls->Add(this->labelTitle);
-			   this->urlPanel->Location = System::Drawing::Point(6, 16);
+			   this->urlPanel->Location = System::Drawing::Point(6, 27);
 			   this->urlPanel->Name = L"urlPanel";
-			   this->urlPanel->Size = System::Drawing::Size(520, 116);
+			   this->urlPanel->Size = System::Drawing::Size(537, 116);
 			   this->urlPanel->TabIndex = 18;
 			   // 
 			   // webURL
 			   // 
+			   this->webURL->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(26)), static_cast<System::Int32>(static_cast<System::Byte>(26)),
+				   static_cast<System::Int32>(static_cast<System::Byte>(26)));
 			   this->webURL->Font = (gcnew System::Drawing::Font(L"Segoe UI", 10));
+			   this->webURL->ForeColor = System::Drawing::Color::White;
 			   this->webURL->Location = System::Drawing::Point(7, 55);
 			   this->webURL->Name = L"webURL";
-			   this->webURL->Size = System::Drawing::Size(375, 30);
+			   this->webURL->Size = System::Drawing::Size(513, 30);
 			   this->webURL->TabIndex = 12;
 			   this->webURL->Text = L"http://";
 			   // 
@@ -257,7 +266,7 @@ namespace Workspace {
 			   this->labelTitle->AutoSize = true;
 			   this->labelTitle->Location = System::Drawing::Point(3, 23);
 			   this->labelTitle->Name = L"labelTitle";
-			   this->labelTitle->Size = System::Drawing::Size(34, 19);
+			   this->labelTitle->Size = System::Drawing::Size(41, 23);
 			   this->labelTitle->TabIndex = 0;
 			   this->labelTitle->Text = L"URL";
 			   // 
@@ -269,17 +278,20 @@ namespace Workspace {
 			   this->applicationPanel->Controls->Add(this->applicationPath);
 			   this->applicationPanel->Controls->Add(this->label5);
 			   this->applicationPanel->Controls->Add(this->chooseApplication);
-			   this->applicationPanel->Location = System::Drawing::Point(6, 21);
+			   this->applicationPanel->Location = System::Drawing::Point(6, 29);
 			   this->applicationPanel->Name = L"applicationPanel";
 			   this->applicationPanel->Size = System::Drawing::Size(522, 114);
 			   this->applicationPanel->TabIndex = 17;
 			   // 
 			   // tbDirectory
 			   // 
+			   this->tbDirectory->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(26)), static_cast<System::Int32>(static_cast<System::Byte>(26)),
+				   static_cast<System::Int32>(static_cast<System::Byte>(26)));
+			   this->tbDirectory->ForeColor = System::Drawing::Color::White;
 			   this->tbDirectory->Location = System::Drawing::Point(8, 73);
 			   this->tbDirectory->Name = L"tbDirectory";
 			   this->tbDirectory->ReadOnly = true;
-			   this->tbDirectory->Size = System::Drawing::Size(375, 25);
+			   this->tbDirectory->Size = System::Drawing::Size(375, 30);
 			   this->tbDirectory->TabIndex = 14;
 			   // 
 			   // selectDirectoryButton
@@ -288,11 +300,12 @@ namespace Workspace {
 			   this->selectDirectoryButton->FlatAppearance->BorderColor = System::Drawing::Color::White;
 			   this->selectDirectoryButton->FlatAppearance->MouseDownBackColor = System::Drawing::Color::Transparent;
 			   this->selectDirectoryButton->FlatAppearance->MouseOverBackColor = System::Drawing::Color::Transparent;
+			   this->selectDirectoryButton->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
 			   this->selectDirectoryButton->Font = (gcnew System::Drawing::Font(L"Segoe UI Semibold", 7, System::Drawing::FontStyle::Bold));
-			   this->selectDirectoryButton->ForeColor = System::Drawing::Color::Black;
+			   this->selectDirectoryButton->ForeColor = System::Drawing::Color::White;
 			   this->selectDirectoryButton->Location = System::Drawing::Point(389, 73);
 			   this->selectDirectoryButton->Name = L"selectDirectoryButton";
-			   this->selectDirectoryButton->Size = System::Drawing::Size(119, 25);
+			   this->selectDirectoryButton->Size = System::Drawing::Size(119, 30);
 			   this->selectDirectoryButton->TabIndex = 13;
 			   this->selectDirectoryButton->Text = L"Choose Directory";
 			   this->selectDirectoryButton->UseVisualStyleBackColor = false;
@@ -300,10 +313,13 @@ namespace Workspace {
 			   // 
 			   // applicationPath
 			   // 
+			   this->applicationPath->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(26)), static_cast<System::Int32>(static_cast<System::Byte>(26)),
+				   static_cast<System::Int32>(static_cast<System::Byte>(26)));
+			   this->applicationPath->ForeColor = System::Drawing::Color::White;
 			   this->applicationPath->Location = System::Drawing::Point(8, 32);
 			   this->applicationPath->Name = L"applicationPath";
 			   this->applicationPath->ReadOnly = true;
-			   this->applicationPath->Size = System::Drawing::Size(375, 25);
+			   this->applicationPath->Size = System::Drawing::Size(375, 30);
 			   this->applicationPath->TabIndex = 11;
 			   // 
 			   // label5
@@ -311,7 +327,7 @@ namespace Workspace {
 			   this->label5->AutoSize = true;
 			   this->label5->Location = System::Drawing::Point(4, 5);
 			   this->label5->Name = L"label5";
-			   this->label5->Size = System::Drawing::Size(138, 19);
+			   this->label5->Size = System::Drawing::Size(173, 23);
 			   this->label5->TabIndex = 10;
 			   this->label5->Text = L"Application to launch";
 			   // 
@@ -320,12 +336,12 @@ namespace Workspace {
 			   this->chooseApplication->FlatAppearance->BorderColor = System::Drawing::Color::White;
 			   this->chooseApplication->FlatAppearance->MouseDownBackColor = System::Drawing::Color::Transparent;
 			   this->chooseApplication->FlatAppearance->MouseOverBackColor = System::Drawing::Color::Transparent;
-			   this->chooseApplication->FlatStyle = System::Windows::Forms::FlatStyle::System;
+			   this->chooseApplication->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
 			   this->chooseApplication->Font = (gcnew System::Drawing::Font(L"Segoe UI Semibold", 7, System::Drawing::FontStyle::Bold));
-			   this->chooseApplication->ForeColor = System::Drawing::Color::Black;
+			   this->chooseApplication->ForeColor = System::Drawing::Color::White;
 			   this->chooseApplication->Location = System::Drawing::Point(389, 32);
 			   this->chooseApplication->Name = L"chooseApplication";
-			   this->chooseApplication->Size = System::Drawing::Size(119, 25);
+			   this->chooseApplication->Size = System::Drawing::Size(119, 30);
 			   this->chooseApplication->TabIndex = 9;
 			   this->chooseApplication->Text = L"Select Application";
 			   this->chooseApplication->UseVisualStyleBackColor = true;
@@ -336,16 +352,19 @@ namespace Workspace {
 			   this->label7->AutoSize = true;
 			   this->label7->BackColor = System::Drawing::Color::Transparent;
 			   this->label7->Font = (gcnew System::Drawing::Font(L"Segoe UI Semibold", 10, System::Drawing::FontStyle::Bold));
-			   this->label7->ForeColor = System::Drawing::Color::Black;
+			   this->label7->ForeColor = System::Drawing::Color::White;
 			   this->label7->Location = System::Drawing::Point(27, 17);
 			   this->label7->Name = L"label7";
-			   this->label7->Size = System::Drawing::Size(116, 23);
+			   this->label7->Size = System::Drawing::Size(93, 23);
 			   this->label7->TabIndex = 14;
-			   this->label7->Text = L"Display Name";
+			   this->label7->Text = L"Task Name";
 			   // 
 			   // itemName
 			   // 
+			   this->itemName->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(26)), static_cast<System::Int32>(static_cast<System::Byte>(26)),
+				   static_cast<System::Int32>(static_cast<System::Byte>(26)));
 			   this->itemName->Font = (gcnew System::Drawing::Font(L"Segoe UI Semibold", 10, System::Drawing::FontStyle::Bold));
+			   this->itemName->ForeColor = System::Drawing::Color::White;
 			   this->itemName->Location = System::Drawing::Point(28, 43);
 			   this->itemName->Name = L"itemName";
 			   this->itemName->Size = System::Drawing::Size(545, 30);
@@ -360,12 +379,14 @@ namespace Workspace {
 			   // 
 			   this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::None;
 			   this->CausesValidation = false;
-			   this->ClientSize = System::Drawing::Size(599, 362);
+			   this->ClientSize = System::Drawing::Size(599, 403);
 			   this->ControlBox = false;
 			   this->Controls->Add(this->addItem);
 			   this->Cursor = System::Windows::Forms::Cursors::Default;
 			   this->Font = (gcnew System::Drawing::Font(L"Segoe UI", 7.8F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				   static_cast<System::Byte>(0)));
+			   this->ForeColor = System::Drawing::Color::White;
+			   this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::None;
 			   this->Icon = (cli::safe_cast<System::Drawing::Icon^>(resources->GetObject(L"$this.Icon")));
 			   this->Name = L"NewItemWindow";
 			   this->ShowIcon = false;

@@ -2,7 +2,6 @@
 #include <cliext/vector>
 #include "WorkspaceContainer.h"
 #include "NewItemWindow.h"
-#include "ProgressDialog.h"
 #include "Item.h"
 #include "JsonRoot.h"
 
@@ -146,7 +145,7 @@ namespace Workspace {
 
 	private: System::Windows::Forms::Label^ labelTasks;
 
-	private: System::Windows::Forms::Button^ btCancel;
+
 	private: System::Windows::Forms::Button^ btSaveWorkspace;
 
 	private: System::Windows::Forms::Button^ btAddTask;
@@ -160,7 +159,7 @@ namespace Workspace {
 
 	private: System::Windows::Forms::Label^ labelWorkspaceName;
 	private: System::ComponentModel::BackgroundWorker^ saveData;
-	private: ProgressDialog^ exitDialog;
+private: System::Windows::Forms::Label^ labelNoWorkspace;
 
 
 
@@ -186,7 +185,6 @@ namespace Workspace {
 			   this->panelNewWorkspace = (gcnew System::Windows::Forms::Panel());
 			   this->btCloseApp = (gcnew System::Windows::Forms::Button());
 			   this->labelTasks = (gcnew System::Windows::Forms::Label());
-			   this->btCancel = (gcnew System::Windows::Forms::Button());
 			   this->btSaveWorkspace = (gcnew System::Windows::Forms::Button());
 			   this->btAddTask = (gcnew System::Windows::Forms::Button());
 			   this->btEditItem = (gcnew System::Windows::Forms::Button());
@@ -197,6 +195,7 @@ namespace Workspace {
 			   this->tbWorkspaceName = (gcnew System::Windows::Forms::TextBox());
 			   this->labelWorkspaceName = (gcnew System::Windows::Forms::Label());
 			   this->saveData = (gcnew System::ComponentModel::BackgroundWorker());
+			   this->labelNoWorkspace = (gcnew System::Windows::Forms::Label());
 			   this->panel1->SuspendLayout();
 			   this->panelNewWorkspace->SuspendLayout();
 			   this->SuspendLayout();
@@ -251,12 +250,11 @@ namespace Workspace {
 			   // 
 			   this->labelWorkspaces->AutoSize = true;
 			   this->labelWorkspaces->BackColor = System::Drawing::Color::Transparent;
-			   this->labelWorkspaces->Font = (gcnew System::Drawing::Font(L"Segoe UI Semibold", 15, static_cast<System::Drawing::FontStyle>((System::Drawing::FontStyle::Bold | System::Drawing::FontStyle::Italic)),
-				   System::Drawing::GraphicsUnit::Point, static_cast<System::Byte>(0)));
+			   this->labelWorkspaces->Font = (gcnew System::Drawing::Font(L"Segoe UI Semibold", 20, static_cast<System::Drawing::FontStyle>((System::Drawing::FontStyle::Bold | System::Drawing::FontStyle::Italic))));
 			   this->labelWorkspaces->ForeColor = System::Drawing::Color::White;
-			   this->labelWorkspaces->Location = System::Drawing::Point(34, 15);
+			   this->labelWorkspaces->Location = System::Drawing::Point(23, 16);
 			   this->labelWorkspaces->Name = L"labelWorkspaces";
-			   this->labelWorkspaces->Size = System::Drawing::Size(147, 35);
+			   this->labelWorkspaces->Size = System::Drawing::Size(201, 46);
 			   this->labelWorkspaces->TabIndex = 0;
 			   this->labelWorkspaces->Text = L"Workspaces";
 			   // 
@@ -286,7 +284,6 @@ namespace Workspace {
 				   static_cast<System::Int32>(static_cast<System::Byte>(26)), static_cast<System::Int32>(static_cast<System::Byte>(26)));
 			   this->panelNewWorkspace->Controls->Add(this->btCloseApp);
 			   this->panelNewWorkspace->Controls->Add(this->labelTasks);
-			   this->panelNewWorkspace->Controls->Add(this->btCancel);
 			   this->panelNewWorkspace->Controls->Add(this->btSaveWorkspace);
 			   this->panelNewWorkspace->Controls->Add(this->btAddTask);
 			   this->panelNewWorkspace->Controls->Add(this->btEditItem);
@@ -313,13 +310,14 @@ namespace Workspace {
 			   this->btCloseApp->FlatAppearance->MouseOverBackColor = System::Drawing::Color::Transparent;
 			   this->btCloseApp->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
 			   this->btCloseApp->ForeColor = System::Drawing::Color::Transparent;
-			   this->btCloseApp->Location = System::Drawing::Point(621, 15);
+			   this->btCloseApp->Location = System::Drawing::Point(622, 10);
 			   this->btCloseApp->Margin = System::Windows::Forms::Padding(3, 10, 10, 3);
 			   this->btCloseApp->Name = L"btCloseApp";
 			   this->btCloseApp->Size = System::Drawing::Size(16, 16);
 			   this->btCloseApp->TabIndex = 20;
 			   this->btCloseApp->UseMnemonic = false;
 			   this->btCloseApp->UseVisualStyleBackColor = false;
+			   this->btCloseApp->Click += gcnew System::EventHandler(this, &workspaces::btCloseApp_Click);
 			   // 
 			   // labelTasks
 			   // 
@@ -333,26 +331,12 @@ namespace Workspace {
 			   this->labelTasks->TabIndex = 19;
 			   this->labelTasks->Text = L"Tasks";
 			   // 
-			   // btCancel
-			   // 
-			   this->btCancel->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((System::Windows::Forms::AnchorStyles::Bottom | System::Windows::Forms::AnchorStyles::Right));
-			   this->btCancel->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
-			   this->btCancel->ForeColor = System::Drawing::SystemColors::ButtonFace;
-			   this->btCancel->Location = System::Drawing::Point(368, 556);
-			   this->btCancel->Name = L"btCancel";
-			   this->btCancel->RightToLeft = System::Windows::Forms::RightToLeft::No;
-			   this->btCancel->Size = System::Drawing::Size(125, 30);
-			   this->btCancel->TabIndex = 18;
-			   this->btCancel->Text = L"Cancel";
-			   this->btCancel->UseVisualStyleBackColor = true;
-			   this->btCancel->Click += gcnew System::EventHandler(this, &workspaces::btCancel_Click);
-			   // 
 			   // btSaveWorkspace
 			   // 
 			   this->btSaveWorkspace->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((System::Windows::Forms::AnchorStyles::Bottom | System::Windows::Forms::AnchorStyles::Right));
 			   this->btSaveWorkspace->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
 			   this->btSaveWorkspace->ForeColor = System::Drawing::SystemColors::ButtonFace;
-			   this->btSaveWorkspace->Location = System::Drawing::Point(499, 556);
+			   this->btSaveWorkspace->Location = System::Drawing::Point(480, 556);
 			   this->btSaveWorkspace->Name = L"btSaveWorkspace";
 			   this->btSaveWorkspace->Size = System::Drawing::Size(125, 30);
 			   this->btSaveWorkspace->TabIndex = 17;
@@ -422,15 +406,15 @@ namespace Workspace {
 			   // 
 			   // button1
 			   // 
-			   this->button1->BackColor = System::Drawing::Color::Transparent;
+			   this->button1->BackColor = System::Drawing::Color::DodgerBlue;
 			   this->button1->BackgroundImageLayout = System::Windows::Forms::ImageLayout::Stretch;
 			   this->button1->FlatAppearance->BorderColor = System::Drawing::Color::White;
 			   this->button1->FlatAppearance->MouseDownBackColor = System::Drawing::Color::Transparent;
 			   this->button1->FlatAppearance->MouseOverBackColor = System::Drawing::Color::Transparent;
-			   this->button1->FlatStyle = System::Windows::Forms::FlatStyle::System;
+			   this->button1->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
 			   this->button1->ForeColor = System::Drawing::Color::White;
 			   this->button1->ImageAlign = System::Drawing::ContentAlignment::MiddleLeft;
-			   this->button1->Location = System::Drawing::Point(506, 15);
+			   this->button1->Location = System::Drawing::Point(378, 556);
 			   this->button1->Margin = System::Windows::Forms::Padding(3, 10, 10, 3);
 			   this->button1->Name = L"button1";
 			   this->button1->Size = System::Drawing::Size(80, 30);
@@ -442,19 +426,21 @@ namespace Workspace {
 			   // 
 			   // btDelete
 			   // 
-			   this->btDelete->BackColor = System::Drawing::Color::Transparent;
+			   this->btDelete->BackColor = System::Drawing::Color::Red;
 			   this->btDelete->BackgroundImageLayout = System::Windows::Forms::ImageLayout::Stretch;
 			   this->btDelete->FlatAppearance->BorderColor = System::Drawing::Color::White;
 			   this->btDelete->FlatAppearance->MouseDownBackColor = System::Drawing::Color::Transparent;
 			   this->btDelete->FlatAppearance->MouseOverBackColor = System::Drawing::Color::Transparent;
-			   this->btDelete->FlatStyle = System::Windows::Forms::FlatStyle::System;
+			   this->btDelete->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
+			   this->btDelete->Font = (gcnew System::Drawing::Font(L"Segoe UI Semibold", 7.8F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+				   static_cast<System::Byte>(0)));
 			   this->btDelete->ForeColor = System::Drawing::Color::White;
-			   this->btDelete->Location = System::Drawing::Point(413, 15);
+			   this->btDelete->Location = System::Drawing::Point(16, 556);
 			   this->btDelete->Margin = System::Windows::Forms::Padding(3, 10, 10, 3);
 			   this->btDelete->Name = L"btDelete";
-			   this->btDelete->Size = System::Drawing::Size(80, 30);
+			   this->btDelete->Size = System::Drawing::Size(152, 30);
 			   this->btDelete->TabIndex = 11;
-			   this->btDelete->Text = L"Delete";
+			   this->btDelete->Text = L"Delete Workspace";
 			   this->btDelete->UseMnemonic = false;
 			   this->btDelete->UseVisualStyleBackColor = false;
 			   this->btDelete->Click += gcnew System::EventHandler(this, &workspaces::btDelete_Click);
@@ -500,7 +486,20 @@ namespace Workspace {
 			   // saveData
 			   // 
 			   this->saveData->DoWork += gcnew System::ComponentModel::DoWorkEventHandler(this, &workspaces::saveData_DoWork);
-			   this->saveData->RunWorkerCompleted += gcnew System::ComponentModel::RunWorkerCompletedEventHandler(this, &Workspace::workspaces::OnRunWorkerCompleted);
+			   this->saveData->RunWorkerCompleted += gcnew System::ComponentModel::RunWorkerCompletedEventHandler(this, &workspaces::OnRunWorkerCompleted);
+			   // 
+			   // labelNoWorkspace
+			   // 
+			   this->labelNoWorkspace->AutoSize = true;
+			   this->labelNoWorkspace->BackColor = System::Drawing::Color::Transparent;
+			   this->labelNoWorkspace->Font = (gcnew System::Drawing::Font(L"Segoe UI Semibold", 20, System::Drawing::FontStyle::Bold));
+			   this->labelNoWorkspace->ForeColor = System::Drawing::Color::White;
+			   this->labelNoWorkspace->Location = System::Drawing::Point(357, 32);
+			   this->labelNoWorkspace->Name = L"labelNoWorkspace";
+			   this->labelNoWorkspace->Size = System::Drawing::Size(384, 46);
+			   this->labelNoWorkspace->TabIndex = 11;
+			   this->labelNoWorkspace->Text = L"No Workspace Selected";
+			   this->labelNoWorkspace->TextAlign = System::Drawing::ContentAlignment::TopCenter;
 			   // 
 			   // workspaces
 			   // 
@@ -512,6 +511,7 @@ namespace Workspace {
 			   this->Controls->Add(this->panelNewWorkspace);
 			   this->Controls->Add(this->button3);
 			   this->Controls->Add(this->panel1);
+			   this->Controls->Add(this->labelNoWorkspace);
 			   this->Font = (gcnew System::Drawing::Font(L"Segoe UI", 7.8F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				   static_cast<System::Byte>(0)));
 			   this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::None;
@@ -527,7 +527,8 @@ namespace Workspace {
 			   this->panelNewWorkspace->ResumeLayout(false);
 			   this->panelNewWorkspace->PerformLayout();
 			   this->ResumeLayout(false);
-			   exitDialog = gcnew ProgressDialog();
+			   this->PerformLayout();
+
 		   }
 #pragma endregion
 	private: System::Void workspaces_Load(System::Object^ sender, System::EventArgs^ e) {
@@ -557,8 +558,8 @@ namespace Workspace {
 
 
 	private: System::Void button3_Click(System::Object^ sender, System::EventArgs^ e) {
+		Hide();
 		saveData->RunWorkerAsync();
-		exitDialog->ShowDialog();
 	}
 
 	private: System::Void treeView_AfterSelect(System::Object^ sender, System::Windows::Forms::TreeViewEventArgs^ e) {
@@ -710,10 +711,13 @@ namespace Workspace {
 
 	private:	System::Void Workspace::workspaces::OnRunWorkerCompleted(System::Object^ sender, System::ComponentModel::RunWorkerCompletedEventArgs^ e)
 	{
-		exitDialog->Close();
 		Application::Exit();
 	}
-	};
+	private: System::Void btCloseApp_Click(System::Object^ sender, System::EventArgs^ e) {
+		panelNewWorkspace->Hide();
+
+	}
+};
 }
 
 

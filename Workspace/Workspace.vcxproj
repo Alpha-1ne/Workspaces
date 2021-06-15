@@ -147,9 +147,6 @@
     <ClInclude Include="NewItemWindow.h">
       <FileType>CppForm</FileType>
     </ClInclude>
-    <ClInclude Include="ProgressDialog.h">
-      <FileType>CppForm</FileType>
-    </ClInclude>
     <ClInclude Include="resource.h" />
     <ClInclude Include="WorkspaceContainer.h" />
     <ClInclude Include="workspaces.h">
@@ -162,9 +159,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="NewItemWindow.resx">
       <DependentUpon>NewItemWindow.h</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="ProgressDialog.resx">
-      <DependentUpon>ProgressDialog.h</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="workspaces.resx">
       <DependentUpon>workspaces.h</DependentUpon>

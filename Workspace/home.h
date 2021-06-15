@@ -37,18 +37,7 @@ namespace Workspace {
 					checkBoxStartup->Checked = false;
 				}
 			}
-			
-			try {
-				Application::LocalUserAppDataPath;
-				StreamReader^ din = File::OpenText(String::Concat(Application::UserAppDataPath, "\\appdata.json"));
-				String^ data = din->ReadLine();
-				array<WorkspaceContainer^>^ root = Newtonsoft::Json::JsonConvert::DeserializeObject<array<WorkspaceContainer^>^>(data);
-				din->Close();
-				workspace = gcnew Workspace::workspaces(root);
-			}
-			catch (Exception^ e) {
-				workspace = gcnew Workspace::workspaces();
-			}
+			readFile->RunWorkerAsync();
 		}
 
 	protected:
@@ -123,6 +112,7 @@ namespace Workspace {
 		/// </summary>
 		System::ComponentModel::Container ^components;
 	private: System::Windows::Forms::CheckBox^ checkBoxStartup;
+private: System::ComponentModel::BackgroundWorker^ readFile;
 
 		   Workspace::workspaces^ workspace;
 
@@ -140,6 +130,7 @@ namespace Workspace {
 			this->startButton = (gcnew System::Windows::Forms::Button());
 			this->pictureBox1 = (gcnew System::Windows::Forms::PictureBox());
 			this->checkBoxStartup = (gcnew System::Windows::Forms::CheckBox());
+			this->readFile = (gcnew System::ComponentModel::BackgroundWorker());
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox1))->BeginInit();
 			this->SuspendLayout();
 			// 
@@ -192,6 +183,7 @@ namespace Workspace {
 			this->startButton->Text = L"Get Started";
 			this->startButton->UseVisualStyleBackColor = false;
 			this->startButton->Click += gcnew System::EventHandler(this, &home::startButton_Click);
+			this->startButton->Enabled = false;
 			// 
 			// pictureBox1
 			// 
@@ -219,6 +211,11 @@ namespace Workspace {
 			this->checkBoxStartup->Text = L"Launch on Windows startup";
 			this->checkBoxStartup->UseVisualStyleBackColor = false;
 			this->checkBoxStartup->CheckedChanged += gcnew System::EventHandler(this, &home::checkBoxStartup_CheckedChanged);
+			// 
+			// readFile
+			// 
+			this->readFile->DoWork += gcnew System::ComponentModel::DoWorkEventHandler(this, &home::readFile_DoWork);
+			this->readFile->RunWorkerCompleted += gcnew System::ComponentModel::RunWorkerCompletedEventHandler(this, &Workspace::home::OnRunWorkerCompleted);
 			// 
 			// home
 			// 
@@ -269,5 +266,25 @@ private: System::Void checkBoxStartup_CheckedChanged(System::Object^ sender, Sys
 		rk->DeleteValue("Workspaces", false);
 	}
 }
+private: System::Void readFile_DoWork(System::Object^ sender, System::ComponentModel::DoWorkEventArgs^ e) {
+	try {
+		Application::LocalUserAppDataPath;
+		StreamReader^ din = File::OpenText(String::Concat(Application::UserAppDataPath, "\\appdata.json"));
+		String^ data = din->ReadLine();
+		array<WorkspaceContainer^>^ root = Newtonsoft::Json::JsonConvert::DeserializeObject<array<WorkspaceContainer^>^>(data);
+		din->Close();
+		workspace = gcnew Workspace::workspaces(root);
+	}
+	catch (Exception^ e) {
+		workspace = gcnew Workspace::workspaces();
+	}
+}
+	   private: System::Void Workspace::home::OnRunWorkerCompleted(System::Object^ sender, System::ComponentModel::RunWorkerCompletedEventArgs^ e)
+	   {
+		   this->startButton->Enabled = true;
+	   }
 };
 }
+
+
+

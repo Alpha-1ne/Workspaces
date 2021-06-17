@@ -6,6 +6,7 @@ All you have to do is create Workspaces as per your needs, add tasks to them and
 
 # Screenshot
 ![](Screenshots/home.jpg)
+![](Screenshots/workspaces.jpg)
 
 # Contribute
 The application is currently under development. All kinds of contribution are accepted.

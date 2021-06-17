@@ -617,7 +617,7 @@ private: System::Windows::Forms::Label^ labelNoWorkspace;
 	}
 	private: System::Void btSave_Click(System::Object^ sender, System::EventArgs^ e) {
 		if (tbWorkspaceName->Text == "") {
-			MessageBox::Show("Please enter valid name", "Error", MessageBoxButtons::OK, MessageBoxIcon::Error);
+			MessageBox::Show("Please enter a valid name", "Error", MessageBoxButtons::OK, MessageBoxIcon::Error);
 			tbWorkspaceName->Focus();
 			return;
 		}
@@ -625,6 +625,14 @@ private: System::Windows::Forms::Label^ labelNoWorkspace;
 			currentWorkpace->name = tbWorkspaceName->Text;
 			myWorkpaces.push_back(currentWorkpace);
 			listWorkspaces->Items->Add(tbWorkspaceName->Text);
+		}
+		else {
+			currentWorkpace->name = tbWorkspaceName->Text;
+			
+		}
+		listWorkspaces->Items->Clear();
+		for (int i = 0; i < myWorkpaces.size(); i++) {
+			listWorkspaces->Items->Add(myWorkpaces[i]->name);
 		}
 		panelNewWorkspace->Hide();
 	}

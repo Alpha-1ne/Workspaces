@@ -400,7 +400,6 @@ namespace Workspace {
 			   this->ShowInTaskbar = false;
 			   this->StartPosition = System::Windows::Forms::FormStartPosition::CenterScreen;
 			   this->Text = L"New Workspace Item";
-			   this->TopMost = true;
 			   this->addItem->ResumeLayout(false);
 			   this->addItem->PerformLayout();
 			   this->taskGroup->ResumeLayout(false);
@@ -543,5 +542,6 @@ namespace Workspace {
 			Close();
 		}
 	}
-	};
+
+};
 }

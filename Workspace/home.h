@@ -37,6 +37,8 @@ namespace Workspace {
 					checkBoxStartup->Checked = false;
 				}
 			}
+			labelVersion->Text = String::Concat("Version ",Application::ProductVersion);
+			this->startButton->Text = "Loading...";
 			readFile->RunWorkerAsync();
 		}
 
@@ -113,7 +115,9 @@ namespace Workspace {
 		System::ComponentModel::Container ^components;
 	private: System::Windows::Forms::CheckBox^ checkBoxStartup;
 private: System::ComponentModel::BackgroundWorker^ readFile;
-	private: System::Windows::Forms::Label^ label2;
+	private: System::Windows::Forms::Label^ labelVersion;
+	private: System::Windows::Forms::ProgressBar^ readingProgress;
+
 
 		   Workspace::workspaces^ workspace;
 
@@ -132,7 +136,8 @@ private: System::ComponentModel::BackgroundWorker^ readFile;
 			this->pictureBox1 = (gcnew System::Windows::Forms::PictureBox());
 			this->checkBoxStartup = (gcnew System::Windows::Forms::CheckBox());
 			this->readFile = (gcnew System::ComponentModel::BackgroundWorker());
-			this->label2 = (gcnew System::Windows::Forms::Label());
+			this->labelVersion = (gcnew System::Windows::Forms::Label());
+			this->readingProgress = (gcnew System::Windows::Forms::ProgressBar());
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox1))->BeginInit();
 			this->SuspendLayout();
 			// 
@@ -179,9 +184,9 @@ private: System::ComponentModel::BackgroundWorker^ readFile;
 			this->startButton->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
 			this->startButton->Font = (gcnew System::Drawing::Font(L"Segoe UI", 14));
 			this->startButton->ForeColor = System::Drawing::Color::White;
-			this->startButton->Location = System::Drawing::Point(335, 439);
+			this->startButton->Location = System::Drawing::Point(335, 440);
 			this->startButton->Name = L"startButton";
-			this->startButton->Size = System::Drawing::Size(223, 58);
+			this->startButton->Size = System::Drawing::Size(223, 60);
 			this->startButton->TabIndex = 2;
 			this->startButton->Text = L"Get Started";
 			this->startButton->UseVisualStyleBackColor = false;
@@ -219,17 +224,27 @@ private: System::ComponentModel::BackgroundWorker^ readFile;
 			this->readFile->DoWork += gcnew System::ComponentModel::DoWorkEventHandler(this, &home::readFile_DoWork);
 			this->readFile->RunWorkerCompleted += gcnew System::ComponentModel::RunWorkerCompletedEventHandler(this, &home::OnRunWorkerCompleted);
 			// 
-			// label2
+			// labelVersion
 			// 
-			this->label2->AutoSize = true;
-			this->label2->BackColor = System::Drawing::Color::Transparent;
-			this->label2->Font = (gcnew System::Drawing::Font(L"Segoe UI Semibold", 10, System::Drawing::FontStyle::Bold));
-			this->label2->ForeColor = System::Drawing::Color::White;
-			this->label2->Location = System::Drawing::Point(12, 565);
-			this->label2->Name = L"label2";
-			this->label2->Size = System::Drawing::Size(39, 23);
-			this->label2->TabIndex = 5;
-			this->label2->Text = L"V1.1";
+			this->labelVersion->AutoSize = true;
+			this->labelVersion->BackColor = System::Drawing::Color::Transparent;
+			this->labelVersion->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
+			this->labelVersion->Font = (gcnew System::Drawing::Font(L"Segoe UI Semibold", 10, System::Drawing::FontStyle::Bold));
+			this->labelVersion->ForeColor = System::Drawing::Color::White;
+			this->labelVersion->Location = System::Drawing::Point(12, 565);
+			this->labelVersion->Name = L"labelVersion";
+			this->labelVersion->Size = System::Drawing::Size(39, 23);
+			this->labelVersion->TabIndex = 5;
+			this->labelVersion->Text = L"V1.1";
+			// 
+			// readingProgress
+			// 
+			this->readingProgress->Location = System::Drawing::Point(335, 500);
+			this->readingProgress->MarqueeAnimationSpeed = 20;
+			this->readingProgress->Name = L"readingProgress";
+			this->readingProgress->Size = System::Drawing::Size(223, 23);
+			this->readingProgress->Style = System::Windows::Forms::ProgressBarStyle::Marquee;
+			this->readingProgress->TabIndex = 6;
 			// 
 			// home
 			// 
@@ -237,7 +252,8 @@ private: System::ComponentModel::BackgroundWorker^ readFile;
 			this->BackColor = System::Drawing::Color::White;
 			this->BackgroundImage = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"$this.BackgroundImage")));
 			this->ClientSize = System::Drawing::Size(900, 600);
-			this->Controls->Add(this->label2);
+			this->Controls->Add(this->readingProgress);
+			this->Controls->Add(this->labelVersion);
 			this->Controls->Add(this->checkBoxStartup);
 			this->Controls->Add(this->pictureBox1);
 			this->Controls->Add(this->startButton);
@@ -297,6 +313,8 @@ private: System::Void readFile_DoWork(System::Object^ sender, System::ComponentM
 	   private: System::Void Workspace::home::OnRunWorkerCompleted(System::Object^ sender, System::ComponentModel::RunWorkerCompletedEventArgs^ e)
 	   {
 		   this->startButton->Enabled = true;
+		   this->startButton->Text = "Get Started";
+		   readingProgress->Hide();
 	   }
 };
 }

@@ -113,6 +113,7 @@ namespace Workspace {
 		System::ComponentModel::Container ^components;
 	private: System::Windows::Forms::CheckBox^ checkBoxStartup;
 private: System::ComponentModel::BackgroundWorker^ readFile;
+	private: System::Windows::Forms::Label^ label2;
 
 		   Workspace::workspaces^ workspace;
 
@@ -131,6 +132,7 @@ private: System::ComponentModel::BackgroundWorker^ readFile;
 			this->pictureBox1 = (gcnew System::Windows::Forms::PictureBox());
 			this->checkBoxStartup = (gcnew System::Windows::Forms::CheckBox());
 			this->readFile = (gcnew System::ComponentModel::BackgroundWorker());
+			this->label2 = (gcnew System::Windows::Forms::Label());
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox1))->BeginInit();
 			this->SuspendLayout();
 			// 
@@ -170,6 +172,7 @@ private: System::ComponentModel::BackgroundWorker^ readFile;
 			// startButton
 			// 
 			this->startButton->BackColor = System::Drawing::SystemColors::Highlight;
+			this->startButton->Enabled = false;
 			this->startButton->FlatAppearance->BorderColor = System::Drawing::Color::White;
 			this->startButton->FlatAppearance->MouseDownBackColor = System::Drawing::Color::Black;
 			this->startButton->FlatAppearance->MouseOverBackColor = System::Drawing::Color::Black;
@@ -183,7 +186,6 @@ private: System::ComponentModel::BackgroundWorker^ readFile;
 			this->startButton->Text = L"Get Started";
 			this->startButton->UseVisualStyleBackColor = false;
 			this->startButton->Click += gcnew System::EventHandler(this, &home::startButton_Click);
-			this->startButton->Enabled = false;
 			// 
 			// pictureBox1
 			// 
@@ -215,7 +217,19 @@ private: System::ComponentModel::BackgroundWorker^ readFile;
 			// readFile
 			// 
 			this->readFile->DoWork += gcnew System::ComponentModel::DoWorkEventHandler(this, &home::readFile_DoWork);
-			this->readFile->RunWorkerCompleted += gcnew System::ComponentModel::RunWorkerCompletedEventHandler(this, &Workspace::home::OnRunWorkerCompleted);
+			this->readFile->RunWorkerCompleted += gcnew System::ComponentModel::RunWorkerCompletedEventHandler(this, &home::OnRunWorkerCompleted);
+			// 
+			// label2
+			// 
+			this->label2->AutoSize = true;
+			this->label2->BackColor = System::Drawing::Color::Transparent;
+			this->label2->Font = (gcnew System::Drawing::Font(L"Segoe UI Semibold", 10, System::Drawing::FontStyle::Bold));
+			this->label2->ForeColor = System::Drawing::Color::White;
+			this->label2->Location = System::Drawing::Point(12, 565);
+			this->label2->Name = L"label2";
+			this->label2->Size = System::Drawing::Size(39, 23);
+			this->label2->TabIndex = 5;
+			this->label2->Text = L"V1.1";
 			// 
 			// home
 			// 
@@ -223,6 +237,7 @@ private: System::ComponentModel::BackgroundWorker^ readFile;
 			this->BackColor = System::Drawing::Color::White;
 			this->BackgroundImage = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"$this.BackgroundImage")));
 			this->ClientSize = System::Drawing::Size(900, 600);
+			this->Controls->Add(this->label2);
 			this->Controls->Add(this->checkBoxStartup);
 			this->Controls->Add(this->pictureBox1);
 			this->Controls->Add(this->startButton);

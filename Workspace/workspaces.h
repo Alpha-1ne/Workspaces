@@ -617,7 +617,7 @@ private: System::Windows::Forms::Label^ labelNoWorkspace;
 	}
 	private: System::Void btSave_Click(System::Object^ sender, System::EventArgs^ e) {
 		if (tbWorkspaceName->Text == "") {
-			MessageBox::Show("Please enter valid name", "Error", MessageBoxButtons::OK, MessageBoxIcon::Error);
+			MessageBox::Show("Please enter a valid name", "Error", MessageBoxButtons::OK, MessageBoxIcon::Error);
 			tbWorkspaceName->Focus();
 			return;
 		}
@@ -625,6 +625,14 @@ private: System::Windows::Forms::Label^ labelNoWorkspace;
 			currentWorkpace->name = tbWorkspaceName->Text;
 			myWorkpaces.push_back(currentWorkpace);
 			listWorkspaces->Items->Add(tbWorkspaceName->Text);
+		}
+		else {
+			currentWorkpace->name = tbWorkspaceName->Text;
+			
+		}
+		listWorkspaces->Items->Clear();
+		for (int i = 0; i < myWorkpaces.size(); i++) {
+			listWorkspaces->Items->Add(myWorkpaces[i]->name);
 		}
 		panelNewWorkspace->Hide();
 	}
@@ -638,13 +646,15 @@ private: System::Windows::Forms::Label^ labelNoWorkspace;
 			else {
 				Process^ myProcess = gcnew Process();
 				myProcess->StartInfo->UseShellExecute = false;
-				// You can start any process, HelloWorld is a do-nothing example.
 				myProcess->StartInfo->FileName = currentItem->application;
 				if (currentItem->type == 1 && currentItem->directory != "")
 					myProcess->StartInfo->Arguments = currentItem->directory;
 				myProcess->StartInfo->CreateNoWindow = true;
 				myProcess->Start();
 			}
+		}
+		if (currentWorkpace->items.size() > 0) {
+			this->SendToBack();
 		}
 	}
 	private: System::Void button4_Click(System::Object^ sender, System::EventArgs^ e) {

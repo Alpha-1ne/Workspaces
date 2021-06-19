@@ -79,12 +79,12 @@ BEGIN
         BEGIN
             VALUE "CompanyName", "Alpha 1"
             VALUE "FileDescription", "Workspaces for Microsoft Windows"
-            VALUE "FileVersion", "1.0.0.1"
+            VALUE "FileVersion", "1.0.0.2"
             VALUE "InternalName", "Workspaces.exe"
             VALUE "LegalCopyright", "Copyright (C) 2021"
             VALUE "OriginalFilename", "Workspaces.exe"
             VALUE "ProductName", "Workspaces"
-            VALUE "ProductVersion", "1.0"
+            VALUE "ProductVersion", "1.1"
         END
     END
     BLOCK "VarFileInfo"

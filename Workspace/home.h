@@ -299,7 +299,6 @@ private: System::Void checkBoxStartup_CheckedChanged(System::Object^ sender, Sys
 }
 private: System::Void readFile_DoWork(System::Object^ sender, System::ComponentModel::DoWorkEventArgs^ e) {
 	try {
-		Application::LocalUserAppDataPath;
 		StreamReader^ din = File::OpenText(String::Concat(Application::UserAppDataPath, "\\appdata.json"));
 		String^ data = din->ReadLine();
 		array<WorkspaceContainer^>^ root = Newtonsoft::Json::JsonConvert::DeserializeObject<array<WorkspaceContainer^>^>(data);

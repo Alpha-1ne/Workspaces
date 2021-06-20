@@ -130,6 +130,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="DataRepository.cpp" />
     <ClCompile Include="home.cpp" />
     <ClCompile Include="Item.cpp" />
     <ClCompile Include="JsonRoot.cpp" />
@@ -138,6 +139,7 @@
     <ClCompile Include="workspaces.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="DataRepository.h" />
     <ClInclude Include="home.h">
       <FileType>CppForm</FileType>
     </ClInclude>

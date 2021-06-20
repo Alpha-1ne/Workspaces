@@ -1,21 +1,15 @@
 #pragma once
-#include <cliext/vector>
 #include "WorkspaceContainer.h"
 #include "NewItemWindow.h"
 #include "Item.h"
-#include "JsonRoot.h"
+#include "DataRepository.h"
 
 namespace Workspace {
 
 	using namespace System;
-	using namespace System::IO;
 	using namespace System::ComponentModel;
-	using namespace System::Collections;
 	using namespace System::Windows::Forms;
-	using namespace System::Data;
 	using namespace System::Drawing;
-	using namespace cliext;
-	using namespace Newtonsoft;
 	/// <summary>
 	/// Summary for workspaces
 	/// </summary>
@@ -25,22 +19,19 @@ namespace Workspace {
 		workspaces(void)
 		{
 			InitializeComponent();
-			myWorkpaces.clear();
 			panelNewWorkspace->Hide();
 		}
 
-		workspaces(array<WorkspaceContainer^>^ data)
+		workspaces(DataRepository^ data)
 		{
+			repository = data;
 			InitializeComponent();
-			myWorkpaces.clear();
 			panelNewWorkspace->Hide();
 			btEditItem->Hide();
 			btDeleteItem->Hide();
 			try {
-				myWorkpaces.empty();
-				for (int i = 0; i < data->Length; i++) {
-					myWorkpaces.push_back(data[i]);
-					listWorkspaces->Items->Add(data[i]->name);
+				for (int i = 0; i < repository->myWorkpaces.size(); i++) {
+					listWorkspaces->Items->Add(repository->myWorkpaces[i]->name);
 				}
 			}
 			catch (Exception^ e) {
@@ -49,9 +40,6 @@ namespace Workspace {
 		}
 
 	protected:
-		/// <summary>
-		/// Clean up any resources being used.
-		/// </summary>
 		~workspaces()
 		{
 			if (components)
@@ -74,9 +62,6 @@ namespace Workspace {
 
 
 	private:
-		/// <summary>
-		/// Required designer variable.
-		/// </summary>
 		System::ComponentModel::Container^ components;
 
 
@@ -105,12 +90,7 @@ namespace Workspace {
 
 
 
-
-
-
-
-	private: cliext::vector<WorkspaceContainer^> myWorkpaces;
-	private: WorkspaceContainer^ currentWorkpace;
+	private: WorkspaceContainer^ currentWorkspace;
 	private: NewItemWindow^ newItem;
 
 
@@ -159,7 +139,8 @@ namespace Workspace {
 
 	private: System::Windows::Forms::Label^ labelWorkspaceName;
 	private: System::ComponentModel::BackgroundWorker^ saveData;
-private: System::Windows::Forms::Label^ labelNoWorkspace;
+	private: System::Windows::Forms::Label^ labelNoWorkspace;
+	private: DataRepository^ repository;
 
 
 
@@ -297,8 +278,7 @@ private: System::Windows::Forms::Label^ labelNoWorkspace;
 			   this->panelNewWorkspace->Name = L"panelNewWorkspace";
 			   this->panelNewWorkspace->Size = System::Drawing::Size(650, 600);
 			   this->panelNewWorkspace->TabIndex = 10;
-			   this->panelNewWorkspace->Paint += gcnew System::Windows::Forms::PaintEventHandler(this, &workspaces::panelNewWorkspace_Paint);
-			   // 
+// 
 			   // btCloseApp
 			   // 
 			   this->btCloseApp->BackColor = System::Drawing::Color::Transparent;
@@ -537,16 +517,16 @@ private: System::Windows::Forms::Label^ labelNoWorkspace;
 
 	}
 	private: System::Void linkLabel1_LinkClicked(System::Object^ sender, System::Windows::Forms::LinkLabelLinkClickedEventArgs^ e) {
-		currentWorkpace = gcnew WorkspaceContainer();
-		currentWorkpace->id = myWorkpaces.size();
+		currentWorkspace = gcnew WorkspaceContainer();
+		currentWorkspace->id = repository->myWorkpaces.size();
 		panelNewWorkspace->Show();
 
 	}
 	private: System::Void btAddWorkspace_Click(System::Object^ sender, System::EventArgs^ e) {
 		clearData();
 		selectedIndex = -1;
-		currentWorkpace = gcnew WorkspaceContainer();
-		currentWorkpace->id = myWorkpaces.size();
+		currentWorkspace = gcnew WorkspaceContainer();
+		currentWorkspace->id = repository->myWorkpaces.size();
 		btSaveWorkspace->Text = "Save";
 		panelNewWorkspace->Show();
 	}
@@ -564,54 +544,47 @@ private: System::Windows::Forms::Label^ labelNoWorkspace;
 		saveData->RunWorkerAsync();
 	}
 
-	private: System::Void treeView_AfterSelect(System::Object^ sender, System::Windows::Forms::TreeViewEventArgs^ e) {
-		//btAddItem->Enabled = true;
-	}
-
-	private: System::Void labelTitle_Click(System::Object^ sender, System::EventArgs^ e) {
-
-	}
-
 	private: System::Void listWorkspaces_SelectedIndexChanged(System::Object^ sender, System::EventArgs^ e) {
 		if (listWorkspaces->SelectedItems->Count > 0) {
 			selectedIndex = listWorkspaces->SelectedIndex;
-			currentWorkpace = myWorkpaces[listWorkspaces->SelectedIndex];
+			currentWorkspace = repository->myWorkpaces[listWorkspaces->SelectedIndex];
 			panelNewWorkspace->Show();
 			btSaveWorkspace->Text = "Update";
-			tbWorkspaceName->Text = currentWorkpace->name;
+			tbWorkspaceName->Text = currentWorkspace->name;
 			btDelete->Show();
 			setUpList();
 		}
 	}
-		   System::Void Workspace::workspaces::OnFormClosed(System::Object^ sender, System::Windows::Forms::FormClosedEventArgs^ e)
-		   {
-			   if (newItem != nullptr) {
-				   Item^ data = newItem->getItemData();
-				   if (selectedItemIndex != -1)
-				   {
-					   Item^ cItem = currentWorkpace->items[selectedItemIndex];
-					   cItem->name = data->name;
-					   cItem->application = data->application;
-					   cItem->directory = data->directory;
-					   cItem->url = data->url;
-					   cItem->type = data->type;
-				   }
-				   else {
-					   currentWorkpace->items.push_back(data);
-				   }
-				   setUpList();
-				   newItem = nullptr;
-			   }
-		   }
+
+    System::Void Workspace::workspaces::OnFormClosed(System::Object^ sender, System::Windows::Forms::FormClosedEventArgs^ e)
+     {
+       if (newItem != nullptr) {
+    	   Item^ data = newItem->getItemData();
+    	   if (selectedItemIndex != -1)
+    	   {
+    		   Item^ cItem = currentWorkspace->items[selectedItemIndex];
+    		   cItem->name = data->name;
+    		   cItem->application = data->application;
+    		   cItem->directory = data->directory;
+    		   cItem->url = data->url;
+    		   cItem->type = data->type;
+    	   }
+    	   else {
+    		   currentWorkspace->items.push_back(data);
+    	   }
+    	   setUpList();
+    	   newItem = nullptr;
+       }
+     }
 
 	private: System::Void setUpList() {
 		listItems->Items->Clear();
-		for (int i = 0; i < currentWorkpace->items.size(); i++) {
-			listItems->Items->Add(currentWorkpace->items[i]->name);
+		for (int i = 0; i < currentWorkspace->items.size(); i++) {
+			listItems->Items->Add(currentWorkspace->items[i]->name);
 		}
 	}
 	private: System::Void button5_Click(System::Object^ sender, System::EventArgs^ e) {
-		newItem = gcnew NewItemWindow(currentWorkpace->items.size(), currentWorkpace->id);
+		newItem = gcnew NewItemWindow(currentWorkspace->items.size(), currentWorkspace->id);
 		newItem->FormClosed += gcnew System::Windows::Forms::FormClosedEventHandler(this, &Workspace::workspaces::OnFormClosed);
 		newItem->ShowDialog();
 	}
@@ -622,23 +595,23 @@ private: System::Windows::Forms::Label^ labelNoWorkspace;
 			return;
 		}
 		else if (selectedIndex == -1) {
-			currentWorkpace->name = tbWorkspaceName->Text;
-			myWorkpaces.push_back(currentWorkpace);
+			currentWorkspace->name = tbWorkspaceName->Text;
+			repository->myWorkpaces.push_back(currentWorkspace);
 			listWorkspaces->Items->Add(tbWorkspaceName->Text);
 		}
 		else {
-			currentWorkpace->name = tbWorkspaceName->Text;
-			
+			currentWorkspace->name = tbWorkspaceName->Text;
 		}
 		listWorkspaces->Items->Clear();
-		for (int i = 0; i < myWorkpaces.size(); i++) {
-			listWorkspaces->Items->Add(myWorkpaces[i]->name);
+		for (int i = 0; i < repository->myWorkpaces.size(); i++) {
+			listWorkspaces->Items->Add(repository->myWorkpaces[i]->name);
 		}
 		panelNewWorkspace->Hide();
+		currentWorkspace = nullptr;
 	}
 	private: System::Void button1_Click(System::Object^ sender, System::EventArgs^ e) {
-		for (int i = 0; i < currentWorkpace->items.size(); i++) {
-			Item^ currentItem = currentWorkpace->items[i];
+		for (int i = 0; i < currentWorkspace->items.size(); i++) {
+			Item^ currentItem = currentWorkspace->items[i];
 			if (currentItem->type == 2)
 			{
 				Process::Start(currentItem->url);
@@ -653,43 +626,27 @@ private: System::Windows::Forms::Label^ labelNoWorkspace;
 				myProcess->Start();
 			}
 		}
-		if (currentWorkpace->items.size() > 0) {
+		if (currentWorkspace->items.size() > 0) {
 			this->SendToBack();
 		}
 	}
 	private: System::Void button4_Click(System::Object^ sender, System::EventArgs^ e) {
-		newItem = gcnew NewItemWindow(currentWorkpace->items[selectedItemIndex]);
+		newItem = gcnew NewItemWindow(currentWorkspace->items[selectedItemIndex]);
 		newItem->FormClosed += gcnew System::Windows::Forms::FormClosedEventHandler(this, &Workspace::workspaces::OnFormClosed);
 		newItem->Show();
 	}
 	private: System::Void button2_Click(System::Object^ sender, System::EventArgs^ e) {
 		if (selectedItemIndex != -1)
 		{
-			int j = 0;
-			for (auto i = currentWorkpace->items.begin(); i != currentWorkpace->items.end(); ) {
-				if (j == selectedItemIndex)
-				{
-					currentWorkpace->items.erase(i);
-					break;
-				}
-				j++;
-			}
+
 			listItems->Items->RemoveAt(selectedItemIndex);
 			selectedItemIndex = -1;
 		}
 	}
 	private: System::Void btDelete_Click(System::Object^ sender, System::EventArgs^ e) {
-		if (selectedIndex != -1 && myWorkpaces.size() >= selectedIndex)
+		if (selectedIndex != -1)
 		{
-			int j = 0;
-			for (auto i = myWorkpaces.begin(); i != myWorkpaces.end(); i++) {
-				if (j == selectedIndex)
-				{
-					myWorkpaces.erase(i);
-					break;
-				}
-				j++;
-			}
+			repository->deleteWorkspace(selectedIndex);
 			listWorkspaces->Items->RemoveAt(selectedIndex);
 			selectedIndex = -1;
 			panelNewWorkspace->Hide();
@@ -707,22 +664,15 @@ private: System::Windows::Forms::Label^ labelNoWorkspace;
 			btDeleteItem->Hide();
 		}
 	}
-	private: System::Void panelNewWorkspace_Paint(System::Object^ sender, System::Windows::Forms::PaintEventArgs^ e) {
-	}
 	private: System::Void btCancel_Click(System::Object^ sender, System::EventArgs^ e) {
 		panelNewWorkspace->Hide();
 	}
-	private: System::Void label1_Click(System::Object^ sender, System::EventArgs^ e) {
-	}
 
 	private: System::Void saveData_DoWork(System::Object^ sender, System::ComponentModel::DoWorkEventArgs^ e) {
-		System::IO::StreamWriter^ sw = gcnew System::IO::StreamWriter(String::Concat(Application::UserAppDataPath, "\\appdata.json"), false);
-		Newtonsoft::Json::JsonSerializer^ serializer = gcnew Newtonsoft::Json::JsonSerializer();
-		serializer->Serialize(sw, myWorkpaces);
-		sw->Close();
+		repository->writeDataFile();
 	}
 
-	private:	System::Void Workspace::workspaces::OnRunWorkerCompleted(System::Object^ sender, System::ComponentModel::RunWorkerCompletedEventArgs^ e)
+	private: System::Void Workspace::workspaces::OnRunWorkerCompleted(System::Object^ sender, System::ComponentModel::RunWorkerCompletedEventArgs^ e)
 	{
 		Application::Exit();
 	}
@@ -730,7 +680,7 @@ private: System::Windows::Forms::Label^ labelNoWorkspace;
 		panelNewWorkspace->Hide();
 
 	}
-};
+	};
 }
 
 

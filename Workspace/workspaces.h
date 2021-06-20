@@ -525,7 +525,6 @@ namespace Workspace {
 	private: System::Void btAddWorkspace_Click(System::Object^ sender, System::EventArgs^ e) {
 		clearData();
 		selectedIndex = -1;
-		currentWorkspace = nullptr;
 		currentWorkspace = gcnew WorkspaceContainer();
 		currentWorkspace->id = repository->myWorkpaces.size();
 		btSaveWorkspace->Text = "Save";
@@ -679,7 +678,7 @@ namespace Workspace {
 	}
 	private: System::Void btCloseApp_Click(System::Object^ sender, System::EventArgs^ e) {
 		panelNewWorkspace->Hide();
-		currentWorkspace = nullptr;
+
 	}
 	};
 }

@@ -78,13 +78,13 @@ BEGIN
         BLOCK "400904b0"
         BEGIN
             VALUE "CompanyName", "Alpha 1"
-            VALUE "FileDescription", "Workspaces for Microsoft Windows"
-            VALUE "FileVersion", "1.0.0.2"
+            VALUE "FileDescription", "Workspaces"
+            VALUE "FileVersion", "1.0.0.3"
             VALUE "InternalName", "Workspaces.exe"
             VALUE "LegalCopyright", "Copyright (C) 2021"
             VALUE "OriginalFilename", "Workspaces.exe"
             VALUE "ProductName", "Workspaces"
-            VALUE "ProductVersion", "1.1"
+            VALUE "ProductVersion", "1.2"
         END
     END
     BLOCK "VarFileInfo"

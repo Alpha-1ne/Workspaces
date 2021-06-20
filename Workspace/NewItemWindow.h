@@ -24,9 +24,6 @@ namespace Workspace {
 		NewItemWindow(int id, int parentId)
 		{
 			InitializeComponent();
-			//
-			//TODO: Add the constructor code here
-			//
 			currentItem = gcnew Item(id, parentId);
 			urlPanel->Hide();
 			applicationPanel->Hide();
@@ -47,9 +44,6 @@ namespace Workspace {
 		}
 
 	protected:
-		/// <summary>
-		/// Clean up any resources being used.
-		/// </summary>
 		~NewItemWindow()
 		{
 			if (components)

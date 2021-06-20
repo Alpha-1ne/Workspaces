@@ -470,19 +470,6 @@ namespace Workspace {
 			   this->saveData->DoWork += gcnew System::ComponentModel::DoWorkEventHandler(this, &workspaces::saveData_DoWork);
 			   this->saveData->RunWorkerCompleted += gcnew System::ComponentModel::RunWorkerCompletedEventHandler(this, &workspaces::OnRunWorkerCompleted);
 			   // 
-			   // labelNoWorkspace
-			   // 
-			   this->labelNoWorkspace->AutoSize = true;
-			   this->labelNoWorkspace->BackColor = System::Drawing::Color::Transparent;
-			   this->labelNoWorkspace->Font = (gcnew System::Drawing::Font(L"Segoe UI Semibold", 20, System::Drawing::FontStyle::Bold));
-			   this->labelNoWorkspace->ForeColor = System::Drawing::Color::White;
-			   this->labelNoWorkspace->Location = System::Drawing::Point(357, 32);
-			   this->labelNoWorkspace->Name = L"labelNoWorkspace";
-			   this->labelNoWorkspace->Size = System::Drawing::Size(384, 46);
-			   this->labelNoWorkspace->TabIndex = 11;
-			   this->labelNoWorkspace->Text = L"No Workspace Selected";
-			   this->labelNoWorkspace->TextAlign = System::Drawing::ContentAlignment::TopCenter;
-			   // 
 			   // workspaces
 			   // 
 			   this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::None;
@@ -503,7 +490,6 @@ namespace Workspace {
 			   this->Name = L"workspaces";
 			   this->StartPosition = System::Windows::Forms::FormStartPosition::CenterScreen;
 			   this->Text = L"workspaces";
-			   this->Load += gcnew System::EventHandler(this, &workspaces::workspaces_Load);
 			   this->panel1->ResumeLayout(false);
 			   this->panel1->PerformLayout();
 			   this->panelNewWorkspace->ResumeLayout(false);
@@ -513,15 +499,6 @@ namespace Workspace {
 
 		   }
 #pragma endregion
-	private: System::Void workspaces_Load(System::Object^ sender, System::EventArgs^ e) {
-
-	}
-	private: System::Void linkLabel1_LinkClicked(System::Object^ sender, System::Windows::Forms::LinkLabelLinkClickedEventArgs^ e) {
-		currentWorkspace = gcnew WorkspaceContainer();
-		currentWorkspace->id = repository->myWorkpaces.size();
-		panelNewWorkspace->Show();
-
-	}
 	private: System::Void btAddWorkspace_Click(System::Object^ sender, System::EventArgs^ e) {
 		clearData();
 		selectedIndex = -1;
@@ -650,6 +627,7 @@ namespace Workspace {
 			listWorkspaces->Items->RemoveAt(selectedIndex);
 			selectedIndex = -1;
 			panelNewWorkspace->Hide();
+			currentWorkspace = nullptr;
 		}
 	}
 	private: System::Void listItems_SelectedIndexChanged(System::Object^ sender, System::EventArgs^ e) {
@@ -664,9 +642,6 @@ namespace Workspace {
 			btDeleteItem->Hide();
 		}
 	}
-	private: System::Void btCancel_Click(System::Object^ sender, System::EventArgs^ e) {
-		panelNewWorkspace->Hide();
-	}
 
 	private: System::Void saveData_DoWork(System::Object^ sender, System::ComponentModel::DoWorkEventArgs^ e) {
 		repository->writeDataFile();
@@ -678,7 +653,7 @@ namespace Workspace {
 	}
 	private: System::Void btCloseApp_Click(System::Object^ sender, System::EventArgs^ e) {
 		panelNewWorkspace->Hide();
-
+		currentWorkspace = nullptr;
 	}
 	};
 }

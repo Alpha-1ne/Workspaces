@@ -15,3 +15,6 @@ To contribute:
 1. Fork this repository.
 2. Make your changes and commit
 3. Raise a PR explaning what you have done.
+
+## Known Issues
+  Please check the issues section. Fixing issues one by one.

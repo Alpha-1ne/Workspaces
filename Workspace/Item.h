@@ -16,5 +16,6 @@ public:
 	String^ command;
 	String^ application;
 	String^ directory;
+	bool runAsAdmin;
 };
 

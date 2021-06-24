@@ -84,6 +84,7 @@ namespace Workspace {
 		System::ComponentModel::Container^ components;
 
 	private: Item^ currentItem;
+	private: System::Windows::Forms::CheckBox^ cbRunAsAdmin;
 	private: int selectedIndex = -1;
 
 #pragma region Windows Form Designer generated code
@@ -114,6 +115,7 @@ namespace Workspace {
 			   this->itemName = (gcnew System::Windows::Forms::TextBox());
 			   this->directorySelectDialog = (gcnew System::Windows::Forms::FolderBrowserDialog());
 			   this->selectApplicationDialog = (gcnew System::Windows::Forms::OpenFileDialog());
+			   this->cbRunAsAdmin = (gcnew System::Windows::Forms::CheckBox());
 			   this->addItem->SuspendLayout();
 			   this->taskGroup->SuspendLayout();
 			   this->urlPanel->SuspendLayout();
@@ -269,6 +271,7 @@ namespace Workspace {
 			   // applicationPanel
 			   // 
 			   this->applicationPanel->BackColor = System::Drawing::Color::Transparent;
+			   this->applicationPanel->Controls->Add(this->cbRunAsAdmin);
 			   this->applicationPanel->Controls->Add(this->tbDirectory);
 			   this->applicationPanel->Controls->Add(this->selectDirectoryButton);
 			   this->applicationPanel->Controls->Add(this->applicationPath);
@@ -276,7 +279,7 @@ namespace Workspace {
 			   this->applicationPanel->Controls->Add(this->chooseApplication);
 			   this->applicationPanel->Location = System::Drawing::Point(6, 29);
 			   this->applicationPanel->Name = L"applicationPanel";
-			   this->applicationPanel->Size = System::Drawing::Size(522, 114);
+			   this->applicationPanel->Size = System::Drawing::Size(522, 133);
 			   this->applicationPanel->TabIndex = 17;
 			   // 
 			   // tbDirectory
@@ -377,6 +380,18 @@ namespace Workspace {
 			   this->selectApplicationDialog->Filter = L"\"EXE|*.exe|All files|*.*\"";
 			   this->selectApplicationDialog->InitialDirectory = L"C:\\ProgramData\\Microsoft\\Windows\\Start Menu\\Programs";
 			   // 
+			   // cbRunAsAdmin
+			   // 
+			   this->cbRunAsAdmin->AutoSize = true;
+			   this->cbRunAsAdmin->Font = (gcnew System::Drawing::Font(L"Segoe UI Semibold", 7.5F, System::Drawing::FontStyle::Bold));
+			   this->cbRunAsAdmin->Location = System::Drawing::Point(8, 109);
+			   this->cbRunAsAdmin->Name = L"cbRunAsAdmin";
+			   this->cbRunAsAdmin->Size = System::Drawing::Size(233, 21);
+			   this->cbRunAsAdmin->TabIndex = 15;
+			   this->cbRunAsAdmin->Text = L"Run this task as an Administrator";
+			   this->cbRunAsAdmin->UseVisualStyleBackColor = true;
+			   this->cbRunAsAdmin->CheckedChanged += gcnew System::EventHandler(this, &NewItemWindow::cbRunAsAdmin_CheckedChanged);
+			   // 
 			   // NewItemWindow
 			   // 
 			   this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::None;
@@ -422,6 +437,7 @@ namespace Workspace {
 			applicationPanel->Show();
 			applicationPath->Show();
 			applicationPath->Text = currentItem->application;
+			cbRunAsAdmin->Checked = currentItem->runAsAdmin;
 			break;
 		case 1:
 			urlPanel->Hide();
@@ -431,6 +447,7 @@ namespace Workspace {
 			applicationPanel->Show();
 			applicationPath->Text = currentItem->application;
 			tbDirectory->Text = currentItem->directory;
+			cbRunAsAdmin->Checked = currentItem->runAsAdmin;
 			break;
 		case 2:
 			applicationPanel->Hide();
@@ -493,6 +510,9 @@ namespace Workspace {
 				if (selectedIndex == 1 && tbDirectory->Text != "")
 					myProcess->StartInfo->Arguments = tbDirectory->Text;
 				myProcess->StartInfo->CreateNoWindow = true;
+				myProcess->StartInfo->UseShellExecute = cbRunAsAdmin->Checked;
+				if(cbRunAsAdmin->Checked)
+					myProcess->StartInfo->Verb = "runas";
 				myProcess->Start();
 			}
 		}
@@ -503,10 +523,12 @@ namespace Workspace {
 		switch (selectedIndex) {
 		case 0:
 			currentItem->application = applicationPath->Text;
+			currentItem->runAsAdmin = cbRunAsAdmin->Checked;
 			break;
 		case 1:
 			currentItem->application = applicationPath->Text;
 			currentItem->directory = tbDirectory->Text;
+			currentItem->runAsAdmin = cbRunAsAdmin->Checked;
 			break;
 		case 2:
 			currentItem->url = webURL->Text;
@@ -537,5 +559,7 @@ namespace Workspace {
 		}
 	}
 
+private: System::Void cbRunAsAdmin_CheckedChanged(System::Object^ sender, System::EventArgs^ e) {
+}
 };
 }

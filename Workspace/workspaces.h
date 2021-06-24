@@ -29,6 +29,7 @@ namespace Workspace {
 			panelNewWorkspace->Hide();
 			btEditItem->Hide();
 			btDeleteItem->Hide();
+			btStartTask->Hide();
 			try {
 				for (int i = 0; i < repository->myWorkpaces.size(); i++) {
 					listWorkspaces->Items->Add(repository->myWorkpaces[i]->name);
@@ -141,6 +142,7 @@ namespace Workspace {
 	private: System::ComponentModel::BackgroundWorker^ saveData;
 	private: System::Windows::Forms::Label^ labelNoWorkspace;
 	private: DataRepository^ repository;
+private: System::Windows::Forms::Button^ btStartTask;
 
 
 
@@ -177,6 +179,7 @@ namespace Workspace {
 			   this->labelWorkspaceName = (gcnew System::Windows::Forms::Label());
 			   this->saveData = (gcnew System::ComponentModel::BackgroundWorker());
 			   this->labelNoWorkspace = (gcnew System::Windows::Forms::Label());
+			   this->btStartTask = (gcnew System::Windows::Forms::Button());
 			   this->panel1->SuspendLayout();
 			   this->panelNewWorkspace->SuspendLayout();
 			   this->SuspendLayout();
@@ -263,6 +266,7 @@ namespace Workspace {
 			   // 
 			   this->panelNewWorkspace->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(26)),
 				   static_cast<System::Int32>(static_cast<System::Byte>(26)), static_cast<System::Int32>(static_cast<System::Byte>(26)));
+			   this->panelNewWorkspace->Controls->Add(this->btStartTask);
 			   this->panelNewWorkspace->Controls->Add(this->btCloseApp);
 			   this->panelNewWorkspace->Controls->Add(this->labelTasks);
 			   this->panelNewWorkspace->Controls->Add(this->btSaveWorkspace);
@@ -278,7 +282,7 @@ namespace Workspace {
 			   this->panelNewWorkspace->Name = L"panelNewWorkspace";
 			   this->panelNewWorkspace->Size = System::Drawing::Size(650, 600);
 			   this->panelNewWorkspace->TabIndex = 10;
-// 
+			   // 
 			   // btCloseApp
 			   // 
 			   this->btCloseApp->BackColor = System::Drawing::Color::Transparent;
@@ -355,7 +359,7 @@ namespace Workspace {
 			   this->btEditItem->FlatAppearance->MouseOverBackColor = System::Drawing::Color::Transparent;
 			   this->btEditItem->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
 			   this->btEditItem->ForeColor = System::Drawing::Color::Transparent;
-			   this->btEditItem->Location = System::Drawing::Point(615, 185);
+			   this->btEditItem->Location = System::Drawing::Point(615, 273);
 			   this->btEditItem->Margin = System::Windows::Forms::Padding(3, 10, 10, 3);
 			   this->btEditItem->Name = L"btEditItem";
 			   this->btEditItem->Size = System::Drawing::Size(15, 20);
@@ -375,7 +379,7 @@ namespace Workspace {
 			   this->btDeleteItem->FlatAppearance->MouseOverBackColor = System::Drawing::Color::Transparent;
 			   this->btDeleteItem->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
 			   this->btDeleteItem->ForeColor = System::Drawing::Color::Transparent;
-			   this->btDeleteItem->Location = System::Drawing::Point(615, 234);
+			   this->btDeleteItem->Location = System::Drawing::Point(615, 227);
 			   this->btDeleteItem->Margin = System::Windows::Forms::Padding(3, 10, 10, 3);
 			   this->btDeleteItem->Name = L"btDeleteItem";
 			   this->btDeleteItem->Size = System::Drawing::Size(15, 19);
@@ -470,6 +474,27 @@ namespace Workspace {
 			   this->saveData->DoWork += gcnew System::ComponentModel::DoWorkEventHandler(this, &workspaces::saveData_DoWork);
 			   this->saveData->RunWorkerCompleted += gcnew System::ComponentModel::RunWorkerCompletedEventHandler(this, &workspaces::OnRunWorkerCompleted);
 			   // 
+			   // 
+			   // btStartTask
+			   // 
+			   this->btStartTask->BackColor = System::Drawing::Color::Transparent;
+			   this->btStartTask->BackgroundImage = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"btStartTask.BackgroundImage")));
+			   this->btStartTask->BackgroundImageLayout = System::Windows::Forms::ImageLayout::Stretch;
+			   this->btStartTask->FlatAppearance->BorderColor = System::Drawing::Color::Black;
+			   this->btStartTask->FlatAppearance->BorderSize = 0;
+			   this->btStartTask->FlatAppearance->MouseDownBackColor = System::Drawing::Color::Transparent;
+			   this->btStartTask->FlatAppearance->MouseOverBackColor = System::Drawing::Color::Transparent;
+			   this->btStartTask->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
+			   this->btStartTask->ForeColor = System::Drawing::Color::Transparent;
+			   this->btStartTask->Location = System::Drawing::Point(617, 185);
+			   this->btStartTask->Margin = System::Windows::Forms::Padding(3, 10, 10, 3);
+			   this->btStartTask->Name = L"btStartTask";
+			   this->btStartTask->Size = System::Drawing::Size(15, 15);
+			   this->btStartTask->TabIndex = 21;
+			   this->btStartTask->UseMnemonic = false;
+			   this->btStartTask->UseVisualStyleBackColor = false;
+			   this->btStartTask->Click += gcnew System::EventHandler(this, &workspaces::btStartTask_Click);
+			   // 
 			   // workspaces
 			   // 
 			   this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::None;
@@ -495,7 +520,6 @@ namespace Workspace {
 			   this->panelNewWorkspace->ResumeLayout(false);
 			   this->panelNewWorkspace->PerformLayout();
 			   this->ResumeLayout(false);
-			   this->PerformLayout();
 
 		   }
 #pragma endregion
@@ -561,6 +585,11 @@ namespace Workspace {
 		}
 	}
 	private: System::Void button5_Click(System::Object^ sender, System::EventArgs^ e) {
+		selectedItemIndex = -1;
+		listItems->ClearSelected();
+		btStartTask->Hide();
+		btEditItem->Hide();
+		btDeleteItem->Hide();
 		newItem = gcnew NewItemWindow(currentWorkspace->items.size(), currentWorkspace->id);
 		newItem->FormClosed += gcnew System::Windows::Forms::FormClosedEventHandler(this, &Workspace::workspaces::OnFormClosed);
 		newItem->ShowDialog();
@@ -635,9 +664,11 @@ namespace Workspace {
 			selectedItemIndex = listItems->SelectedIndex;
 			btEditItem->Show();
 			btDeleteItem->Show();
+			btStartTask->Show();
 		}
 		else {
 			selectedItemIndex = -1;
+			btStartTask->Hide();
 			btEditItem->Hide();
 			btDeleteItem->Hide();
 		}
@@ -655,7 +686,24 @@ namespace Workspace {
 		panelNewWorkspace->Hide();
 		currentWorkspace = nullptr;
 	}
-	};
+	private: System::Void btStartTask_Click(System::Object^ sender, System::EventArgs^ e) {
+		if (selectedItemIndex == -1)
+			return;
+		Item^ currentItem = currentWorkspace->items[selectedItemIndex];
+		if ( currentItem->type == 2)
+			Process::Start(currentItem->url);
+		else {
+				Process^ myProcess = gcnew Process();
+				myProcess->StartInfo->UseShellExecute = false;
+				// You can start any process, HelloWorld is a do-nothing example.
+				myProcess->StartInfo->FileName = currentItem->application;
+				if (selectedIndex == 1 && currentItem->directory != "")
+					myProcess->StartInfo->Arguments = currentItem->directory;
+				myProcess->StartInfo->CreateNoWindow = true;
+				myProcess->Start();
+		}
+	}
+};
 }
 
 

@@ -157,6 +157,7 @@ namespace Workspace {
 			   this->itemType->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(26)), static_cast<System::Int32>(static_cast<System::Byte>(26)),
 				   static_cast<System::Int32>(static_cast<System::Byte>(26)));
 			   this->itemType->Cursor = System::Windows::Forms::Cursors::Default;
+			   this->itemType->DropDownStyle = System::Windows::Forms::ComboBoxStyle::DropDownList;
 			   this->itemType->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
 			   this->itemType->Font = (gcnew System::Drawing::Font(L"Segoe UI Semibold", 10, System::Drawing::FontStyle::Bold));
 			   this->itemType->ForeColor = System::Drawing::Color::White;
@@ -487,7 +488,6 @@ namespace Workspace {
 			}
 			else {
 				Process^ myProcess = gcnew Process();
-				myProcess->StartInfo->UseShellExecute = false;
 				// You can start any process, HelloWorld is a do-nothing example.
 				myProcess->StartInfo->FileName = applicationPath->Text;
 				if (selectedIndex == 1 && tbDirectory->Text != "")

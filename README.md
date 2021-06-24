@@ -22,4 +22,4 @@ To contribute:
 ## TODO
   1. Add CheckBox to run task as an Admin
   2. Add option to run any Command.
-  3. Add option to run individual tasks.
+  3. Add option to run individual tasks. (High Priority)

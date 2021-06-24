@@ -20,6 +20,5 @@ To contribute:
   Please check the issues section. Fixing issues one by one.
   
 ## TODO
-  1. Add CheckBox to run task as an Admin
+  1. Add CheckBox to run task as an Admin.
   2. Add option to run any Command.
-  3. Add option to run individual tasks. (High Priority)

@@ -624,11 +624,13 @@ private: System::Windows::Forms::Button^ btStartTask;
 			}
 			else {
 				Process^ myProcess = gcnew Process();
-				myProcess->StartInfo->UseShellExecute = false;
 				myProcess->StartInfo->FileName = currentItem->application;
 				if (currentItem->type == 1 && currentItem->directory != "")
 					myProcess->StartInfo->Arguments = currentItem->directory;
 				myProcess->StartInfo->CreateNoWindow = true;
+				myProcess->StartInfo->UseShellExecute = currentItem->runAsAdmin;
+				if (currentItem->runAsAdmin)
+					myProcess->StartInfo->Verb = "runas";
 				myProcess->Start();
 			}
 		}
@@ -694,12 +696,14 @@ private: System::Windows::Forms::Button^ btStartTask;
 			Process::Start(currentItem->url);
 		else {
 				Process^ myProcess = gcnew Process();
-				myProcess->StartInfo->UseShellExecute = false;
 				// You can start any process, HelloWorld is a do-nothing example.
 				myProcess->StartInfo->FileName = currentItem->application;
 				if (selectedIndex == 1 && currentItem->directory != "")
 					myProcess->StartInfo->Arguments = currentItem->directory;
 				myProcess->StartInfo->CreateNoWindow = true;
+				myProcess->StartInfo->UseShellExecute = currentItem->runAsAdmin;
+				if (currentItem->runAsAdmin)
+					myProcess->StartInfo->Verb = "runas";
 				myProcess->Start();
 		}
 	}

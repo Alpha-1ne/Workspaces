@@ -142,6 +142,26 @@
         RK5CYII=
 </value>
   </data>
+  <data name="btStartTask.BackgroundImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAAEEAAABLCAYAAAAvbOojAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
+        YQUAAAAJcEhZcwAALiMAAC4jAXilP3YAAAM4SURBVHhe7ZqBbdVAEERTAiVQQkqgBEqgBEqgBEqgBEqg
+        BEpICXTwuRdpIzQ2vl37vD4vjPRGiWJb/4/v9m7tPD0ej5fGxwY//5Ngph+N58bioOpgqm+Nd43FwVXB
+        1vSr8aWxOKEi2JaoFx8aixMrgXlEvXjfWFygAlhEXxvl6gUWFfXic2NxsbuCqfiS0NPPRol6gamY/wx5
+        lkqPvjduXS8wFSHYAWye+N0jltRb1gtM9WcIBttqlsuemEafGnr+1GCqtRAM7ranXnCN29QLTLUVAkTq
+        BcdNXy8wVS8Ew1svGDlT1wtM5Q3B8NaLaVt2TBUNwYjUi6ladky1NwRgyLO19mialh1THQnBoBhynZ6s
+        XqxdIw1MNSIEg2XSWy8uW1Ix1cgQDBoub71IX1Ix1RkhQKRepLbsmOqsEIxIvUjZgmOqs0MwvPXi9JYd
+        U2WFYHjrxWktO6bKDgEi9WL4FhxTXRGCwZ3mjvfENBpWLzDVlSEY1ABqQU981sP1AlPNEILB3fbUi0Mt
+        O6aaKQRg/lMHetq9BcdUs4VgROpFqGXHVLOGYETqhatlx1Szh2BE6sXmkoqp7hICROrFX9+aYao7hWBE
+        6sViScVUdwzB4Avy+XvimLclFVPdOQSDeuFpzl5bdk5QVQgBuNOeIF44WPV/JDTdOQTvCyGOKVcTWCo9
+        rwbLrg7sE3qbprL7BO/rv5I7RuYyn7EnjinXO3A3PY/gGB0lu0jPw1j+XvJ5ApXcO+/flrwomGqGEPhC
+        noaIz7pY8qJgqitD8LbGjI6ST5u9D0kIaXPJi4KpskNgOHsel5V8A8UX8mx1S76LtHnvWfKGzfstMNWZ
+        IYRa3MbaNYaDqc4IYVeLmwWmGhkCd3N3i5sFphoVwuEWNwtMdTSEYS1uFphqbwjMZc7tiWPK/Ucrd/OU
+        FjcLTBUJIdLiTjH018BUnhC8W91DLW4WmGorBL5QWoubBaZaC4Gh7Glx07a6I8FUGsJlLW4WmMpCYDjz
+        c0+ntbhZYCoK3hQtbhZYVFNsdUeCRZTa4maBeURtuPW83wLb0qUtbhbYmmyruzihIphqmhY3C8zEvJ+q
+        xc0Cm7bFzeHx9Btf0cOrrRgDKAAAAABJRU5ErkJggg==
+</value>
+  </data>
   <data name="btCloseApp.BackgroundImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAAEsAAABLCAYAAAA4TnrqAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAu

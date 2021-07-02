@@ -2,12 +2,15 @@
 A productivity tool for Microsoft Windows.
 
 With Workspaces you are no longer required to run one by one your daily-use applications. 
-All you have to do is create Workspaces as per your needs, add tasks to them and from the next time run all at once via single click.
+All you have to do is to create Workspaces as per your needs, add tasks to them and from the next time run all at once via single click.
 
 # Screenshot
 <img src="Screenshots/home.jpg" width=400/>  <img src="Screenshots/workspaces.jpg" width=400/>
 
 <img src="Screenshots/workspace_detail.jpg" width=400/>  <img src="Screenshots/mytask.jpg" width=400/>
+
+# Download
+<a href="https://github.com/Alpha-1ne/Workspaces/releases/latest">Click here</a> to download latest version.
 
 # Contribute
 The application is currently under development. All kinds of contribution are accepted.

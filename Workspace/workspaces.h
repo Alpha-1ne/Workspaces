@@ -142,7 +142,11 @@ namespace Workspace {
 	private: System::ComponentModel::BackgroundWorker^ saveData;
 	private: System::Windows::Forms::Label^ labelNoWorkspace;
 	private: DataRepository^ repository;
-private: System::Windows::Forms::Button^ btStartTask;
+	private: System::Windows::Forms::Button^ btStartTask;
+	private: System::Windows::Forms::Button^ btMinimise;
+	private: System::Windows::Forms::Button^ btMinimiseWindowMain;
+
+
 
 
 
@@ -166,6 +170,8 @@ private: System::Windows::Forms::Button^ btStartTask;
 			   this->labelWorkspaces = (gcnew System::Windows::Forms::Label());
 			   this->button3 = (gcnew System::Windows::Forms::Button());
 			   this->panelNewWorkspace = (gcnew System::Windows::Forms::Panel());
+			   this->btMinimise = (gcnew System::Windows::Forms::Button());
+			   this->btStartTask = (gcnew System::Windows::Forms::Button());
 			   this->btCloseApp = (gcnew System::Windows::Forms::Button());
 			   this->labelTasks = (gcnew System::Windows::Forms::Label());
 			   this->btSaveWorkspace = (gcnew System::Windows::Forms::Button());
@@ -179,7 +185,7 @@ private: System::Windows::Forms::Button^ btStartTask;
 			   this->labelWorkspaceName = (gcnew System::Windows::Forms::Label());
 			   this->saveData = (gcnew System::ComponentModel::BackgroundWorker());
 			   this->labelNoWorkspace = (gcnew System::Windows::Forms::Label());
-			   this->btStartTask = (gcnew System::Windows::Forms::Button());
+			   this->btMinimiseWindowMain = (gcnew System::Windows::Forms::Button());
 			   this->panel1->SuspendLayout();
 			   this->panelNewWorkspace->SuspendLayout();
 			   this->SuspendLayout();
@@ -195,6 +201,9 @@ private: System::Windows::Forms::Button^ btStartTask;
 			   this->panel1->Name = L"panel1";
 			   this->panel1->Size = System::Drawing::Size(250, 600);
 			   this->panel1->TabIndex = 0;
+			   this->panel1->MouseDown += gcnew System::Windows::Forms::MouseEventHandler(this, &workspaces::panel1_MouseDown);
+			   this->panel1->MouseMove += gcnew System::Windows::Forms::MouseEventHandler(this, &workspaces::panel1_MouseMove);
+			   this->panel1->MouseUp += gcnew System::Windows::Forms::MouseEventHandler(this, &workspaces::panel1_MouseUp);
 			   // 
 			   // listWorkspaces
 			   // 
@@ -266,6 +275,7 @@ private: System::Windows::Forms::Button^ btStartTask;
 			   // 
 			   this->panelNewWorkspace->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(26)),
 				   static_cast<System::Int32>(static_cast<System::Byte>(26)), static_cast<System::Int32>(static_cast<System::Byte>(26)));
+			   this->panelNewWorkspace->Controls->Add(this->btMinimise);
 			   this->panelNewWorkspace->Controls->Add(this->btStartTask);
 			   this->panelNewWorkspace->Controls->Add(this->btCloseApp);
 			   this->panelNewWorkspace->Controls->Add(this->labelTasks);
@@ -282,6 +292,50 @@ private: System::Windows::Forms::Button^ btStartTask;
 			   this->panelNewWorkspace->Name = L"panelNewWorkspace";
 			   this->panelNewWorkspace->Size = System::Drawing::Size(650, 600);
 			   this->panelNewWorkspace->TabIndex = 10;
+			   this->panelNewWorkspace->Paint += gcnew System::Windows::Forms::PaintEventHandler(this, &workspaces::panelNewWorkspace_Paint);
+			   this->panelNewWorkspace->MouseDown += gcnew System::Windows::Forms::MouseEventHandler(this, &workspaces::panelNewWorkspace_MouseDown);
+			   this->panelNewWorkspace->MouseMove += gcnew System::Windows::Forms::MouseEventHandler(this, &workspaces::panelNewWorkspace_MouseMove);
+			   this->panelNewWorkspace->MouseUp += gcnew System::Windows::Forms::MouseEventHandler(this, &workspaces::panelNewWorkspace_MouseUp);
+			   // 
+			   // btMinimise
+			   // 
+			   this->btMinimise->BackColor = System::Drawing::Color::Transparent;
+			   this->btMinimise->BackgroundImage = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"btMinimise.BackgroundImage")));
+			   this->btMinimise->BackgroundImageLayout = System::Windows::Forms::ImageLayout::Center;
+			   this->btMinimise->FlatAppearance->BorderColor = System::Drawing::Color::Black;
+			   this->btMinimise->FlatAppearance->BorderSize = 0;
+			   this->btMinimise->FlatAppearance->MouseDownBackColor = System::Drawing::Color::Transparent;
+			   this->btMinimise->FlatAppearance->MouseOverBackColor = System::Drawing::Color::Transparent;
+			   this->btMinimise->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
+			   this->btMinimise->ForeColor = System::Drawing::Color::Transparent;
+			   this->btMinimise->Location = System::Drawing::Point(575, 18);
+			   this->btMinimise->Margin = System::Windows::Forms::Padding(3, 10, 10, 3);
+			   this->btMinimise->Name = L"btMinimise";
+			   this->btMinimise->Size = System::Drawing::Size(20, 2);
+			   this->btMinimise->TabIndex = 22;
+			   this->btMinimise->UseMnemonic = false;
+			   this->btMinimise->UseVisualStyleBackColor = false;
+			   this->btMinimise->Click += gcnew System::EventHandler(this, &workspaces::button2_Click_1);
+			   // 
+			   // btStartTask
+			   // 
+			   this->btStartTask->BackColor = System::Drawing::Color::Transparent;
+			   this->btStartTask->BackgroundImage = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"btStartTask.BackgroundImage")));
+			   this->btStartTask->BackgroundImageLayout = System::Windows::Forms::ImageLayout::Stretch;
+			   this->btStartTask->FlatAppearance->BorderColor = System::Drawing::Color::Black;
+			   this->btStartTask->FlatAppearance->BorderSize = 0;
+			   this->btStartTask->FlatAppearance->MouseDownBackColor = System::Drawing::Color::Transparent;
+			   this->btStartTask->FlatAppearance->MouseOverBackColor = System::Drawing::Color::Transparent;
+			   this->btStartTask->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
+			   this->btStartTask->ForeColor = System::Drawing::Color::Transparent;
+			   this->btStartTask->Location = System::Drawing::Point(617, 185);
+			   this->btStartTask->Margin = System::Windows::Forms::Padding(3, 10, 10, 3);
+			   this->btStartTask->Name = L"btStartTask";
+			   this->btStartTask->Size = System::Drawing::Size(15, 15);
+			   this->btStartTask->TabIndex = 21;
+			   this->btStartTask->UseMnemonic = false;
+			   this->btStartTask->UseVisualStyleBackColor = false;
+			   this->btStartTask->Click += gcnew System::EventHandler(this, &workspaces::btStartTask_Click);
 			   // 
 			   // btCloseApp
 			   // 
@@ -294,7 +348,7 @@ private: System::Windows::Forms::Button^ btStartTask;
 			   this->btCloseApp->FlatAppearance->MouseOverBackColor = System::Drawing::Color::Transparent;
 			   this->btCloseApp->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
 			   this->btCloseApp->ForeColor = System::Drawing::Color::Transparent;
-			   this->btCloseApp->Location = System::Drawing::Point(622, 10);
+			   this->btCloseApp->Location = System::Drawing::Point(615, 11);
 			   this->btCloseApp->Margin = System::Windows::Forms::Padding(3, 10, 10, 3);
 			   this->btCloseApp->Name = L"btCloseApp";
 			   this->btCloseApp->Size = System::Drawing::Size(16, 16);
@@ -444,6 +498,7 @@ private: System::Windows::Forms::Button^ btStartTask;
 			   this->listItems->Size = System::Drawing::Size(589, 418);
 			   this->listItems->TabIndex = 2;
 			   this->listItems->SelectedIndexChanged += gcnew System::EventHandler(this, &workspaces::listItems_SelectedIndexChanged);
+			   this->listItems->DoubleClick += gcnew System::EventHandler(this, &workspaces::listItems_DoubleClick);
 			   // 
 			   // tbWorkspaceName
 			   // 
@@ -474,26 +529,32 @@ private: System::Windows::Forms::Button^ btStartTask;
 			   this->saveData->DoWork += gcnew System::ComponentModel::DoWorkEventHandler(this, &workspaces::saveData_DoWork);
 			   this->saveData->RunWorkerCompleted += gcnew System::ComponentModel::RunWorkerCompletedEventHandler(this, &workspaces::OnRunWorkerCompleted);
 			   // 
+			   // labelNoWorkspace
 			   // 
-			   // btStartTask
+			   this->labelNoWorkspace->Location = System::Drawing::Point(0, 0);
+			   this->labelNoWorkspace->Name = L"labelNoWorkspace";
+			   this->labelNoWorkspace->Size = System::Drawing::Size(100, 23);
+			   this->labelNoWorkspace->TabIndex = 11;
 			   // 
-			   this->btStartTask->BackColor = System::Drawing::Color::Transparent;
-			   this->btStartTask->BackgroundImage = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"btStartTask.BackgroundImage")));
-			   this->btStartTask->BackgroundImageLayout = System::Windows::Forms::ImageLayout::Stretch;
-			   this->btStartTask->FlatAppearance->BorderColor = System::Drawing::Color::Black;
-			   this->btStartTask->FlatAppearance->BorderSize = 0;
-			   this->btStartTask->FlatAppearance->MouseDownBackColor = System::Drawing::Color::Transparent;
-			   this->btStartTask->FlatAppearance->MouseOverBackColor = System::Drawing::Color::Transparent;
-			   this->btStartTask->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
-			   this->btStartTask->ForeColor = System::Drawing::Color::Transparent;
-			   this->btStartTask->Location = System::Drawing::Point(617, 185);
-			   this->btStartTask->Margin = System::Windows::Forms::Padding(3, 10, 10, 3);
-			   this->btStartTask->Name = L"btStartTask";
-			   this->btStartTask->Size = System::Drawing::Size(15, 15);
-			   this->btStartTask->TabIndex = 21;
-			   this->btStartTask->UseMnemonic = false;
-			   this->btStartTask->UseVisualStyleBackColor = false;
-			   this->btStartTask->Click += gcnew System::EventHandler(this, &workspaces::btStartTask_Click);
+			   // btMinimiseWindowMain
+			   // 
+			   this->btMinimiseWindowMain->BackColor = System::Drawing::Color::Transparent;
+			   this->btMinimiseWindowMain->BackgroundImage = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"btMinimiseWindowMain.BackgroundImage")));
+			   this->btMinimiseWindowMain->BackgroundImageLayout = System::Windows::Forms::ImageLayout::None;
+			   this->btMinimiseWindowMain->FlatAppearance->BorderColor = System::Drawing::Color::Black;
+			   this->btMinimiseWindowMain->FlatAppearance->BorderSize = 0;
+			   this->btMinimiseWindowMain->FlatAppearance->MouseDownBackColor = System::Drawing::Color::Transparent;
+			   this->btMinimiseWindowMain->FlatAppearance->MouseOverBackColor = System::Drawing::Color::Transparent;
+			   this->btMinimiseWindowMain->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
+			   this->btMinimiseWindowMain->ForeColor = System::Drawing::Color::Transparent;
+			   this->btMinimiseWindowMain->Location = System::Drawing::Point(829, 16);
+			   this->btMinimiseWindowMain->Margin = System::Windows::Forms::Padding(3, 10, 10, 3);
+			   this->btMinimiseWindowMain->Name = L"btMinimiseWindowMain";
+			   this->btMinimiseWindowMain->Size = System::Drawing::Size(20, 2);
+			   this->btMinimiseWindowMain->TabIndex = 23;
+			   this->btMinimiseWindowMain->UseMnemonic = false;
+			   this->btMinimiseWindowMain->UseVisualStyleBackColor = false;
+			   this->btMinimiseWindowMain->Click += gcnew System::EventHandler(this, &workspaces::button2_Click_2);
 			   // 
 			   // workspaces
 			   // 
@@ -502,6 +563,7 @@ private: System::Windows::Forms::Button^ btStartTask;
 			   this->BackgroundImage = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"$this.BackgroundImage")));
 			   this->ClientSize = System::Drawing::Size(900, 600);
 			   this->ControlBox = false;
+			   this->Controls->Add(this->btMinimiseWindowMain);
 			   this->Controls->Add(this->panelNewWorkspace);
 			   this->Controls->Add(this->button3);
 			   this->Controls->Add(this->panel1);
@@ -515,6 +577,10 @@ private: System::Windows::Forms::Button^ btStartTask;
 			   this->Name = L"workspaces";
 			   this->StartPosition = System::Windows::Forms::FormStartPosition::CenterScreen;
 			   this->Text = L"workspaces";
+			   this->Load += gcnew System::EventHandler(this, &workspaces::workspaces_Load);
+			   this->MouseDown += gcnew System::Windows::Forms::MouseEventHandler(this, &workspaces::workspaces_MouseDown);
+			   this->MouseMove += gcnew System::Windows::Forms::MouseEventHandler(this, &workspaces::workspaces_MouseMove);
+			   this->MouseUp += gcnew System::Windows::Forms::MouseEventHandler(this, &workspaces::workspaces_MouseUp);
 			   this->panel1->ResumeLayout(false);
 			   this->panel1->PerformLayout();
 			   this->panelNewWorkspace->ResumeLayout(false);
@@ -557,26 +623,26 @@ private: System::Windows::Forms::Button^ btStartTask;
 		}
 	}
 
-    System::Void Workspace::workspaces::OnFormClosed(System::Object^ sender, System::Windows::Forms::FormClosedEventArgs^ e)
-     {
-       if (newItem != nullptr) {
-    	   Item^ data = newItem->getItemData();
-    	   if (selectedItemIndex != -1)
-    	   {
-    		   Item^ cItem = currentWorkspace->items[selectedItemIndex];
-    		   cItem->name = data->name;
-    		   cItem->application = data->application;
-    		   cItem->directory = data->directory;
-    		   cItem->url = data->url;
-    		   cItem->type = data->type;
-    	   }
-    	   else {
-    		   currentWorkspace->items.push_back(data);
-    	   }
-    	   setUpList();
-    	   newItem = nullptr;
-       }
-     }
+		   System::Void Workspace::workspaces::OnFormClosed(System::Object^ sender, System::Windows::Forms::FormClosedEventArgs^ e)
+		   {
+			   if (newItem != nullptr) {
+				   Item^ data = newItem->getItemData();
+				   if (selectedItemIndex != -1)
+				   {
+					   Item^ cItem = currentWorkspace->items[selectedItemIndex];
+					   cItem->name = data->name;
+					   cItem->application = data->application;
+					   cItem->directory = data->directory;
+					   cItem->url = data->url;
+					   cItem->type = data->type;
+				   }
+				   else {
+					   currentWorkspace->items.push_back(data);
+				   }
+				   setUpList();
+				   newItem = nullptr;
+			   }
+		   }
 
 	private: System::Void setUpList() {
 		listItems->Items->Clear();
@@ -692,19 +758,96 @@ private: System::Windows::Forms::Button^ btStartTask;
 		if (selectedItemIndex == -1)
 			return;
 		Item^ currentItem = currentWorkspace->items[selectedItemIndex];
-		if ( currentItem->type == 2)
+		if (currentItem->type == 2)
 			Process::Start(currentItem->url);
 		else {
-				Process^ myProcess = gcnew Process();
-				// You can start any process, HelloWorld is a do-nothing example.
-				myProcess->StartInfo->FileName = currentItem->application;
-				if (selectedIndex == 1 && currentItem->directory != "")
-					myProcess->StartInfo->Arguments = currentItem->directory;
-				myProcess->StartInfo->CreateNoWindow = true;
-				myProcess->StartInfo->UseShellExecute = currentItem->runAsAdmin;
-				if (currentItem->runAsAdmin)
-					myProcess->StartInfo->Verb = "runas";
-				myProcess->Start();
+			Process^ myProcess = gcnew Process();
+			// You can start any process, HelloWorld is a do-nothing example.
+			myProcess->StartInfo->FileName = currentItem->application;
+			if (selectedIndex == 1 && currentItem->directory != "")
+				myProcess->StartInfo->Arguments = currentItem->directory;
+			myProcess->StartInfo->CreateNoWindow = true;
+			myProcess->StartInfo->UseShellExecute = currentItem->runAsAdmin;
+			if (currentItem->runAsAdmin)
+				myProcess->StartInfo->Verb = "runas";
+			myProcess->Start();
+		}
+	}
+	private: System::Void button2_Click_1(System::Object^ sender, System::EventArgs^ e) {
+		this->WindowState = FormWindowState::Minimized;
+	}
+	private: System::Void panelNewWorkspace_Paint(System::Object^ sender, System::Windows::Forms::PaintEventArgs^ e) {
+	}
+	private: System::Void button2_Click_2(System::Object^ sender, System::EventArgs^ e) {
+		this->WindowState = FormWindowState::Minimized;
+	}
+	private: System::Void workspaces_Load(System::Object^ sender, System::EventArgs^ e) {
+	}
+
+		   //Code for dragging
+		   bool dragging;
+		   Point offset;
+	private: System::Void workspaces_MouseDown(System::Object^ sender, System::Windows::Forms::MouseEventArgs^ e) {
+		setPoint(e);
+	}
+	private: System::Void workspaces_MouseMove(System::Object^ sender, System::Windows::Forms::MouseEventArgs^ e) {
+		moveScreen(e);
+	}
+	private: System::Void workspaces_MouseUp(System::Object^ sender, System::Windows::Forms::MouseEventArgs^ e) {
+		dragging = false;
+	}
+	private: System::Void panel1_MouseDown(System::Object^ sender, System::Windows::Forms::MouseEventArgs^ e) {
+		setPoint(e);
+	}
+	private: System::Void panel1_MouseMove(System::Object^ sender, System::Windows::Forms::MouseEventArgs^ e) {
+		moveScreen(e);
+	}
+	private: System::Void panel1_MouseUp(System::Object^ sender, System::Windows::Forms::MouseEventArgs^ e) {
+		dragging = false;
+	}
+
+	private: System::Void setPoint(System::Windows::Forms::MouseEventArgs^ e) {
+		dragging = true;
+		offset.X = e->X;
+		offset.Y = e->Y;
+	}
+
+	private: System::Void moveScreen(System::Windows::Forms::MouseEventArgs^ e) {
+		if (dragging) {
+			Point currentPosition = PointToScreen(Point(e->X, e->Y));
+			Location = Point(currentPosition.X - offset.X, currentPosition.Y - offset.Y);
+		}
+	}
+
+
+
+
+	private: System::Void panelNewWorkspace_MouseDown(System::Object^ sender, System::Windows::Forms::MouseEventArgs^ e) {
+		setPoint(e);
+	}
+	private: System::Void panelNewWorkspace_MouseMove(System::Object^ sender, System::Windows::Forms::MouseEventArgs^ e) {
+		moveScreen(e);
+	}
+	private: System::Void panelNewWorkspace_MouseUp(System::Object^ sender, System::Windows::Forms::MouseEventArgs^ e) {
+		dragging = false;
+	}
+	private: System::Void listItems_DoubleClick(System::Object^ sender, System::EventArgs^ e) {
+		if (selectedItemIndex == -1)
+			return;
+		Item^ currentItem = currentWorkspace->items[selectedItemIndex];
+		if (currentItem->type == 2)
+			Process::Start(currentItem->url);
+		else {
+			Process^ myProcess = gcnew Process();
+			// You can start any process, HelloWorld is a do-nothing example.
+			myProcess->StartInfo->FileName = currentItem->application;
+			if (selectedIndex == 1 && currentItem->directory != "")
+				myProcess->StartInfo->Arguments = currentItem->directory;
+			myProcess->StartInfo->CreateNoWindow = true;
+			myProcess->StartInfo->UseShellExecute = currentItem->runAsAdmin;
+			if (currentItem->runAsAdmin)
+				myProcess->StartInfo->Verb = "runas";
+			myProcess->Start();
 		}
 	}
 };

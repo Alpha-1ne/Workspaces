@@ -139,7 +139,8 @@ namespace Workspace {
 			   this->close->Margin = System::Windows::Forms::Padding(3, 10, 10, 3);
 			   this->close->Name = L"close";
 			   this->close->Size = System::Drawing::Size(20, 20);
-			   this->close->TabIndex = 0;
+			   this->close->TabIndex = 2;
+			   this->close->TabStop = false;
 			   this->close->UseMnemonic = false;
 			   this->close->UseVisualStyleBackColor = false;
 			   this->close->Click += gcnew System::EventHandler(this, &home::close_Click);
@@ -170,7 +171,7 @@ namespace Workspace {
 			   this->startButton->Location = System::Drawing::Point(335, 440);
 			   this->startButton->Name = L"startButton";
 			   this->startButton->Size = System::Drawing::Size(223, 60);
-			   this->startButton->TabIndex = 2;
+			   this->startButton->TabIndex = 0;
 			   this->startButton->Text = L"Get Started";
 			   this->startButton->UseVisualStyleBackColor = false;
 			   this->startButton->Click += gcnew System::EventHandler(this, &home::startButton_Click);
